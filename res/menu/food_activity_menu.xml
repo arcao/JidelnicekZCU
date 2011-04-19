@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/price_source" android:id="@+id/price_source"></item>
+    <item android:id="@+id/select_date" android:title="@string/select_date"></item>
+</menu>

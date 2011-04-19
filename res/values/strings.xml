@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jídelníček ZČU</string>
+    <string name="price_source">Zobrazená cena jídla</string>
+    <string name="food_list_loading">Načítám seznam jídel...</string>
+    <string name="food_list_loading_error">Nepovedlo se načíst jídelníček!</string>
+    <string-array name="price_source_values">
+        <item>Student</item>
+        <item>Zaměstanec</item>
+        <item>Ostatní</item>
+    </string-array>
+        <string name="no_food">Tento den se nevaří\nKlepnutím na datum zvolíte jiný den.</string>
+        <string name="select_date">Vybrat datum</string>
+</resources>

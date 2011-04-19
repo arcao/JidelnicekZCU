@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	style="@style/action_bar" 
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- <ImageView style="@style/action_bar_action" /> -->
+	<TextView style="@style/action_bar_day" android:id="@+id/day" android:onClick="goSelectDate" android:clickable="true" />
+    <View style="@style/action_bar_separator" />
+    <TextView style="@style/action_bar_title" android:id="@+id/title"/>
+    <View style="@style/action_bar_separator" />
+    <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_refresh" android:onClick="goRefresh" android:id="@+id/refresh" />
+</LinearLayout>
