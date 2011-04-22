@@ -83,7 +83,9 @@ public class FoodListAdapter extends BaseAdapter {
 					price = jsFood.optInt("price_stu");
 					break;
 				}
-				foodList.add(new Food(food, type, price, jsFood.optInt("oblibenost") * 0.05F));
+				int rating = jsFood.optInt("oblibenost");
+				
+				foodList.add(new Food(food, type, price, (rating < 0) ? -1F : 1F + (rating * 0.04F)));
 			}
 		}
 	}
