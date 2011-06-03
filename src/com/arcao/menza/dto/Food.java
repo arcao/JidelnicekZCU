@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.dto;
 
 import java.io.Serializable;
 
@@ -9,14 +9,16 @@ public class Food implements Serializable {
 	private String type;
 	private int price;
 	private float rating;
+	private String hash;
 	
-	public Food(String name, String type, int price, float rating) {
+	public Food(String name, String type, int price, float rating, String hash) {
 		this.name = name;
 		this.type = type;
 		this.price = price;
 		this.rating = rating;
+		this.hash = hash;
 	}
-	
+		
 	public String getName() {
 		return name;
 	}
@@ -31,5 +33,9 @@ public class Food implements Serializable {
 	
 	public float getRating() {
 		return rating;
+	}
+	
+	public String getHash() {
+		return hash;
 	}
 }

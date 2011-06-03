@@ -7,5 +7,5 @@
     <View style="@style/action_bar_separator" />
     <TextView style="@style/action_bar_title" android:id="@+id/title"/>
     <View style="@style/action_bar_separator" />
-    <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_refresh" android:onClick="goRefresh" android:id="@+id/refresh" />
+    <ImageView style="@style/action_bar_action" android:src="@drawable/ic_actionbar_refresh" android:onClick="goRefresh" android:id="@+id/refresh" />
 </LinearLayout>

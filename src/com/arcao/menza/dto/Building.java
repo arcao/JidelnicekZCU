@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.dto;
 
 public class Building {
 	private String name;

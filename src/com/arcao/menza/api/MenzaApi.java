@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.api;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
@@ -27,6 +28,18 @@ public class MenzaApi {
 			if (foods instanceof JSONArray && ((JSONArray)foods).length() == 0)
 				throw new FoodNotFoundException();
 			return (JSONObject) foods;
+		} catch (MalformedURLException e) {
+			throw new DownloadException(e);
+		} catch (JSONException e) {
+			throw new DownloadException(e);
+		}
+	}
+	
+	public static void vote(String hash, int vote) throws DownloadException {
+		try {
+			Object result = new JSONTokener(downloadData(new URL("http://menza.arcao.com/api/vote?hash=" + URLEncoder.encode(hash) + "&vote=" + vote))).nextValue();
+			if (!(result instanceof JSONObject) || !((JSONObject) result).getString("state").equals("ok"))
+				throw new DownloadException("Vote on " + hash + " with " + vote + " failed.");
 		} catch (MalformedURLException e) {
 			throw new DownloadException(e);
 		} catch (JSONException e) {

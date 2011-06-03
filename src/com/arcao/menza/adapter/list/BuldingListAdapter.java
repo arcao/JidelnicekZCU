@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.adapter.list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,13 +7,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.arcao.menza.R;
+import com.arcao.menza.dto.Building;
+
 public class BuldingListAdapter extends BaseAdapter {
 	private static Building[] buildings = new Building[] {
-		new Building("Menza Bory", "UniverzitnÌ 12"),
-		new Building("Menza Koll·rova", "Koll·rova 19"),
-		new Building("Bufet LochotÌn", "Boleveck· 30"),
-		new Building("Bufet FAV/FST", "UniverzitnÌ 22"),
-		new Building("Bufet PF", "Klatovsk· 51")
+		new Building("Menza Bory", "Univerzitn√≠ 12"),
+		new Building("Menza Koll√°rova", "Koll√°rova 19"),
+		new Building("Bufet Lochot√≠n", "Boleveck√° 30"),
+		new Building("Bufet FAV/FST", "Univerzitn√≠ 22"),
+		new Building("Bufet PF", "Klatovsk√° 51")
 	};
 	
 	private LayoutInflater mInflater;

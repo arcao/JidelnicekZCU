@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.api;
 
 public class DownloadException extends Exception {
 	private static final long serialVersionUID = -6369642464553846131L;

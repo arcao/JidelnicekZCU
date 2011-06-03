@@ -1,4 +1,4 @@
-package com.arcao.menza;
+package com.arcao.menza.adapter.list;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,6 +14,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.arcao.menza.FoodActivity;
+import com.arcao.menza.R;
+import com.arcao.menza.dto.Food;
+import com.arcao.menza.dto.FoodSection;
 
 public class FoodListAdapter extends BaseAdapter {
 	private List<Food> foodList;
@@ -84,8 +89,9 @@ public class FoodListAdapter extends BaseAdapter {
 					break;
 				}
 				int rating = jsFood.optInt("oblibenost");
+				String hash = jsFood.optString("hash");
 				
-				foodList.add(new Food(food, type, price, (rating < 0) ? -1F : 1F + (rating * 0.04F)));
+				foodList.add(new Food(food, type, price, (rating < 0) ? -1F : 1F + (rating * 0.04F), hash));
 			}
 		}
 	}

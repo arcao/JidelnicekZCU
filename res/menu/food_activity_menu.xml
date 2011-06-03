@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/price_source" android:id="@+id/price_source"></item>
-    <item android:id="@+id/select_date" android:title="@string/select_date"></item>
+    <item android:title="@string/price_source" android:id="@+id/price_source" android:icon="@drawable/ic_menu_view"></item>
+    <item android:id="@+id/select_date" android:title="@string/select_date" android:icon="@drawable/ic_menu_today"></item>
 </menu>

@@ -2,6 +2,8 @@ package com.arcao.menza;
 
 import java.util.Date;
 
+import com.arcao.menza.adapter.list.BuldingListAdapter;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	private static final String TAG = "JidelnicekZCU|Main";
+	private static final String TAG = "JidelnicekZCU|MainActivity";
 	
 	private ListView list; 
     
@@ -26,7 +28,7 @@ public class MainActivity extends Activity {
         list.setAdapter(new BuldingListAdapter(this));
         
         TextView day = (TextView) findViewById(R.id.header).findViewById(R.id.day);
-        System.out.println(String.format("%1$te.%1$tm", new Date()));
+        Log.d(TAG, String.format("%1$te.%1$tm", new Date()));
         day.setText(String.format("%1$te.%1$tm", new Date()));
         
         list.setOnItemClickListener(new OnItemClickListener() {
