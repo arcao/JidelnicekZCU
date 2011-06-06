@@ -2,17 +2,17 @@ package com.arcao.menza;
 
 import java.util.Date;
 
-import com.arcao.menza.adapter.list.BuldingListAdapter;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.arcao.menza.adapter.list.BuildingListAdapter;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "JidelnicekZCU|MainActivity";
@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         
         list = (ListView) findViewById(R.id.list);
-        list.setAdapter(new BuldingListAdapter(this));
+        list.setAdapter(new BuildingListAdapter(this));
         
         TextView day = (TextView) findViewById(R.id.header).findViewById(R.id.day);
         Log.d(TAG, String.format("%1$te.%1$tm", new Date()));

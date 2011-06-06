@@ -10,36 +10,27 @@ import android.widget.TextView;
 import com.arcao.menza.R;
 import com.arcao.menza.dto.Building;
 
-public class BuldingListAdapter extends BaseAdapter {
-	private static Building[] buildings = new Building[] {
-		new Building("Menza Bory", "Univerzitní 12"),
-		new Building("Menza Kollárova", "Kollárova 19"),
-		new Building("Bufet Lochotín", "Bolevecká 30"),
-		new Building("Bufet FAV/FST", "Univerzitní 22"),
-		new Building("Bufet PF", "Klatovská 51")
-	};
+public class BuildingListAdapter extends BaseAdapter {
 	
-	private LayoutInflater mInflater;
+	
+	private final LayoutInflater mInflater;
 
-	public BuldingListAdapter(Context context) {
+	public BuildingListAdapter(Context context) {
 		mInflater = LayoutInflater.from(context);
 	}
 	
 	public int getCount() {
-		return buildings.length;
+		return Building.getBuildings().length;
 	}
 
-	@Override
 	public Building getItem(int position) {
-		return buildings[position];
+		return Building.getBuilding(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
@@ -60,9 +51,5 @@ public class BuldingListAdapter extends BaseAdapter {
 	private class ViewHolder {
 	    TextView name;
 	    TextView address;
-	} 
-	
-	public static Building getBuilding(int id) {
-		return buildings[id];
 	}
 }

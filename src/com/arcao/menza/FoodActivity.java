@@ -2,18 +2,10 @@ package com.arcao.menza;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import com.arcao.menza.adapter.list.BuldingListAdapter;
-import com.arcao.menza.adapter.list.FoodListAdapter;
-import com.arcao.menza.api.DownloadException;
-import com.arcao.menza.api.FoodNotFoundException;
-import com.arcao.menza.api.MenzaApi;
-import com.arcao.menza.dialog.RatingDialog;
-import com.arcao.menza.dialog.RatingDialog.OnRatingListener;
-import com.arcao.menza.dto.Food;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,16 +22,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arcao.menza.adapter.list.FoodListAdapter;
+import com.arcao.menza.api.FoodNotFoundException;
+import com.arcao.menza.api.MenzaApi;
+import com.arcao.menza.dialog.RatingDialog;
+import com.arcao.menza.dialog.RatingDialog.OnRatingListener;
+import com.arcao.menza.dto.Building;
+import com.arcao.menza.dto.Food;
 
 public class FoodActivity extends Activity {
 	private static final String TAG = "JidelnicekZCU|FoodActivity";
@@ -51,7 +51,7 @@ public class FoodActivity extends Activity {
 	private Resources res;
 	private Calendar cal;
 	private ListView list;
-	private SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyyMMdd");
+	private final SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyyMMdd");
 	private Handler handler;
 	private ProgressDialog pd;
 
@@ -68,11 +68,12 @@ public class FoodActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		menzaId = extras.getInt("menzaId");
+		Log.i(TAG, "menzaId: " + menzaId);
 		
 		cal = Calendar.getInstance();
 		
 		TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-        title.setText(BuldingListAdapter.getBuilding(menzaId).getName());
+        title.setText(Building.getBuilding(menzaId).getName());
         
         TextView day = (TextView) findViewById(R.id.header).findViewById(R.id.day);
         day.setText(String.format("%1$te.%1$tm", cal));       
@@ -164,7 +165,7 @@ public class FoodActivity extends Activity {
 		FoodListAdapter adapter = (FoodListAdapter) list.getAdapter();
 		
 		Food food = adapter.getItem(position);
-		String shareText = res.getString(R.string.share_text, BuldingListAdapter.getBuilding(menzaId).getName(), food.getName(), food.getPrice());
+		String shareText = res.getString(R.string.share_text, Building.getBuilding(menzaId).getName(), food.getName(), food.getPrice());
 		
 		Intent sendIntent = new Intent(Intent.ACTION_SEND); 
         sendIntent.putExtra(Intent.EXTRA_TEXT, shareText); 
@@ -208,7 +209,7 @@ public class FoodActivity extends Activity {
                         	setContentView(R.layout.detail);
                         	
                         	TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-                            title.setText(BuldingListAdapter.getBuilding(menzaId).getName());
+                            title.setText(Building.getBuilding(menzaId).getName());
                             
                             TextView day = (TextView) findViewById(R.id.header).findViewById(R.id.day);
                             day.setText(String.format("%1$te.%1$tm", cal));
@@ -228,7 +229,7 @@ public class FoodActivity extends Activity {
                         	setContentView(R.layout.no_food);
                         	
                         	TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
-                            title.setText(BuldingListAdapter.getBuilding(menzaId).getName());
+                            title.setText(Building.getBuilding(menzaId).getName());
                             
                             TextView day = (TextView) findViewById(R.id.header).findViewById(R.id.day);
                             day.setText(String.format("%1$te.%1$tm", cal));

@@ -21,8 +21,8 @@ import com.arcao.menza.dto.Food;
 import com.arcao.menza.dto.FoodSection;
 
 public class FoodListAdapter extends BaseAdapter {
-	private List<Food> foodList;
-	private LayoutInflater mInflater;
+	private final List<Food> foodList;
+	private final LayoutInflater mInflater;
 	private int priceSource = 0;
 	
 	private static final int TYPE_ITEM = 0;
@@ -56,7 +56,6 @@ public class FoodListAdapter extends BaseAdapter {
 	
 	@Override
 	public boolean isEnabled(int position) {
-		// TODO Auto-generated method stub
 		return !(getItem(position) instanceof FoodSection);
 	}
 
@@ -96,22 +95,18 @@ public class FoodListAdapter extends BaseAdapter {
 		}
 	}
 	
-	@Override
 	public int getCount() {
 		return foodList.size();
 	}
 
-	@Override
 	public Food getItem(int position) {
 		return foodList.get(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		Food item = getItem(position);

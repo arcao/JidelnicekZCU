@@ -50,4 +50,8 @@
         <item name="android:textSize">20dip</item>
         <item name="android:textColor">@color/just_white</item>
     </style>
+    <style name="Theme.NoWindow" parent="android:Theme.Dialog">
+		<item name="android:windowBackground">@null</item>
+		<item name="android:windowNoTitle">true</item>
+	</style>
 </resources>
