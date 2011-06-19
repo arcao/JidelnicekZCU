@@ -19,4 +19,8 @@
         <string name="vote_finished">Hodnocení bylo úspěšně odesláno.</string>
         <string name="vote_failed">Nepovedlo se odeslat hodnocení.</string>
         <string name="already_voted">Již jste toto jídlo ohodnotil!</string>
+        <string name="open_time">Otevírací doba</string>
+        <string name="create_shortcut">Vytvořit odkaz na menzu / bufet...</string>
+        <string name="button_ok">Ok</string>
+        <string name="actual_day_vote_only">Hlasovat lze jen pro aktuální den!</string>
 </resources>

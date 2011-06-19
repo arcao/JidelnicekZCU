@@ -2,6 +2,7 @@ package com.arcao.menza;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -100,6 +101,9 @@ public class FoodActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.open_time:
+			goShowOpenTime();
+			return true;
 	    case R.id.price_source:
 	    	goPriceSourceSelect();
 	        return true;
@@ -144,7 +148,14 @@ public class FoodActivity extends Activity {
 		
 		// check vote
 		final String hash = adapter.getItem(position).getHash();
-		final String key = ymdFormat.format(cal.getTime()) + "_" + hash;
+		final String date = ymdFormat.format(cal.getTime());
+		
+		if (!date.equals(ymdFormat.format(new Date()))) {
+			Toast.makeText(this, res.getString(R.string.actual_day_vote_only), Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		final String key = date + "_" + hash;
 		if (settings.contains(key)) {
 			Toast.makeText(this, res.getString(R.string.already_voted), Toast.LENGTH_LONG).show();
 			return;
@@ -283,6 +294,17 @@ public class FoodActivity extends Activity {
     
     public int getPriceSource() {
     	return settings.getInt("PriceSource", 0);
+    }
+    
+    protected void goShowOpenTime() {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setTitle(R.string.open_time);
+    	builder.setMessage(Building.getBuilding(menzaId).getOpenTime());
+    	builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {}
+		});
+    	AlertDialog alert = builder.create();
+    	alert.show();
     }
     
     private class VoteThread extends Thread {

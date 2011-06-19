@@ -14,6 +14,7 @@ public class ShortcutActivity extends Activity implements DialogInterface.OnClic
 		super.onCreate(savedInstanceState);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.create_shortcut);
 		builder.setItems(Building.getBuildingNames(), this);
 		builder.setOnCancelListener(this);
 		AlertDialog dialog = builder.create();
