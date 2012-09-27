@@ -4,7 +4,7 @@ public class Building {
 	private static Building[] buildings = new Building[] {
 		new Building("Menza Bory", "Univerzitní 12", "Obědy:\n10.30 - 15.00\n\nVečeře:\n16.30 - 18.30\n(V době prázdnin a zkouškovém období nepodáváme)"),
 		new Building("Menza Kollárova", "Kollárova 19", "Obědy:\n10.30 - 14.30"),
-		new Building("Bufet Lochotín", "Bolevecká 30", "Po-St: 10.30 - 19.30\nČt: 09.00 - 18.00\nPá: 09.00 - 15.00\n\nProvozní doba ve zkouškovém období:\nPo-Čt: 10.30 - 16.30\nPá: 09.00 - 14.00\n\nVýdej hotových jídel:\nPo-Pá: od 11.30"),
+		new Building("Bufet Lochotín", "Bolevecká 30", "Po-St: 10.00 - 18.00\nČt: 10.00 - 18.00\nPá: 10.00 - 15.00\n\nProvozní doba ve zkouškovém období:\nPo-Čt: 10.00 - 16.30\nPá: 10.00 - 15.00\n\nVýdej hotových jídel:\nPo-Pá: od 11.30"),
 		new Building("Bufet FAV/FST", "Univerzitní 22", "Po-Čt: 09.00 - 16.30\nPá: 09.00 - 15.00\n\nProvozní doba ve zkouškovém období:\nPo-Čt: 09.00 - 15.30\nPá: 09.00 - 14.00\n\nVýdej hotových jídel:\nPo-Pá: od 10.30"),
 		new Building("Bufet PF", "Klatovská 51", "Po-Čt: 09.00 - 16.30\nPá: 09.00 - 15.00\n\nProvozní doba ve zkouškovém období:\nPo-Čt: 09.00 - 15.30\nPá: 09.00 - 14.00\n\nVýdej hotových jídel:\nPo-Pá: od 10.00")
 	};
