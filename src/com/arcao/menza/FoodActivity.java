@@ -3,6 +3,7 @@ package com.arcao.menza;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public class FoodActivity extends Activity {
 	private Resources res;
 	private Calendar cal;
 	private ListView list;
-	private final SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyyMMdd");
+	private final SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
 	private Handler handler;
 	private ProgressDialog pd;
 
@@ -162,6 +163,7 @@ public class FoodActivity extends Activity {
 		}
 		
 		final RatingDialog dialog = new RatingDialog(this, new OnRatingListener() {
+			@Override
 			public void onRatingSelected(DialogInterface dialog, float rating) {
 				pd = ProgressDialog.show(FoodActivity.this, null, res.getString(R.string.vote_progress));
 				new VoteThread(hash, rating).start();
@@ -192,6 +194,7 @@ public class FoodActivity extends Activity {
 	
     public void goSelectDate(View view) {
     	DatePickerDialog dp = new DatePickerDialog(this, new OnDateSetListener() {
+			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				cal.set(year, monthOfYear, dayOfMonth);
 				foods = null;
@@ -201,22 +204,29 @@ public class FoodActivity extends Activity {
     	dp.show();
     }
 
-    private void refresh() {
-        pd = ProgressDialog.show(this, null, res.getString(R.string.food_list_loading), false, true, new OnCancelListener() {
-			public void onCancel(DialogInterface dialog) {
-				FoodActivity.this.finish();
-			}
-		});
-                
+    private void refresh() {               
         new Thread() {
             @Override
             public void run() {
+            	handler.post(new Runnable() {
+								@Override
+								public void run() {
+									pd = ProgressDialog.show(FoodActivity.this, null, res.getString(R.string.food_list_loading), false, true, new OnCancelListener() {
+										@Override
+										public void onCancel(DialogInterface dialog) {
+											FoodActivity.this.finish();
+										}
+									});								
+								}
+							});
+            
                 try {
                 	if (foods == null)
                 		foods = MenzaApi.getFoods(menzaId, cal.getTime());                	
                 	
                 	handler.post(new Runnable() {
-                        public void run() {
+                        @Override
+												public void run() {
                         	setContentView(R.layout.detail);
                         	
                         	TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
@@ -236,7 +246,8 @@ public class FoodActivity extends Activity {
                 	Log.e(TAG, e.getMessage(), e);
                 	
                 	handler.post(new Runnable() {
-                        public void run() {
+                        @Override
+												public void run() {
                         	setContentView(R.layout.no_food);
                         	
                         	TextView title = (TextView) findViewById(R.id.header).findViewById(R.id.title);
@@ -252,7 +263,8 @@ public class FoodActivity extends Activity {
                 	Log.e(TAG, e.getMessage(), e);
 
                 	handler.post(new Runnable() {
-                        public void run() {
+                        @Override
+												public void run() {
                             pd.dismiss();
                             Toast.makeText(FoodActivity.this, res.getString(R.string.food_list_loading_error), Toast.LENGTH_LONG).show();
                             finish();
@@ -277,7 +289,8 @@ public class FoodActivity extends Activity {
     	builder.setTitle(R.string.price_source);
     	
     	builder.setItems(R.array.price_source_values, new DialogInterface.OnClickListener() {
-    	    public void onClick(DialogInterface dialog, int item) {
+    	    @Override
+					public void onClick(DialogInterface dialog, int item) {
     	        setPriceSource(item);
     	        refresh();
     	    }
@@ -301,6 +314,7 @@ public class FoodActivity extends Activity {
     	builder.setTitle(R.string.open_time);
     	builder.setMessage(Building.getBuilding(menzaId).getOpenTime());
     	builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int which) {}
 		});
     	AlertDialog alert = builder.create();
@@ -327,6 +341,7 @@ public class FoodActivity extends Activity {
 				edit.commit();
 						
 				handler.post(new Runnable() {
+					@Override
 					public void run() {
 						pd.dismiss();
 						Toast.makeText(FoodActivity.this, res.getString(R.string.vote_finished), Toast.LENGTH_LONG).show();
@@ -338,6 +353,7 @@ public class FoodActivity extends Activity {
 				Log.e(TAG, e.getMessage(), e);
 				
 				handler.post(new Runnable() {
+					@Override
 					public void run() {
 						pd.dismiss();
 						Toast.makeText(FoodActivity.this, res.getString(R.string.vote_failed), Toast.LENGTH_LONG).show();

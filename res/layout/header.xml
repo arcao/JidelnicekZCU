@@ -3,9 +3,9 @@
 	style="@style/action_bar" 
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<!-- <ImageView style="@style/action_bar_action" /> -->
-	<TextView style="@style/action_bar_day" android:id="@+id/day" android:onClick="goSelectDate" android:clickable="true" />
+	<TextView style="@style/action_bar_day" android:id="@+id/day" android:onClick="goSelectDate" android:clickable="true" android:textIsSelectable="false" />
     <View style="@style/action_bar_separator" />
-    <TextView style="@style/action_bar_title" android:id="@+id/title"/>
+    <TextView style="@style/action_bar_title" android:id="@+id/title" android:textIsSelectable="false" />
     <View style="@style/action_bar_separator" />
     <ImageView style="@style/action_bar_action" android:src="@drawable/ic_actionbar_refresh" android:onClick="goRefresh" android:id="@+id/refresh" />
 </LinearLayout>

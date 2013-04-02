@@ -11,7 +11,8 @@
     	android:layout_width="fill_parent" 
     	android:gravity="center"
     	android:textColor="@color/just_black"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:textStyle="bold"
-     android:text="@string/no_food"/>
+        android:text="@string/no_food"
+        android:textIsSelectable="false" />
 </LinearLayout>
