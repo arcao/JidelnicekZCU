@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    maven {
+        url 'https://github.com/Goddchen/mvn-repo/raw/master/'
+    }
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.0.1"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 18
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile 'com.android:volley:1.0'
+    compile files('libs/gson-2.2.4-repack.jar')
+}

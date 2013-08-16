@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JidelnicekZCU</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="places">
+        <item>Menza Bory</item>
+        <item>Menza Kollárova</item>
+        <item>Bufet FST</item>
+        <item>Bufet Kollárova</item>
+        <item>Bufet Lochotín</item>
+    </string-array>
+</resources>
