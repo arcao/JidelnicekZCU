@@ -1,5 +1,6 @@
 package com.arcao.menza.volley;
 
+import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 public class JacksonRequest <T> extends Request<T> {
 	private final Class<T> mClazz;
@@ -19,7 +21,7 @@ public class JacksonRequest <T> extends Request<T> {
 
 
 	public JacksonRequest(int method, String url, Class<T> clazz, Listener<T> listener, ErrorListener errorListener) {
-		super(Method.GET, url, errorListener);
+		super(method, url, errorListener);
 		this.mClazz = clazz;
 		this.mListener = listener;
 	}
@@ -33,7 +35,15 @@ public class JacksonRequest <T> extends Request<T> {
 	@Override
 	protected Response<T> parseNetworkResponse(NetworkResponse response) {
 		try {
-			return Response.success(JsonMapper.INSTANCE.mapper().readValue(response.data, mClazz), HttpHeaderParser.parseCacheHeaders(response));
+            Cache.Entry cacheEntry;
+
+            if (getMethod() == Method.GET) {
+                cacheEntry = parseIgnoreCacheHeaders(response);
+            } else {
+                cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
+            }
+
+			return Response.success(JsonMapper.INSTANCE.mapper().readValue(response.data, mClazz), cacheEntry);
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
 		} catch (JsonMappingException e) {
@@ -44,4 +54,41 @@ public class JacksonRequest <T> extends Request<T> {
 			return Response.error(new ParseError(e));
 		}
 	}
+
+    /**
+     * Extracts a {@link Cache.Entry} from a {@link NetworkResponse}.
+     * Cache-control headers are ignored. SoftTtl == 30 min, ttl == 24 hours.
+     * @param response The network response to parse headers from
+     * @return a cache entry for the given response, or null if the response is not cacheable.
+     */
+    protected static Cache.Entry parseIgnoreCacheHeaders(NetworkResponse response) {
+        long now = System.currentTimeMillis();
+
+        Map<String, String> headers = response.headers;
+        long serverDate = 0;
+        String serverEtag = null;
+        String headerValue;
+
+        headerValue = headers.get("Date");
+        if (headerValue != null) {
+            serverDate = HttpHeaderParser.parseDateAsEpoch(headerValue);
+        }
+
+        serverEtag = headers.get("ETag");
+
+        final long cacheHitButRefreshed = 30 * 60 * 1000; // in 30 minutes cache will be hit, but also refreshed on background
+        final long cacheExpired = 24 * 60 * 60 * 1000; // in 24 hours this cache entry expires completely
+        final long softExpire = now + cacheHitButRefreshed;
+        final long ttl = now + cacheExpired;
+
+        Cache.Entry entry = new Cache.Entry();
+        entry.data = response.data;
+        entry.etag = serverEtag;
+        entry.softTtl = softExpire;
+        entry.ttl = ttl;
+        entry.serverDate = serverDate;
+        entry.responseHeaders = headers;
+
+        return entry;
+    }
 }
