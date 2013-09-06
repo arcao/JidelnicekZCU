@@ -3,7 +3,6 @@ package com.arcao.menza.fragment;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,8 +24,6 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(getResources().getText(R.string.list_empty));
-
         update();
     }
 
@@ -34,6 +31,9 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 	public void update() {
 		setListShown(false);
 
+        if (getActivity() != null) {
+            setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
+        }
 
 		int menzaId = getArguments().getInt(ARG_MENZA_ID, 0) + 1;
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
@@ -56,11 +56,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		return new Response.Listener<Section[]>() {
 			@Override
 			public void onResponse(Section[] response) {
+                setEmptyText(getResources().getText(R.string.list_empty));
+
                 if (getActivity() == null)
                     return;
 
 				setListAdapter(new DayMenuAdapter(getActivity(), response));
-
 				setListShown(true);
 			}
 		};
@@ -73,8 +74,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 			public void onErrorResponse(VolleyError error) {
                 Log.e("VOLLEY", error.getMessage(), error);
 
+                setEmptyText(getResources().getText(R.string.connection_error));
+
+                if (getActivity() == null)
+                    return;
+
 				setListShown(true);
-                Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_LONG).show();
 			}
 		};
 	}
