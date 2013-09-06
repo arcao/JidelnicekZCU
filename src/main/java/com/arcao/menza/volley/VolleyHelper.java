@@ -11,9 +11,6 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by msloup on 6.9.13.
- */
 public class VolleyHelper {
 	protected static RequestQueue requestQueue;
 

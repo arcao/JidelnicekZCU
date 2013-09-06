@@ -17,9 +17,6 @@ import com.arcao.menza.volley.VolleyHelper;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by msloup on 16.8.13.
- */
 public class DayMenuListFragment extends ListFragment implements UpdateableFragment {
     public static final String ARG_DAY_ID = "DAY_ID";
     public static final String ARG_MENZA_ID = "MENZA_ID";

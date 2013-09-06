@@ -22,17 +22,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final ActionBar actionBar = getSupportActionBar();
-
-        // Specify that tabs should be displayed in the action bar.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setDisplayShowTitleEnabled(false);
 
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
         mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mDayPagerAdapter);
         mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
@@ -51,7 +46,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

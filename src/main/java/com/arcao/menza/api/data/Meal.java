@@ -1,8 +1,5 @@
 package com.arcao.menza.api.data;
 
-/**
- * Created by msloup on 21.8.13.
- */
 public class Meal {
 	public int id;
 	public String name;

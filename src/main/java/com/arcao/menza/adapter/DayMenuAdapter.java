@@ -14,16 +14,12 @@ import com.arcao.menza.api.data.Section;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by msloup on 6.9.13.
- */
 public class DayMenuAdapter extends BaseAdapter {
-	protected final List<Object> items;
-
     protected static final int TYPE_ITEM = 0;
     protected static final int TYPE_SECTION = 1;
     protected static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
 
+    protected final List<Object> items;
     protected final LayoutInflater mInflater;
 
 
