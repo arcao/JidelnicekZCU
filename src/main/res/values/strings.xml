@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">JidelnicekZCU</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">JídelníčekZČU</string>
+    <string name="action_settings">Nastavení</string>
 
     <string-array name="places">
         <item>Menza Bory</item>
@@ -11,4 +11,14 @@
         <item>Bufet Kollárova</item>
         <item>Bufet Lochotín</item>
     </string-array>
+
+    <string-array name="relative_day_title">
+        <item>Včera</item>
+        <item>Dnes</item>
+        <item>Zítra</item>
+    </string-array>
+
+    <string name="list_empty">Tento den se nevaří.</string>
+    <string name="connection_error">Nepovedlo se stáhnout jídelní lístek!</string>
+    <string name="action_today">Zobrazit dnešek</string>
 </resources>

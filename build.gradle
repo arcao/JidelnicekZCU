@@ -29,5 +29,5 @@ dependencies {
     compile 'com.android.support:support-v4:18.0.+'
     compile 'com.android.support:appcompat-v7:18.0.+'
     compile 'com.android:volley:1.0'
-    compile files('libs/gson-2.2.4-repack.jar')
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
 }
