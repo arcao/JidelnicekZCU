@@ -56,10 +56,10 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		return new Response.Listener<Section[]>() {
 			@Override
 			public void onResponse(Section[] response) {
-                setEmptyText(getResources().getText(R.string.list_empty));
-
                 if (getActivity() == null)
                     return;
+
+				setEmptyText(getResources().getText(R.string.list_empty));
 
 				setListAdapter(new DayMenuAdapter(getActivity(), response));
 				setListShown(true);
@@ -72,13 +72,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-                Log.e("VOLLEY", error.getMessage(), error);
-
-                setEmptyText(getResources().getText(R.string.connection_error));
-
                 if (getActivity() == null)
                     return;
 
+				Log.e("VOLLEY", error.getMessage(), error);
+
+				setEmptyText(getResources().getText(R.string.connection_error));
 				setListShown(true);
 			}
 		};
