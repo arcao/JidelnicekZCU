@@ -26,15 +26,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
         super.onActivityCreated(savedInstanceState);
 
         // set correct padding left / right for list view
-        int paddingLeftDp = 16;
-        int paddingRightDp = 8; // scrollbar has 8 dp, thus 16 - 8 = 8
+        int paddingDp = 16;
         final float scale = getResources().getDisplayMetrics().density;
+        int paddingPx = (int) (paddingDp * scale + 0.5f);
 
-        int paddingLeftPx = (int) (paddingLeftDp * scale + 0.5f);
-        int paddingRightPx = (int) (paddingRightDp * scale + 0.5f);
-
-        getListView().setPadding(paddingLeftPx, 0, paddingRightPx, 0);
-        getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_INSET);
+        getListView().setPadding(paddingPx, 0, paddingPx, 0);
+        getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
 
         update();
     }
