@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.arcao.menza.R;
@@ -13,6 +14,7 @@ import com.arcao.menza.api.data.Section;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DayMenuAdapter extends BaseAdapter {
     protected static final int TYPE_ITEM = 0;
@@ -64,7 +66,12 @@ public class DayMenuAdapter extends BaseAdapter {
         return COUNT_OF_TYPES;
     }
 
-    @Override
+	@Override
+	public boolean areAllItemsEnabled() {
+		return false;
+	}
+
+	@Override
     public boolean isEnabled(int position) {
         return !(getItem(position) instanceof SectionItem);
     }
@@ -94,13 +101,29 @@ public class DayMenuAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_menu_item, parent, false);
 
             holder = new ViewHolder();
+			holder.number = (TextView) convertView.findViewById(R.id.number);
             holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.price = (TextView) convertView.findViewById(R.id.price);
+			holder.rating = (RatingBar) convertView.findViewById(R.id.rating);
+			holder.rating.setMax(100);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.name.setText(((Meal)item).name);
+
+		Meal meal = (Meal) item;
+
+        holder.number.setText(String.valueOf(meal.id));
+		holder.name.setText(meal.name);
+		holder.price.setText(String.valueOf((int)meal.priceStudent)); // TODO price according to configuration
+
+		if (meal.quality < 0) {
+			holder.rating.setVisibility(View.INVISIBLE);
+		} else {
+			holder.rating.setVisibility(View.VISIBLE);
+			holder.rating.setProgress((int)meal.quality);
+		}
 
         return convertView;
 
@@ -110,12 +133,15 @@ public class DayMenuAdapter extends BaseAdapter {
 		public final String name;
 
 		public SectionItem(String name) {
-			this.name = name;
+			this.name = name.toUpperCase(Locale.US);
 		}
 	}
 
     protected static class ViewHolder {
         TextView name;
+		TextView number;
+		TextView price;
+		RatingBar rating;
     }
 
 }

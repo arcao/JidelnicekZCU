@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/name"
-    />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        style="@style/Item.Layout">
+    <TextView
+            android:id="@+id/number"
+            style="@style/Item.Number"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+                android:id="@+id/name"
+                style="@style/Item.Name"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RatingBar
+                android:id="@+id/rating"
+                style="@style/Item.RatingBar"
+                />
+            <TextView
+                    android:id="@+id/price"
+                    style="@style/Item.Price"/>
+            <TextView
+                    android:text="@string/list_item_price_suffix"
+                    style="@style/Item.Price.Suffix"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

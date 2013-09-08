@@ -1,8 +1,15 @@
 package com.arcao.menza.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,9 +27,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
     public static final String ARG_DAY_ID = "DAY_ID";
     public static final String ARG_MENZA_ID = "MENZA_ID";
 
-    @Override
+	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+		// remove divider
+		//getListView().setDivider(null);
 
         update();
     }
