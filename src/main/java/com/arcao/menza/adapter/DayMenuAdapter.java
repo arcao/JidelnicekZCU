@@ -106,6 +106,7 @@ public class DayMenuAdapter extends BaseAdapter {
 			holder.price = (TextView) convertView.findViewById(R.id.price);
 			holder.rating = (RatingBar) convertView.findViewById(R.id.rating);
 			holder.rating.setMax(100);
+            holder.rating.setIsIndicator(true);
 
             convertView.setTag(holder);
         } else {
@@ -122,7 +123,7 @@ public class DayMenuAdapter extends BaseAdapter {
 			holder.rating.setVisibility(View.INVISIBLE);
 		} else {
 			holder.rating.setVisibility(View.VISIBLE);
-			holder.rating.setProgress((int)meal.quality);
+			holder.rating.setProgress((int) (20F + 80F * (meal.quality / 100F)));
 		}
 
         return convertView;

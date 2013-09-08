@@ -1,15 +1,9 @@
 package com.arcao.menza.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,12 +21,20 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
     public static final String ARG_DAY_ID = "DAY_ID";
     public static final String ARG_MENZA_ID = "MENZA_ID";
 
-	@Override
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-		// remove divider
-		//getListView().setDivider(null);
+        // set correct padding left / right for list view
+        int paddingLeftDp = 16;
+        int paddingRightDp = 8; // scrollbar has 8 dp, thus 16 - 8 = 8
+        final float scale = getResources().getDisplayMetrics().density;
+
+        int paddingLeftPx = (int) (paddingLeftDp * scale + 0.5f);
+        int paddingRightPx = (int) (paddingRightDp * scale + 0.5f);
+
+        getListView().setPadding(paddingLeftPx, 0, paddingRightPx, 0);
+        getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_INSET);
 
         update();
     }
