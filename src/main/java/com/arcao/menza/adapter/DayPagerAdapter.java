@@ -16,10 +16,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DayPagerAdapter extends FragmentStatePagerAdapter {
-    protected int menzaId = 0;
+    protected int menzaId;
 
-    public DayPagerAdapter(FragmentManager fm) {
+    public DayPagerAdapter(FragmentManager fm, int initialPlaceId) {
         super(fm);
+        this.menzaId = initialPlaceId;
     }
 
     @Override

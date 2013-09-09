@@ -13,6 +13,8 @@ import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
 
 public class MainActivity extends ActionBarActivity {
+    private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
+
     private DayPagerAdapter mDayPagerAdapter;
     private ViewPager mViewPager;
 
@@ -25,8 +27,14 @@ public class MainActivity extends ActionBarActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setDisplayShowTitleEnabled(false);
 
+        int placeId = 0;
 
-        mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager());
+        if (savedInstanceState != null) {
+            placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);
+        }
+
+
+        mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager(), placeId);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mDayPagerAdapter);
@@ -42,6 +50,14 @@ public class MainActivity extends ActionBarActivity {
 
         SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.places, android.R.layout.simple_spinner_dropdown_item);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, mOnNavigationListener);
+        actionBar.setSelectedNavigationItem(placeId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(STATE_PLACE_ID, getSupportActionBar().getSelectedNavigationIndex());
     }
 
     @Override
