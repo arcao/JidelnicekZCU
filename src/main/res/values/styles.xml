@@ -47,7 +47,6 @@
         <item name="android:indeterminateDrawable">@drawable/ratingbar_small_holo_light</item>
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
-
     </style>
 
     <style name="Item.Number" parent="@android:style/Widget.TextView">
@@ -60,12 +59,14 @@
     <style name="Item.Name" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingRight">8dp</item>
     </style>
 
     <style name="Item.Price" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">right</item>
@@ -74,6 +75,7 @@
     <style name="Item.Price.Suffix">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_weight">0</item>
+        <item name="android:paddingRight">8dp</item>
     </style>
 </resources>
 
