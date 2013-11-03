@@ -13,31 +13,30 @@ import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.api.data.Section;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 public class DayMenuAdapter extends BaseAdapter {
-    protected static final int TYPE_ITEM = 0;
-    protected static final int TYPE_SECTION = 1;
-    protected static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
+	protected static final int TYPE_ITEM = 0;
+	protected static final int TYPE_SECTION = 1;
+	protected static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
 
-    protected final List<Object> items;
-    protected final LayoutInflater mInflater;
+	protected final List<Object> items;
+	protected final LayoutInflater mInflater;
 
 
-    public DayMenuAdapter(Context mContext, Section[] sections) {
-		items = new ArrayList<Object>();
-        mInflater = LayoutInflater.from(mContext);
+	public DayMenuAdapter(Context mContext, Section[] sections) {
+		items = new ArrayList<>();
+		mInflater = LayoutInflater.from(mContext);
 
-        fillItems(sections);
+		fillItems(sections);
 	}
 
 	protected void fillItems(Section[] sections) {
 		for (Section section : sections) {
 			items.add(new SectionItem(section.name));
-			for (Meal meal: section.meals) {
-				items.add(meal);
-			}
+			Collections.addAll(items, section.meals);
 		}
 	}
 
@@ -56,15 +55,15 @@ public class DayMenuAdapter extends BaseAdapter {
 		return position;
 	}
 
-    @Override
-    public int getItemViewType(int position) {
-        return (getItem(position) instanceof SectionItem) ? TYPE_SECTION : TYPE_ITEM;
-    }
+	@Override
+	public int getItemViewType(int position) {
+		return (getItem(position) instanceof SectionItem) ? TYPE_SECTION : TYPE_ITEM;
+	}
 
-    @Override
-    public int getViewTypeCount() {
-        return COUNT_OF_TYPES;
-    }
+	@Override
+	public int getViewTypeCount() {
+		return COUNT_OF_TYPES;
+	}
 
 	@Override
 	public boolean areAllItemsEnabled() {
@@ -72,52 +71,52 @@ public class DayMenuAdapter extends BaseAdapter {
 	}
 
 	@Override
-    public boolean isEnabled(int position) {
-        return !(getItem(position) instanceof SectionItem);
-    }
+	public boolean isEnabled(int position) {
+		return !(getItem(position) instanceof SectionItem);
+	}
 
 
-    @Override
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        Object item = getItem(position);
-        if (item instanceof SectionItem) {
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.list_menu_section, parent, false);
+		ViewHolder holder;
+		Object item = getItem(position);
+		if (item instanceof SectionItem) {
+			if (convertView == null) {
+				convertView = mInflater.inflate(R.layout.list_menu_section, parent, false);
 
-                holder = new ViewHolder();
-                holder.name = (TextView) convertView.findViewById(R.id.name);
+				holder = new ViewHolder();
+				holder.name = (TextView) convertView.findViewById(R.id.name);
 
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
 
-            holder.name.setText(((SectionItem) item).name);
-            return convertView;
-        }
+			holder.name.setText(((SectionItem) item).name);
+			return convertView;
+		}
 
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_menu_item, parent, false);
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.list_menu_item, parent, false);
 
-            holder = new ViewHolder();
+			holder = new ViewHolder();
 			holder.number = (TextView) convertView.findViewById(R.id.number);
-            holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.price = (TextView) convertView.findViewById(R.id.price);
 			holder.rating = (RatingBar) convertView.findViewById(R.id.rating);
 			holder.rating.setMax(100);
-            holder.rating.setIsIndicator(true);
+			holder.rating.setIsIndicator(true);
 
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
 
 		Meal meal = (Meal) item;
 
-        holder.number.setText(String.valueOf(meal.id));
+		holder.number.setText(String.valueOf(meal.id));
 		holder.name.setText(meal.name);
-		holder.price.setText(String.valueOf((int)meal.priceStudent)); // TODO price according to configuration
+		holder.price.setText(String.valueOf((int) meal.priceStudent)); // TODO price according to configuration
 
 		if (meal.quality < 0) {
 			holder.rating.setVisibility(View.INVISIBLE);
@@ -126,9 +125,9 @@ public class DayMenuAdapter extends BaseAdapter {
 			holder.rating.setProgress((int) (20F + 80F * (meal.quality / 100F)));
 		}
 
-        return convertView;
+		return convertView;
 
-    }
+	}
 
 	protected static class SectionItem {
 		public final String name;
@@ -138,11 +137,11 @@ public class DayMenuAdapter extends BaseAdapter {
 		}
 	}
 
-    protected static class ViewHolder {
-        TextView name;
+	protected static class ViewHolder {
+		TextView name;
 		TextView number;
 		TextView price;
 		RatingBar rating;
-    }
+	}
 
 }

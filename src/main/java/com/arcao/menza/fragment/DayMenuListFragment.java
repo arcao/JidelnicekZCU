@@ -18,35 +18,35 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DayMenuListFragment extends ListFragment implements UpdateableFragment {
-    public static final String ARG_DAY_ID = "DAY_ID";
-    public static final String ARG_MENZA_ID = "MENZA_ID";
+	public static final String ARG_DAY_ID = "DAY_ID";
+	public static final String ARG_PLACE_ID = "PLACE_ID";
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
-        // set correct padding left / right for list view
-        int horizontalPadding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        int verticalPadding = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+		// set correct padding left / right for list view
+		int horizontalPadding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+		int verticalPadding = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
 
-        getListView().setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
-        getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+		getListView().setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+		getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
 
-        update();
-    }
+		update();
+	}
 
-    @Override
+	@Override
 	public void update() {
 		setListShown(false);
 
-        if (getActivity() != null) {
-            setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
-        }
+		if (getActivity() != null) {
+			setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
+		}
 
-		int menzaId = getArguments().getInt(ARG_MENZA_ID, 0) + 1;
+		int placeId = getArguments().getInt(ARG_PLACE_ID, 0) + 1;
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
-        Log.d("UPDATE", "MenzaId:" + menzaId + " DayId: " + dayId);
+		Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, dayId - AppConstant.DAY_ID_TODAY);
@@ -57,15 +57,15 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 
 		Date date = cal.getTime();
 
-		VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(menzaId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
+		VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
 	}
 
 	private Response.Listener<Section[]> createDayMenuReqSuccessListener() {
 		return new Response.Listener<Section[]>() {
 			@Override
 			public void onResponse(Section[] response) {
-                if (getActivity() == null)
-                    return;
+				if (getActivity() == null)
+					return;
 
 				setEmptyText(getResources().getText(R.string.list_empty));
 
@@ -80,8 +80,8 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-                if (getActivity() == null)
-                    return;
+				if (getActivity() == null)
+					return;
 
 				Log.e("VOLLEY", error.getMessage(), error);
 
