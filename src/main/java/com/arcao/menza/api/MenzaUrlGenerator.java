@@ -5,7 +5,9 @@ import java.util.Date;
 
 public class MenzaUrlGenerator {
 	protected static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
-	protected static final String DAY_URL = "http://menza.arcao.com/api/get_v2/%d/%s";
+
+    protected static final String URL_PREFIX = "http://menza.arcao.com/api/v2/";
+	protected static final String DAY_URL = URL_PREFIX + "get/%d/%s";
 
 	public static String generateDayUrl(int menzaId, Date date) {
 		return String.format(DAY_URL, menzaId, DAY_FORMAT.format(date));

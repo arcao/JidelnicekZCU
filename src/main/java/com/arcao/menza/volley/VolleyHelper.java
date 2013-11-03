@@ -7,7 +7,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Request.Method;
 import com.android.volley.toolbox.Volley;
+import com.arcao.menza.constant.AppConstant;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +19,13 @@ public class VolleyHelper {
 
 	public static void init(Context mContext) {
 		requestQueue = Volley.newRequestQueue(mContext);
+
+        Authenticator.setDefault(new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(AppConstant.CONSUMER_KEY, AppConstant.CONSUMER_SECRET.toCharArray());
+            }
+        });
 	}
 
 	public static RequestQueue getRequestQueue() {
