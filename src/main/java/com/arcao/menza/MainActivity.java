@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
-        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.places, android.R.layout.simple_spinner_dropdown_item);
+        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.places, R.layout.actionbar_spinner_dropdown_item);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, mOnNavigationListener);
         actionBar.setSelectedNavigationItem(placeId);
     }
