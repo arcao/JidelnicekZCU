@@ -8,4 +8,8 @@ public class Meal {
 	public float priceExternal;
 	public String hash;
 	public float quality;
+	public int commentCount;
+	public int imageCount;
+	public Image[] images;
+	public Comment[] comments;
 }
