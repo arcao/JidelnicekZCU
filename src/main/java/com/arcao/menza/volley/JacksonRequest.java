@@ -39,7 +39,8 @@ public class JacksonRequest<T> extends Request<T> {
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
 		Map<String, String> headers = new HashMap<>();
-		String auth = "Basic " + Base64.encodeToString((AppConstant.CONSUMER_KEY + ":" + AppConstant.CONSUMER_SECRET).getBytes(), Base64.NO_WRAP);
+		String credentials = String.format("%s:%s", AppConstant.CONSUMER_KEY, AppConstant.CONSUMER_SECRET);
+		String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 		headers.put("Authorization", auth);
 		return headers;
 	}
