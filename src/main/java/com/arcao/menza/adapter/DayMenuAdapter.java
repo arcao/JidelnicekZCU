@@ -1,6 +1,8 @@
 package com.arcao.menza.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.api.data.Section;
+import com.arcao.menza.constant.PrefConstant;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,11 +27,14 @@ public class DayMenuAdapter extends BaseAdapter {
 
 	protected final List<Object> items;
 	protected final LayoutInflater mInflater;
+	protected final String priceGroup;
 
 
 	public DayMenuAdapter(Context mContext, Section[] sections) {
 		items = new ArrayList<>();
 		mInflater = LayoutInflater.from(mContext);
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		priceGroup = mSharedPreferences.getString(PrefConstant.PRICE_GROUP, PrefConstant.PRICE_GROUP__STUDENT);
 
 		fillItems(sections);
 	}
@@ -116,7 +122,7 @@ public class DayMenuAdapter extends BaseAdapter {
 
 		holder.number.setText(String.valueOf(meal.id));
 		holder.name.setText(meal.name);
-		holder.price.setText(String.valueOf((int) meal.priceStudent)); // TODO price according to configuration
+		holder.price.setText(getMealPrice(meal)); // TODO price according to configuration
 
 		if (meal.quality < 0) {
 			holder.rating.setVisibility(View.INVISIBLE);
@@ -127,6 +133,21 @@ public class DayMenuAdapter extends BaseAdapter {
 
 		return convertView;
 
+	}
+
+	protected String getMealPrice(Meal meal) {
+		switch (priceGroup) {
+			case PrefConstant.PRICE_GROUP__STAFF:
+				return String.valueOf(meal.priceStaff);
+
+			case PrefConstant.PRICE_GROUP__EXTERNAL:
+				return String.valueOf(meal.priceExternal);
+
+			case PrefConstant.PRICE_GROUP__STUDENT:
+			default:
+				return String.valueOf(meal.priceStudent);
+
+		}
 	}
 
 	protected static class SectionItem {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_price_group_values" translatable="false">
+        <!-- Student -->
+        <item>0</item>
+        <!-- Staff -->
+        <item>1</item>
+        <!-- External -->
+        <item>2</item>
+    </string-array>
+</resources>

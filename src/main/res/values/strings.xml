@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">JídelníčekZČU</string>
     <string name="action_settings">Nastavení</string>
 
@@ -22,4 +21,12 @@
     <string name="connection_error">Nepovedlo se stáhnout jídelní lístek!</string>
     <string name="action_today">Zobrazit dnešek</string>
     <string name="list_item_price_suffix">,- Kč</string>
+    <string name="pref_cat_appearance_title">Vzhled</string>
+    <string name="pref_price_group_title">Cenová skupina</string>
+
+    <string-array name="pref_price_group_entries">
+        <item>Student</item>
+        <item>Zaměstnanec</item>
+        <item>Externí</item>
+    </string-array>
 </resources>

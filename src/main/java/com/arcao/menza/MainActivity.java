@@ -1,5 +1,6 @@
 package com.arcao.menza;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import com.arcao.menza.constant.AppConstant;
 
 public class MainActivity extends ActionBarActivity {
 	private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
+	private static final int RESULT_SETTINGS = 1;
 
 	private DayPagerAdapter mDayPagerAdapter;
 	private ViewPager mViewPager;
@@ -72,8 +74,23 @@ public class MainActivity extends ActionBarActivity {
 			case R.id.action_today:
 				mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
 				return true;
+			case R.id.action_settings:
+				startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+			case RESULT_SETTINGS:
+				// reload fragments
+				mDayPagerAdapter.notifyDataSetChanged();
+				break;
 		}
 	}
 }
