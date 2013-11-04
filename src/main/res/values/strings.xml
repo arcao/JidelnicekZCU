@@ -29,4 +29,7 @@
         <item>Zaměstnanec</item>
         <item>Externí</item>
     </string-array>
+
+    <string name="button_continue">Pokračovat</string>
+    <string name="price_group_changeable">Cenovou skupinu lze kdykoliv později změnit v nastavení aplikace.</string>
 </resources>

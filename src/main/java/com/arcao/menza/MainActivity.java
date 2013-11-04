@@ -1,7 +1,9 @@
 package com.arcao.menza;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -12,13 +14,17 @@ import android.widget.SpinnerAdapter;
 
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
+import com.arcao.menza.constant.PrefConstant;
+import com.arcao.menza.fragment.PriceGroupChangeableDialogFragment;
+import com.arcao.menza.fragment.PriceGroupSelectionDialogFragment;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
 	private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
 	private static final int RESULT_SETTINGS = 1;
 
 	private DayPagerAdapter mDayPagerAdapter;
 	private ViewPager mViewPager;
+	private SharedPreferences mSharedPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
 			placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);
 		}
 
+		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager(), placeId);
 
@@ -53,6 +60,16 @@ public class MainActivity extends ActionBarActivity {
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.places, R.layout.actionbar_spinner_dropdown_item);
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, mOnNavigationListener);
 		actionBar.setSelectedNavigationItem(placeId);
+	}
+
+	@Override
+	protected void onResumeFragments() {
+		super.onResumeFragments();
+
+		if (mSharedPreferences.getString(PrefConstant.PRICE_GROUP, null) == null
+				&& getSupportFragmentManager().findFragmentByTag(PriceGroupSelectionDialogFragment.TAG) == null) {
+			PriceGroupSelectionDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupSelectionDialogFragment.TAG);
+		}
 	}
 
 	@Override
@@ -80,6 +97,14 @@ public class MainActivity extends ActionBarActivity {
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public void onPriceGroupSelected(String priceGroup) {
+		mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).commit();
+		mDayPagerAdapter.notifyDataSetChanged();
+
+		PriceGroupChangeableDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupChangeableDialogFragment.TAG);
 	}
 
 	@Override
