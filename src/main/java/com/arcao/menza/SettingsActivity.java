@@ -1,10 +1,12 @@
 package com.arcao.menza;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.view.MenuItem;
 
 import com.arcao.menza.constant.PrefConstant;
 
@@ -13,9 +15,23 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+
 		addPreferencesFromResource(R.xml.preferences);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			// Respond to the action bar's Up/Home button
+			case android.R.id.home:
+				finish();
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	protected void onResume() {
