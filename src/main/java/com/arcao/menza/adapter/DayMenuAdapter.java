@@ -15,6 +15,7 @@ import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.api.data.Section;
 import com.arcao.menza.constant.PrefConstant;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,8 @@ public class DayMenuAdapter extends BaseAdapter {
 	protected static final int TYPE_ITEM = 0;
 	protected static final int TYPE_SECTION = 1;
 	protected static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
+
+	protected static DecimalFormat PRICE_FORMAT = new DecimalFormat("0.##");
 
 	protected final List<Object> items;
 	protected final LayoutInflater mInflater;
@@ -122,7 +125,7 @@ public class DayMenuAdapter extends BaseAdapter {
 
 		holder.number.setText(String.valueOf(meal.id));
 		holder.name.setText(meal.name);
-		holder.price.setText(getMealPrice(meal)); // TODO price according to configuration
+		holder.price.setText(getMealPrice(meal));
 
 		if (meal.quality < 0) {
 			holder.rating.setVisibility(View.INVISIBLE);
@@ -138,14 +141,14 @@ public class DayMenuAdapter extends BaseAdapter {
 	protected String getMealPrice(Meal meal) {
 		switch (priceGroup) {
 			case PrefConstant.PRICE_GROUP__STAFF:
-				return String.valueOf(meal.priceStaff);
+				return PRICE_FORMAT.format(meal.priceStaff);
 
 			case PrefConstant.PRICE_GROUP__EXTERNAL:
-				return String.valueOf(meal.priceExternal);
+				return PRICE_FORMAT.format(meal.priceExternal);
 
 			case PrefConstant.PRICE_GROUP__STUDENT:
 			default:
-				return String.valueOf(meal.priceStudent);
+				return PRICE_FORMAT.format(meal.priceStudent);
 
 		}
 	}
