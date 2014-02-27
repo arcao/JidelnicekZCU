@@ -1,15 +1,18 @@
 package com.arcao.menza.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
-
+import android.widget.AdapterView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.arcao.menza.MealPreviewActivity;
 import com.arcao.menza.R;
 import com.arcao.menza.adapter.DayMenuAdapter;
 import com.arcao.menza.api.MenzaUrlGenerator;
+import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.api.data.Section;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.volley.VolleyHelper;
@@ -31,6 +34,23 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 
 		getListView().setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
 		getListView().setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+
+		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				DayMenuAdapter adapter = (DayMenuAdapter) getListAdapter();
+
+				Object item = adapter.getItem(position);
+				if (item instanceof Meal) {
+					Meal meal = (Meal) item;
+
+					Intent i = new Intent(getActivity(), MealPreviewActivity.class);
+					i.putExtra(MealPreviewActivity.PARAM_MEAL, meal);
+					getActivity().startActivity(i);
+
+				}
+			}
+		});
 
 		update();
 	}

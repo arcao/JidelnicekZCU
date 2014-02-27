@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" android:label="@string/action_settings" android:theme="@style/AppTheme"/>
+        <activity android:name=".MealPreviewActivity" android:theme="@style/PopupTheme"/>
     </application>
 
 </manifest>
