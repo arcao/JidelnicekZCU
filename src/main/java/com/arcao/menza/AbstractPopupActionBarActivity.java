@@ -16,9 +16,16 @@ public abstract class AbstractPopupActionBarActivity extends ActionBarActivity {
 		requestWindowFeature(Window.FEATURE_ACTION_BAR);
 	}
 
-	protected void showAsPopup(int width, int height) {
+	protected void showAsPopup(int widthResId, int heightResId) {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Not supported, because of problems with touching outside of window
+			return;
+		}
+
+		int width = getResources().getDimensionPixelSize(widthResId);
+		int height = getResources().getDimensionPixelSize(heightResId);
+
+		if (width == 0 || height == 0) {
 			return;
 		}
 

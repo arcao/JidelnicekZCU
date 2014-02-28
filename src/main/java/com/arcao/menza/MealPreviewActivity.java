@@ -15,15 +15,14 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		showAsPopup(600, 400);
+		setContentView(R.layout.activity_fragment);
 
-		Meal meal = getIntent().getParcelableExtra(PARAM_MEAL);
-
-		setTitle(meal.name);
+		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
+			Meal meal = getIntent().getParcelableExtra(PARAM_MEAL);
 			Fragment fragment = MealPreviewFragment.getInstance(meal);
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, fragment).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 		}
 	}
 }
