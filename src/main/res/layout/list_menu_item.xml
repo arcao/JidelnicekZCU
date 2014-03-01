@@ -25,7 +25,7 @@
                     android:id="@+id/price"
                     style="@style/Item.Price"/>
             <TextView
-                    android:text="@string/list_item_price_suffix"
+                    android:text="@string/price_suffix"
                     style="@style/Item.Price.Suffix"/>
         </LinearLayout>
     </LinearLayout>

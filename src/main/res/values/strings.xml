@@ -20,7 +20,7 @@
     <string name="list_empty">Tento den se nevaří.</string>
     <string name="connection_error">Nepovedlo se stáhnout jídelní lístek!</string>
     <string name="action_today">Zobrazit dnešek</string>
-    <string name="list_item_price_suffix">,- Kč</string>
+    <string name="price_suffix">,- Kč</string>
     <string name="pref_cat_appearance_title">Vzhled</string>
     <string name="pref_price_group_title">Cenová skupina</string>
 
@@ -37,4 +37,7 @@
     <string name="price_student">Student:</string>
     <string name="price_staff">Zaměstnanec:</string>
     <string name="preview_meal">Náhled jídla</string>
+    <string name="action_share">Sdílet</string>
+    <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
+    <string name="header_quality">Oblíbenost</string>
 </resources>
