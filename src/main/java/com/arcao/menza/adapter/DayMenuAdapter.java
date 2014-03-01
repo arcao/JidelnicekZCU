@@ -19,7 +19,6 @@ import com.arcao.menza.constant.PrefConstant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class DayMenuAdapter extends BaseAdapter {
 	protected static final int TYPE_ITEM = 0;
@@ -155,7 +154,7 @@ public class DayMenuAdapter extends BaseAdapter {
 		public final String name;
 
 		public SectionItem(String name) {
-			this.name = name.toUpperCase(Locale.US);
+			this.name = name;
 		}
 	}
 
