@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.api.data.Section;
+import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,8 +25,6 @@ public class DayMenuAdapter extends BaseAdapter {
 	protected static final int TYPE_ITEM = 0;
 	protected static final int TYPE_SECTION = 1;
 	protected static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
-
-	protected static DecimalFormat PRICE_FORMAT = new DecimalFormat("0.##");
 
 	protected final List<Object> items;
 	protected final LayoutInflater mInflater;
@@ -141,14 +139,14 @@ public class DayMenuAdapter extends BaseAdapter {
 	protected String getMealPrice(Meal meal) {
 		switch (priceGroup) {
 			case PrefConstant.PRICE_GROUP__STAFF:
-				return PRICE_FORMAT.format(meal.priceStaff);
+				return AppConstant.PRICE_FORMAT.format(meal.priceStaff);
 
 			case PrefConstant.PRICE_GROUP__EXTERNAL:
-				return PRICE_FORMAT.format(meal.priceExternal);
+				return AppConstant.PRICE_FORMAT.format(meal.priceExternal);
 
 			case PrefConstant.PRICE_GROUP__STUDENT:
 			default:
-				return PRICE_FORMAT.format(meal.priceStudent);
+				return AppConstant.PRICE_FORMAT.format(meal.priceStudent);
 
 		}
 	}

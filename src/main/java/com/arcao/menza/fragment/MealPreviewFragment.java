@@ -6,18 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Meal;
-
-import java.text.DecimalFormat;
+import com.arcao.menza.constant.AppConstant;
 
 /**
  * Created by msloup on 26.2.14.
  */
 public class MealPreviewFragment extends Fragment {
 	public static final String PARAM_MEAL = "MEAL";
-
-	protected static DecimalFormat PRICE_FORMAT = new DecimalFormat("0.## Kč");
 
 	public static MealPreviewFragment getInstance(Meal meal) {
 		MealPreviewFragment fragment = new MealPreviewFragment();
@@ -37,9 +35,9 @@ public class MealPreviewFragment extends Fragment {
 
 		((TextView)view.findViewById(R.id.mealName)).setText(meal.name);
 
-		((TextView)view.findViewById(R.id.priceStudent)).setText(PRICE_FORMAT.format(meal.priceStudent));
-		((TextView)view.findViewById(R.id.priceStaff)).setText(PRICE_FORMAT.format(meal.priceStaff));
-		((TextView)view.findViewById(R.id.priceExternal)).setText(PRICE_FORMAT.format(meal.priceExternal));
+		((TextView)view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent));
+		((TextView)view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff));
+		((TextView)view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal));
 
 		return view;
 	}
