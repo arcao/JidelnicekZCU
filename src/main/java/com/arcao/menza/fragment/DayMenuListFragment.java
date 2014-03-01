@@ -24,6 +24,8 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 	public static final String ARG_DAY_ID = "DAY_ID";
 	public static final String ARG_PLACE_ID = "PLACE_ID";
 
+	protected int placeId = 0;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -46,6 +48,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 
 					Intent i = new Intent(getActivity(), MealPreviewActivity.class);
 					i.putExtra(MealPreviewActivity.PARAM_MEAL, meal);
+					i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId);
 					getActivity().startActivity(i);
 
 				}
@@ -63,7 +66,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 			setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
 		}
 
-		int placeId = getArguments().getInt(ARG_PLACE_ID, 0) + 1;
+		placeId = getArguments().getInt(ARG_PLACE_ID, 0) + 1;
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
 		Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);
