@@ -24,7 +24,6 @@
         <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:background">@color/background_holo_light</item>
     </style>
 
     <style name="PopupTheme" parent="PopupBaseTheme">
