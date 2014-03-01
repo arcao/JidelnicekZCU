@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         style="@style/Item.Layout">
-    <TextView
+    <com.arcao.menza.widget.UpperCaseTextView
         android:id="@+id/name"
         style="@style/Item.Header"
         />
