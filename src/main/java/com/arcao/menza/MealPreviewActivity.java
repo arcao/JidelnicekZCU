@@ -20,7 +20,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 
 	protected Meal meal;
 	protected String priceGroup;
-	protected int placeId = 0;
+	protected int placeId = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 	}
 
 	protected Intent getShareIntent() {
-		String place = getResources().getStringArray(R.array.places)[placeId];
+		String place = getResources().getStringArray(R.array.places)[placeId - 1];
 
 		String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
 
