@@ -3,6 +3,7 @@ package com.arcao.menza;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -14,19 +15,20 @@ public abstract class AbstractPopupActionBarActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_ACTION_BAR);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
-	protected void showAsPopup(int widthResId, int heightResId) {
+	protected boolean showAsPopup(int widthResId, int heightResId) {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Not supported, because of problems with touching outside of window
-			return;
+			return false;
 		}
 
 		int width = getResources().getDimensionPixelSize(widthResId);
 		int height = getResources().getDimensionPixelSize(heightResId);
 
 		if (width == 0 || height == 0) {
-			return;
+			return false;
 		}
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -37,5 +39,18 @@ public abstract class AbstractPopupActionBarActivity extends ActionBarActivity {
 
 		// This sets the window size, while working around the IllegalStateException thrown by ActionBarView
 		this.getWindow().setLayout(width, height);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			// Respond to the action bar's Up/Home button
+			case android.R.id.home:
+				finish();
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
