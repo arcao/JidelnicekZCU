@@ -48,8 +48,9 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 					Meal meal = (Meal) item;
 
 					Intent i = new Intent(getActivity(), MealPreviewActivity.class);
+					i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, getArguments().getInt(ARG_PLACE_ID, 0));
+					i.putExtra(MealPreviewActivity.PARAM_DATE, date.getTime());
 					i.putExtra(MealPreviewActivity.PARAM_MEAL, meal);
-					i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId);
 					getActivity().startActivity(i);
 
 				}
@@ -67,7 +68,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 			setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
 		}
 
-		placeId = getArguments().getInt(ARG_PLACE_ID, 0) + 1;
+		placeId = getArguments().getInt(ARG_PLACE_ID, 0);
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
 		Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);

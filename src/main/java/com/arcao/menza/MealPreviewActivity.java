@@ -14,13 +14,17 @@ import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.MealPreviewFragment;
 
-public class MealPreviewActivity extends AbstractPopupActionBarActivity {
-	public static final String PARAM_MEAL = MealPreviewFragment.PARAM_MEAL;
-	public static final String PARAM_PLACE_ID = "PLACE_ID";
+import java.util.Date;
 
+public class MealPreviewActivity extends AbstractPopupActionBarActivity {
+	public static final String PARAM_PLACE_ID = MealPreviewFragment.PARAM_PLACE_ID;
+	public static final String PARAM_DATE = MealPreviewFragment.PARAM_DATE;
+	public static final String PARAM_MEAL = MealPreviewFragment.PARAM_MEAL;
+
+	protected int placeId = 1;
+	protected Date date;
 	protected Meal meal;
 	protected String priceGroup;
-	protected int placeId = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +33,16 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		priceGroup = mSharedPreferences.getString(PrefConstant.PRICE_GROUP, PrefConstant.PRICE_GROUP__STUDENT);
 
-		meal = getIntent().getParcelableExtra(PARAM_MEAL);
 		placeId = getIntent().getIntExtra(PARAM_PLACE_ID, placeId);
+		date = new Date(getIntent().getLongExtra(PARAM_DATE, 0L));
+		meal = getIntent().getParcelableExtra(PARAM_MEAL);
 
 		setContentView(R.layout.activity_fragment);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
-			Fragment fragment = MealPreviewFragment.getInstance(meal);
+			Fragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 		}
 	}
@@ -55,7 +60,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 	}
 
 	protected Intent getShareIntent() {
-		String place = getResources().getStringArray(R.array.places)[placeId - 1];
+		String place = getResources().getStringArray(R.array.places)[placeId];
 
 		String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
 

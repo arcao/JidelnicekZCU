@@ -71,7 +71,7 @@ public class RatingChecker {
 
 		for (String item : collection) {
 			if (item == null || item.length() == 0)
-				continue;;
+				continue;
 
 			if (sb.length() != 0)
 				sb.append(separator);

@@ -31,10 +31,12 @@ public class MealPreviewFragment extends Fragment {
 	protected WeakReference<RatingChecker> ratingCheckerRef;
 	protected WeakReference<RatingBar> ratingBarRef;
 
-	public static MealPreviewFragment getInstance(Meal meal) {
+	public static MealPreviewFragment getInstance(int placeId, Date date, Meal meal) {
 		MealPreviewFragment fragment = new MealPreviewFragment();
 
 		Bundle args = new Bundle();
+		args.putInt(PARAM_PLACE_ID, placeId);
+		args.putLong(PARAM_DATE, date.getTime());
 		args.putParcelable(PARAM_MEAL, meal);
 		fragment.setArguments(args);
 

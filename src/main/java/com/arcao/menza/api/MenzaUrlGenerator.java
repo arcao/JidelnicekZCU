@@ -1,5 +1,7 @@
 package com.arcao.menza.api;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +13,9 @@ public class MenzaUrlGenerator {
 	protected static final String RATING_URL = URL_PREFIX + "vote/";
 
 	public static String generateDayUrl(int placeId, Date date) {
-		return String.format(DAY_URL, placeId, DAY_FORMAT.format(date));
+		String url = String.format(DAY_URL, placeId + 1, DAY_FORMAT.format(date));
+		Log.v("JZ|MenzaUrlGenerator", url);
+		return url;
 	}
 
 	public static String generateRatingUrl() {
