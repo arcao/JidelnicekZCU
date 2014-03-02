@@ -33,6 +33,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            runProguard true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard.cfg'
         }
     }
 
