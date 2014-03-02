@@ -40,4 +40,8 @@
     <string name="action_share">Sdílet</string>
     <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
     <string name="header_rating">Oblíbenost</string>
+
+    <string name="vote_progress">Odesílám váše hodnocení...</string>
+    <string name="vote_finished">Hodnocení bylo úspěšně odesláno.</string>
+    <string name="vote_failed">Nepovedlo se odeslat hodnocení.</string>
 </resources>

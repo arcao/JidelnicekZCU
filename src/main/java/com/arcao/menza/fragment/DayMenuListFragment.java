@@ -25,6 +25,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 	public static final String ARG_PLACE_ID = "PLACE_ID";
 
 	protected int placeId = 0;
+	protected Date date = null;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 
-		Date date = cal.getTime();
+		date = cal.getTime();
 
 		VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
 	}
