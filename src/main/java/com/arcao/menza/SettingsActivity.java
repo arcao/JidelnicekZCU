@@ -20,6 +20,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		}
 
 		addPreferencesFromResource(R.xml.preferences);
+
+		// fix for Android 2.x
+		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.PRICE_GROUP);
 	}
 
 	@Override

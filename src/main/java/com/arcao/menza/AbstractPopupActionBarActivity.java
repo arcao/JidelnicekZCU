@@ -14,7 +14,7 @@ public abstract class AbstractPopupActionBarActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR);
+		supportRequestWindowFeature(Window.FEATURE_ACTION_BAR);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
