@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_holo_light"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:text="@string/price_suffix"
             style="@style/PreviewItem.Value.PriceSuffix" />
     </LinearLayout>
-
+    <View style="@style/PreviewItem.Divider"/>
     <LinearLayout
         style="@style/PreviewItem.Layout">
         <TextView
@@ -45,9 +45,9 @@
             android:text="@string/price_suffix"
             style="@style/PreviewItem.Value.PriceSuffix" />
     </LinearLayout>
-
+    <View style="@style/PreviewItem.Divider"/>
     <LinearLayout
-        style="@style/PreviewItem.Layout.Last">
+        style="@style/PreviewItem.Layout">
         <TextView
             android:text="@string/price_external"
             style="@style/PreviewItem.Label" />
@@ -61,6 +61,11 @@
     </LinearLayout>
 
     <com.arcao.menza.widget.UpperCaseTextView
-        android:text="@string/header_quality"
+        android:text="@string/header_rating"
         style="@style/PreviewItem.Header" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/PreviewItem.RatingBar"/>
+
 </LinearLayout>

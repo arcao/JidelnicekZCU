@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.arcao.menza.R;
@@ -38,6 +39,23 @@ public class MealPreviewFragment extends Fragment {
 		((TextView)view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent));
 		((TextView)view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff));
 		((TextView)view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal));
+
+		RatingBar ratingBar = ((RatingBar)view.findViewById(R.id.ratingBar));
+		ratingBar.setMax(100);
+
+		if (meal.quality > 0) {
+			ratingBar.setProgress((int) (20F + 80F * (meal.quality / 100F)));
+		}
+
+		ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				if (!fromUser)
+					return;
+
+
+			}
+		});
 
 		return view;
 	}

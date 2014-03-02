@@ -111,7 +111,11 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="PreviewItem.Layout.Last"></style>
+    <style name="PreviewItem.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
 
     <style name="PreviewItem.Label" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">0dp</item>
@@ -133,8 +137,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
 
-        <item name="android:progressDrawable">@drawable/ratingbar_small_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar_small_holo_light</item>
+        <item name="android:progressDrawable">@drawable/ratingbar_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
     </style>
 </resources>
 

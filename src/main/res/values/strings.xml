@@ -39,5 +39,5 @@
     <string name="preview_meal">Náhled jídla</string>
     <string name="action_share">Sdílet</string>
     <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
-    <string name="header_quality">Oblíbenost</string>
+    <string name="header_rating">Oblíbenost</string>
 </resources>
