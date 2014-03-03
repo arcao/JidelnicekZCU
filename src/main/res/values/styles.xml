@@ -61,7 +61,7 @@
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
         <item name="android:isIndicator">true</item>
-        <item name="android:numStars">10</item>
+        <item name="android:numStars">5</item>
     </style>
 
     <style name="Item.Number" parent="@android:style/Widget.TextView">
@@ -141,7 +141,7 @@
 
         <item name="android:progressDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
-        <item name="android:numStars">10</item>
+        <item name="android:numStars">5</item>
     </style>
 </resources>
 
