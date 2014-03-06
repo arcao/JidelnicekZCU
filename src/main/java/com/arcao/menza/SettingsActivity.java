@@ -7,8 +7,8 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
-
 import com.arcao.menza.constant.PrefConstant;
+import com.arcao.menza.util.FeedbackHelper;
 
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 	@Override
@@ -20,6 +20,15 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		}
 
 		addPreferencesFromResource(R.xml.preferences);
+
+		Preference feedBackPref = findPreference("feed_back");
+		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				FeedbackHelper.sendFeedBack(SettingsActivity.this);
+				return true;
+			}
+		});
 
 		// fix for Android 2.x
 		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.PRICE_GROUP);
@@ -67,5 +76,4 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 	protected <P extends Preference> P findPreference(String key) {
 		return (P)super.findPreference(key);
 	}
-
 }

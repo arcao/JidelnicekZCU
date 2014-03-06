@@ -11,4 +11,8 @@
             android:defaultValue="@string/pref_price_group_default"
             android:summary="%s"/>
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Vývojář">
+        <Preference android:title="Zpětná vazba" android:key="feed_back" />
+    </PreferenceCategory>
 </PreferenceScreen>
