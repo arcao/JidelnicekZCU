@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -24,20 +25,23 @@ import java.io.IOException;
  */
 public class FeedbackHelper {
 	private static final String TAG = "FeedbackHelper";
-	private static final String FEEDBACK_IMAGE = "screenshot.jpg";
 
+	private static final String FEEDBACK_IMAGE = "screenshot.jpg";
+	private static final boolean ALLOW_GMS_FEEDBACK = false; // unable to get feedback from this
 	private static int MAX_WIDTH = 600;
 	private static int MAX_HEIGHT = 600;
 
 
-	public static void sendFeedBack(Activity activity) {
-		if (!activity.bindService(new Intent(Intent.ACTION_BUG_REPORT), new FeedBackServiceConnection(activity.getWindow()), Context.BIND_AUTO_CREATE)) {
+	public static void sendFeedBack(Activity activity, int resEmail, int resSubject, int resMessageText) {
+		if (!ALLOW_GMS_FEEDBACK || !activity.bindService(new Intent(Intent.ACTION_BUG_REPORT), new FeedBackServiceConnection(activity.getWindow()), Context.BIND_AUTO_CREATE)) {
+			String subject = activity.getString(resSubject, getApplicationName(activity), getVersion(activity));
+
 			// send it old way
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/email");
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"arcao@arcao.com"});
-			intent.putExtra(Intent.EXTRA_SUBJECT, "JídelníčekZČU: Zpětná vazba");
-			intent.putExtra(Intent.EXTRA_TEXT, "Váš text...");
+			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{activity.getString(resEmail)});
+			intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+			intent.putExtra(Intent.EXTRA_TEXT, activity.getString(resMessageText));
 
 			// try to add screenshot
 			try {
@@ -109,6 +113,19 @@ public class FeedbackHelper {
 		return null;
 	}
 
+	public static String getApplicationName(Context context) {
+		int stringId = context.getApplicationInfo().labelRes;
+		return context.getString(stringId);
+	}
+
+	public static String getVersion(Context context) {
+		try {
+			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			Log.e(TAG, e.getMessage(), e);
+			return "0.0";
+		}
+	}
 
 	protected static class FeedBackServiceConnection implements ServiceConnection {
 		protected Window mWindow;

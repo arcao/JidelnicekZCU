@@ -25,7 +25,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				FeedbackHelper.sendFeedBack(SettingsActivity.this);
+				FeedbackHelper.sendFeedBack(SettingsActivity.this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
 				return true;
 			}
 		});

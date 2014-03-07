@@ -17,6 +17,7 @@ import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.PriceGroupChangeableDialogFragment;
 import com.arcao.menza.fragment.PriceGroupSelectionDialogFragment;
+import com.arcao.menza.util.FeedbackHelper;
 
 public class MainActivity extends ActionBarActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
 	private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
@@ -93,6 +94,9 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 				return true;
 			case R.id.action_settings:
 				startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
+				return true;
+			case R.id.action_feedback:
+				FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

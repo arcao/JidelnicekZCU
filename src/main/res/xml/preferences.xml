@@ -12,7 +12,7 @@
             android:summary="%s"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="Vývojář">
-        <Preference android:title="Zpětná vazba" android:key="feed_back" />
+        android:title="@string/pref_cat_developer_title">
+        <Preference android:title="@string/action_feedback" android:key="feed_back" />
     </PreferenceCategory>
 </PreferenceScreen>

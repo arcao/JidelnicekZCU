@@ -44,4 +44,8 @@
     <string name="vote_progress">Odesílám váše hodnocení...</string>
     <string name="vote_finished">Hodnocení bylo úspěšně odesláno.</string>
     <string name="vote_failed">Nepovedlo se odeslat hodnocení.</string>
+    <string name="action_feedback">Zpětná vazba</string>
+    <string name="feedback_subject">%1$s (%2$s): Zpětná vazba</string>
+    <string name="feedback_message">Váš text...</string>
+    <string name="pref_cat_developer_title">Vývojář</string>
 </resources>
