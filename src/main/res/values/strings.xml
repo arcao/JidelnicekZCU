@@ -6,9 +6,9 @@
     <string-array name="places">
         <item>Menza Bory</item>
         <item>Menza Kollárova</item>
-        <item>Bufet FST</item>
-        <item>Bufet Kollárova</item>
         <item>Bufet Lochotín</item>
+        <item>Bufet FST</item>
+        <item>Bufet PF</item>
     </string-array>
 
     <string-array name="relative_day_title">
@@ -48,4 +48,7 @@
     <string name="feedback_subject">%1$s (%2$s): Zpětná vazba</string>
     <string name="feedback_message">Váš text...</string>
     <string name="pref_cat_developer_title">Vývojář</string>
+    <string name="action_info">Informace místě</string>
+    <string name="address">Adresa</string>
+    <string name="open_time">Otevírací doba</string>
 </resources>

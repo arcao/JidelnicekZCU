@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".SettingsActivity" android:label="@string/action_settings" android:theme="@style/AppTheme"/>
         <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/PopupTheme"/>
+        <activity android:name=".PlacePreviewActivity" android:theme="@style/PopupTheme"/>
     </application>
 
 </manifest>

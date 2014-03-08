@@ -92,6 +92,9 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 			case R.id.action_today:
 				mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
 				return true;
+			case R.id.action_info:
+				startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, getSupportActionBar().getSelectedNavigationIndex()));
+				return true;
 			case R.id.action_settings:
 				startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
 				return true;

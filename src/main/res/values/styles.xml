@@ -135,6 +135,10 @@
 
     <style name="PreviewItem.Value.PriceSuffix"></style>
 
+    <style name="PreviewItem.Value.Left">
+        <item name="android:layout_gravity">left</item>
+    </style>
+
     <style name="PreviewItem.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

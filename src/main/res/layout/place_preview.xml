@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/background_holo_light">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:scrollbarStyle="outsideOverlay">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <com.arcao.menza.widget.UpperCaseTextView
+                android:text="@string/address"
+                style="@style/PreviewItem.Header" />
+            <LinearLayout
+                style="@style/PreviewItem.Layout">
+                <TextView
+                    android:id="@+id/address"
+                    android:text="Abc"
+                    style="@style/PreviewItem.Value.Left" />
+            </LinearLayout>
+
+            <com.arcao.menza.widget.UpperCaseTextView
+                android:text="@string/open_time"
+                style="@style/PreviewItem.Header" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/PreviewItem.Value.Left"
+                android:layout_marginTop="16dp"
+                android:text="Desc" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

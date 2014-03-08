@@ -3,14 +3,20 @@ package com.arcao.menza.api.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by msloup on 10.11.13.
- */
 public class Place implements Parcelable {
 	public String name;
+	public String address;
 	public String description;
-	public Image[] images;
+	public String[] images;
 
+	public Place() {}
+
+	protected Place(Parcel in) {
+		name = in.readString();
+		address = in.readString();
+		description = in.readString();
+		images = in.createStringArray();
+	}
 
 	@Override
 	public int describeContents() {
@@ -19,25 +25,19 @@ public class Place implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.name);
-		dest.writeString(this.description);
-		dest.writeTypedArray(this.images, flags);
+		dest.writeString(name);
+		dest.writeString(address);
+		dest.writeString(description);
+		dest.writeArray(images);
 	}
 
-	public Place() {
-	}
-
-	private Place(Parcel in) {
-		this.name = in.readString();
-		this.description = in.readString();
-		this.images = in.createTypedArray(Image.CREATOR);
-	}
-
-	public static Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
-		public Place createFromParcel(Parcel source) {
-			return new Place(source);
+	public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
+		@Override
+		public Place createFromParcel(Parcel in) {
+			return new Place(in);
 		}
 
+		@Override
 		public Place[] newArray(int size) {
 			return new Place[size];
 		}
