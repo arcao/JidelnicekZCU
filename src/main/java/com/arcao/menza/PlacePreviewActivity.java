@@ -2,10 +2,7 @@ package com.arcao.menza;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
@@ -52,10 +49,10 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 			public void onErrorResponse(VolleyError error) {
 				Log.e("VOLLEY", error.getMessage(), error);
 
-                Fragment fragment = ErrorFragment.newInstance(R.string.connection_error_data);
+				Fragment fragment = ErrorFragment.newInstance(R.string.connection_error_data);
 
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null)
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+				if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null)
+					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 			}
 		};
 	}
