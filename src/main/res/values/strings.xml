@@ -51,4 +51,5 @@
     <string name="action_info">Informace místě</string>
     <string name="address">Adresa</string>
     <string name="open_time">Otevírací doba</string>
+    <string name="connection_error_data">Nepovedlo se stáhnout data!</string>
 </resources>

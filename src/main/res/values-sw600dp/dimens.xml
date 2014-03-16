@@ -3,6 +3,6 @@
          screen margins) for sw600dp devices (e.g. 7" tablets) here. -->
     <dimen name="activity_horizontal_margin">32dp</dimen>
 
-    <dimen name="popup_width">500dp</dimen>
-    <dimen name="popup_height">400dp</dimen>
+    <dimen name="popup_width">400dp</dimen>
+    <dimen name="popup_height">450dp</dimen>
 </resources>

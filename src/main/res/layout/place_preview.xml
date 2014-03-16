@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:scrollbarStyle="outsideOverlay"
+    android:fillViewport="true"
     android:background="@color/background_holo_light">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:scrollbarStyle="outsideOverlay">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <com.arcao.menza.widget.UpperCaseTextView
+            style="@style/Card">
+            <TextView
                 android:text="@string/address"
-                style="@style/PreviewItem.Header" />
-            <LinearLayout
-                style="@style/PreviewItem.Layout">
-                <TextView
-                    android:id="@+id/address"
-                    android:text="Abc"
-                    style="@style/PreviewItem.Value.Left" />
-            </LinearLayout>
+                style="@style/Card.Header" />
+            <TextView
+                android:id="@+id/address"
+                tools:text="Abc"
+                style="@style/Card.Text" />
+        </LinearLayout>
 
-            <com.arcao.menza.widget.UpperCaseTextView
+        <LinearLayout
+            style="@style/Card">
+            <TextView
                 android:text="@string/open_time"
-                style="@style/PreviewItem.Header" />
-
+                style="@style/Card.Header" />
             <TextView
                 android:id="@+id/description"
-                style="@style/PreviewItem.Value.Left"
-                android:layout_marginTop="16dp"
-                android:text="Desc" />
+                style="@style/Card.Text"
+                tools:text="Desc" />
         </LinearLayout>
-    </ScrollView>
-
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -93,53 +93,61 @@
         <item name="android:paddingRight">8dp</item>
     </style>
 
-    <style name="PreviewItem"></style>
-
-    <style name="PreviewItem.Header" parent="@android:style/Widget.TextView">
-        <item name="android:background">@drawable/list_section_divider_holo_light</item>
+    <style name="Card">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">8dip</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:background">@drawable/card_background</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:textColor">@color/card_text</item>
     </style>
 
-    <style name="PreviewItem.Layout">
+    <style name="Card.Header" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:paddingBottom">8dip</item>
+    </style>
+    <style name="Card.Text" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/card_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Card.Item" parent="">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
-
-    <style name="PreviewItem.Divider">
+    <style name="Card.Item.Divider" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
-
-    <style name="PreviewItem.Label" parent="@android:style/Widget.TextView">
+    <style name="Card.Item.Label" parent="Card.Text">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="PreviewItem.Value" parent="@android:style/Widget.TextView">
+    <style name="Card.Item.Value" parent="Card.Text">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
         <item name="android:layout_gravity">right</item>
     </style>
 
-    <style name="PreviewItem.Value.PriceSuffix"></style>
+    <style name="Card.Item.Value.PriceSuffix"></style>
 
-    <style name="PreviewItem.Value.Left">
+    <style name="Card.Item.Value.Left">
         <item name="android:layout_gravity">left</item>
     </style>
 
-    <style name="PreviewItem.RatingBar" parent="@android:style/Widget.RatingBar">
+    <style name="Card.Item.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
 
@@ -147,5 +155,7 @@
         <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:numStars">5</item>
     </style>
+
+
 </resources>
 
