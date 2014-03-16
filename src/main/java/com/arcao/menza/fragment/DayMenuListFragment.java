@@ -51,8 +51,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 					i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, getArguments().getInt(ARG_PLACE_ID, 0));
 					i.putExtra(MealPreviewActivity.PARAM_DATE, date.getTime());
 					i.putExtra(MealPreviewActivity.PARAM_MEAL, meal);
-					getActivity().startActivity(i);
-
+					getActivity().startActivityForResult(i, 0);
 				}
 			}
 		});

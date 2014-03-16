@@ -21,7 +21,7 @@ import com.arcao.menza.util.FeedbackHelper;
 
 public class MainActivity extends ActionBarActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
 	private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
-	private static final int RESULT_SETTINGS = 1;
+	public static final int RESULT_REFRESH = 101;
 
 	private DayPagerAdapter mDayPagerAdapter;
 	private ViewPager mViewPager;
@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 				startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, getSupportActionBar().getSelectedNavigationIndex()));
 				return true;
 			case R.id.action_settings:
-				startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
+				startActivityForResult(new Intent(this, SettingsActivity.class), 0);
 				return true;
 			case R.id.action_feedback:
 				FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
@@ -118,11 +118,9 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		switch (requestCode) {
-			case RESULT_SETTINGS:
+		if (resultCode == RESULT_REFRESH) {
 				// reload fragments
 				mDayPagerAdapter.notifyDataSetChanged();
-				break;
 		}
 	}
 }

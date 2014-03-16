@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.arcao.menza.MainActivity;
 import com.arcao.menza.R;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Meal;
@@ -97,6 +97,9 @@ public class MealPreviewFragment extends Fragment {
 
 				ratingBar.setIsIndicator(true);
 
+				// show message
+				Toast.makeText(getActivity(), R.string.vote_progress, Toast.LENGTH_LONG).show();
+
 				VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date, meal), createRatingReqErrorListener(meal));
 			}
 		});
@@ -107,7 +110,8 @@ public class MealPreviewFragment extends Fragment {
 		return new Response.Listener<Object>() {
 			@Override
 			public void onResponse(Object response) {
-				if (getActivity() == null)
+				Activity activity = getActivity();
+				if (activity == null)
 					return;
 
 				RatingChecker ratingChecker = ratingCheckerRef.get();
@@ -117,6 +121,8 @@ public class MealPreviewFragment extends Fragment {
 
 				// invalidate soft cache
 				VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
+
+				activity.setResult(MainActivity.RESULT_REFRESH);
 
 				// show message
 				Toast.makeText(getActivity(), R.string.vote_finished, Toast.LENGTH_LONG).show();

@@ -63,6 +63,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		switch (key) {
 			case PrefConstant.PRICE_GROUP:
+				setResult(MainActivity.RESULT_REFRESH);
 				updateListPreferenceSummary(key);
 				break;
 		}
