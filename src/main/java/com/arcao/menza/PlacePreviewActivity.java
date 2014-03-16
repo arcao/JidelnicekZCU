@@ -2,12 +2,15 @@ package com.arcao.menza;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Place;
+import com.arcao.menza.fragment.ErrorFragment;
 import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
 
@@ -49,8 +52,10 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 			public void onErrorResponse(VolleyError error) {
 				Log.e("VOLLEY", error.getMessage(), error);
 
-				// show error message
-				Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();
+                Fragment fragment = ErrorFragment.newInstance(R.string.connection_error_data);
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null)
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 			}
 		};
 	}
