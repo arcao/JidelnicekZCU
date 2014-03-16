@@ -147,5 +147,31 @@
         <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:numStars">5</item>
     </style>
+
+    <style name="Card"></style>
+
+    <style name="Card.Layout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:background">@drawable/background_card</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Card.Header" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:paddingBottom">8dip</item>
+    </style>
+    <style name="Card.Body" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
 
