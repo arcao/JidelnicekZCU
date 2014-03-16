@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            style="@style/Card.Layout">
+            style="@style/Card">
             <TextView
                 style="@style/Card.Header"
                 android:id="@+id/mealName"
@@ -22,62 +22,62 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/Card.Layout">
+            style="@style/Card">
             <TextView
                 android:text="@string/price"
                 style="@style/Card.Header" />
             <LinearLayout
-                style="@style/PreviewItem.Layout">
+                style="@style/Card.Item">
                 <TextView
                     android:text="@string/price_student"
-                    style="@style/PreviewItem.Label" />
+                    style="@style/Card.Item.Label" />
                 <TextView
                     android:id="@+id/priceStudent"
                     tools:text="0"
-                    style="@style/PreviewItem.Value" />
+                    style="@style/Card.Item.Value" />
                 <TextView
                     android:text="@string/price_suffix"
-                    style="@style/PreviewItem.Value.PriceSuffix" />
+                    style="@style/Card.Item.Value.PriceSuffix" />
             </LinearLayout>
-            <View style="@style/PreviewItem.Divider"/>
+            <View style="@style/Card.Item.Divider"/>
             <LinearLayout
-                style="@style/PreviewItem.Layout">
+                style="@style/Card.Item">
                 <TextView
                     android:text="@string/price_staff"
-                    style="@style/PreviewItem.Label" />
+                    style="@style/Card.Item.Label" />
                 <TextView
                     android:id="@+id/priceStaff"
                     tools:text="0"
-                    style="@style/PreviewItem.Value" />
+                    style="@style/Card.Item.Value" />
                 <TextView
                     android:text="@string/price_suffix"
-                    style="@style/PreviewItem.Value.PriceSuffix" />
+                    style="@style/Card.Item.Value.PriceSuffix" />
             </LinearLayout>
-            <View style="@style/PreviewItem.Divider"/>
+            <View style="@style/Card.Item.Divider"/>
             <LinearLayout
-                style="@style/PreviewItem.Layout">
+                style="@style/Card.Item">
                 <TextView
                     android:text="@string/price_external"
-                    style="@style/PreviewItem.Label" />
+                    style="@style/Card.Item.Label" />
                 <TextView
                     android:id="@+id/priceExternal"
                     tools:text="0"
-                    style="@style/PreviewItem.Value" />
+                    style="@style/Card.Item.Value" />
                 <TextView
                     android:text="@string/price_suffix"
-                    style="@style/PreviewItem.Value.PriceSuffix" />
+                    style="@style/Card.Item.Value.PriceSuffix" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            style="@style/Card.Layout">
+            style="@style/Card">
             <TextView
                 android:text="@string/header_rating"
                 style="@style/Card.Header" />
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_gravity="center"
-                style="@style/PreviewItem.RatingBar"/>
+                style="@style/Card.Item.RatingBar"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

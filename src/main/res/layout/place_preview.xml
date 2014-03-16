@@ -13,24 +13,24 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            style="@style/Card.Layout">
+            style="@style/Card">
             <TextView
                 android:text="@string/address"
                 style="@style/Card.Header" />
             <TextView
                 android:id="@+id/address"
                 tools:text="Abc"
-                style="@style/Card.Body" />
+                style="@style/Card.Text" />
         </LinearLayout>
 
         <LinearLayout
-            style="@style/Card.Layout">
+            style="@style/Card">
             <TextView
                 android:text="@string/open_time"
                 style="@style/Card.Header" />
             <TextView
                 android:id="@+id/description"
-                style="@style/Card.Body"
+                style="@style/Card.Text"
                 tools:text="Desc" />
         </LinearLayout>
     </LinearLayout>
