@@ -1,6 +1,9 @@
 package com.arcao.menza;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -21,7 +24,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
 		addPreferencesFromResource(R.xml.preferences);
 
-		Preference feedBackPref = findPreference("feed_back");
+		Preference feedBackPref = findPreference("feedback");
 		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -29,6 +32,21 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 				return true;
 			}
 		});
+
+		Preference licensesPref = findPreference("licenses");
+		licensesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Intent i = new Intent(SettingsActivity.this, WebViewActivity.class);
+				i.putExtra(WebViewActivity.PARAM_TITLE, R.string.pref_licenses);
+				i.putExtra(WebViewActivity.PARAM_RAW_RESOURCE, R.raw.licenses);
+				startActivity(i);
+				return true;
+			}
+		});
+
+		findPreference("version").setSummary(getVersion(this));
+
 
 		// fix for Android 2.x
 		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.PRICE_GROUP);
@@ -76,5 +94,13 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
 	protected <P extends Preference> P findPreference(String key) {
 		return (P)super.findPreference(key);
+	}
+
+	public static String getVersion(Context context) {
+		try {
+			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			return "0.0";
+		}
 	}
 }
