@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -18,7 +18,7 @@
             <TextView
                 style="@style/Card.Header"
                 android:id="@+id/mealName"
-                android:text="Ovocné knedlíky s tvarohem 400g" />
+                tools:text="Ovocné knedlíky s tvarohem 400g" />
         </LinearLayout>
 
         <LinearLayout
@@ -33,7 +33,7 @@
                     style="@style/PreviewItem.Label" />
                 <TextView
                     android:id="@+id/priceStudent"
-                    android:text="0"
+                    tools:text="0"
                     style="@style/PreviewItem.Value" />
                 <TextView
                     android:text="@string/price_suffix"
@@ -47,7 +47,7 @@
                     style="@style/PreviewItem.Label" />
                 <TextView
                     android:id="@+id/priceStaff"
-                    android:text="0"
+                    tools:text="0"
                     style="@style/PreviewItem.Value" />
                 <TextView
                     android:text="@string/price_suffix"
@@ -61,7 +61,7 @@
                     style="@style/PreviewItem.Label" />
                 <TextView
                     android:id="@+id/priceExternal"
-                    android:text="0"
+                    tools:text="0"
                     style="@style/PreviewItem.Value" />
                 <TextView
                     android:text="@string/price_suffix"
