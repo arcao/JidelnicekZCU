@@ -6,4 +6,9 @@
 
     <dimen name="popup_width">0dp</dimen>
     <dimen name="popup_height">0dp</dimen>
+
+    <dimen name="card_margin">16dp</dimen>
+    <dimen name="card_padding">8dp</dimen>
+    <dimen name="card_header_text_size">25sp</dimen>
+    <dimen name="card_text_size">14sp</dimen>
 </resources>

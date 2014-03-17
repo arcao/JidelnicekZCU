@@ -2,19 +2,18 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:scrollbarStyle="outsideOverlay"
     android:fillViewport="true"
     android:background="@color/background_holo_light">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             style="@style/Card">
-            <TextView
+            <com.arcao.menza.widget.CardHeaderTextView
                 android:text="@string/address"
                 style="@style/Card.Header" />
             <TextView
@@ -25,7 +24,7 @@
 
         <LinearLayout
             style="@style/Card">
-            <TextView
+            <com.arcao.menza.widget.CardHeaderTextView
                 android:text="@string/open_time"
                 style="@style/Card.Header" />
             <TextView

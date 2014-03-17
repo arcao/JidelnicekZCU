@@ -96,10 +96,11 @@
     <style name="Card">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">4dp</item>
-        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">@dimen/card_margin</item>
+        <item name="android:layout_marginLeft">@dimen/card_margin</item>
+        <item name="android:layout_marginRight">@dimen/card_margin</item>
         <item name="android:background">@drawable/card_background</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">@dimen/card_padding</item>
         <item name="android:orientation">vertical</item>
         <item name="android:textColor">@color/card_text</item>
     </style>
@@ -108,23 +109,22 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/card_title_text</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">@dimen/card_header_text_size</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
-        <item name="android:paddingBottom">8dip</item>
+        <item name="android:paddingBottom">@dimen/card_padding</item>
     </style>
     <style name="Card.Text" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/card_text</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/card_text_size</item>
     </style>
     <style name="Card.Item" parent="">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
     </style>
     <style name="Card.Item.Divider" parent="">
         <item name="android:layout_width">match_parent</item>
