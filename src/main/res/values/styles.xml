@@ -153,9 +153,23 @@
 
         <item name="android:progressDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
+        <item name="android:minHeight">35dip</item>
+        <item name="android:maxHeight">35dip</item>
+        <item name="android:isIndicator">true</item>
         <item name="android:numStars">5</item>
     </style>
 
+    <style name="Dialog"></style>
+    <style name="Dialog.RatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:layout_gravity">center</item>
+
+        <item name="android:progressDrawable">@drawable/ratingbar_full_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_full_holo_light</item>
+        <item name="android:numStars">5</item>
+    </style>
 
 </resources>
 

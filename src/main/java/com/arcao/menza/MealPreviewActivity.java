@@ -4,19 +4,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.RatingBar;
+import android.widget.Toast;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.MealPreviewFragment;
+import com.arcao.menza.util.RatingChecker;
+import com.arcao.menza.volley.VolleyHelper;
 
 import java.util.Date;
 
-public class MealPreviewActivity extends AbstractPopupActionBarActivity {
+public class MealPreviewActivity extends AbstractPopupActionBarActivity implements RatingBar.OnRatingBarChangeListener {
 	public static final String PARAM_PLACE_ID = MealPreviewFragment.PARAM_PLACE_ID;
 	public static final String PARAM_DATE = MealPreviewFragment.PARAM_DATE;
 	public static final String PARAM_MEAL = MealPreviewFragment.PARAM_MEAL;
@@ -25,6 +31,8 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 	protected Date date;
 	protected Meal meal;
 	protected String priceGroup;
+	protected MealPreviewFragment fragment;
+	protected RatingChecker ratingChecker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +45,14 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 		date = new Date(getIntent().getLongExtra(PARAM_DATE, 0L));
 		meal = getIntent().getParcelableExtra(PARAM_MEAL);
 
+		ratingChecker = new RatingChecker(getApplicationContext());
+
 		setContentView(R.layout.activity_fragment);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
-			Fragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
+			fragment = MealPreviewFragment.getInstance(placeId, date, meal);
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 		}
 	}
@@ -86,4 +96,51 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity {
 		}
 	}
 
+	@Override
+	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+		if (!fromUser)
+			return;
+
+		Bundle params = new Bundle();
+		params.putString("hash", meal.hash);
+		params.putInt("vote", (int) rating);
+
+		ratingChecker.addRating(date, meal.hash);
+
+		// show message
+		Toast.makeText(getApplicationContext(), R.string.vote_progress, Toast.LENGTH_LONG).show();
+
+		VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date, meal), createRatingReqErrorListener(meal));
+	}
+
+	private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date, final Meal meal) {
+		return new Response.Listener<Object>() {
+			@Override
+			public void onResponse(Object response) {
+				// invalidate soft cache
+				VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
+
+				setResult(MainActivity.RESULT_REFRESH);
+
+				// show message
+				Toast.makeText(getApplicationContext(), R.string.vote_finished, Toast.LENGTH_LONG).show();
+			}
+		};
+	}
+
+
+	private Response.ErrorListener createRatingReqErrorListener(final Meal meal) {
+		return new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.e("VOLLEY", error.getMessage(), error);
+
+				ratingChecker.removeRating(date, meal.hash);
+
+				// show error message
+				Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();
+			}
+		};
+	}
 }
+
