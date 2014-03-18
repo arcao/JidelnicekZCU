@@ -38,7 +38,7 @@ public class FeedbackHelper {
 
 			// send it old way
 			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.setType("text/email");
+			intent.setType("message/rfc822");
 			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{activity.getString(resEmail)});
 			intent.putExtra(Intent.EXTRA_SUBJECT, subject);
 			intent.putExtra(Intent.EXTRA_TEXT, activity.getString(resMessageText));
