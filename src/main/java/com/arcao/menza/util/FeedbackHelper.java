@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,8 @@ import android.view.Window;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by msloup on 6.3.14.
@@ -36,12 +40,15 @@ public class FeedbackHelper {
 		if (!ALLOW_GMS_FEEDBACK || !activity.bindService(new Intent(Intent.ACTION_BUG_REPORT), new FeedBackServiceConnection(activity.getWindow()), Context.BIND_AUTO_CREATE)) {
 			String subject = activity.getString(resSubject, getApplicationName(activity), getVersion(activity));
 
+            String email = activity.getString(resEmail);
+
 			// send it old way
 			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.setType("message/rfc822");
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{activity.getString(resEmail)});
+			intent.setType("*/*");
 			intent.putExtra(Intent.EXTRA_SUBJECT, subject);
 			intent.putExtra(Intent.EXTRA_TEXT, activity.getString(resMessageText));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 			// try to add screenshot
 			try {
@@ -59,7 +66,7 @@ public class FeedbackHelper {
 				Log.e(TAG, e.getMessage(), e);
 			}
 
-			activity.startActivity(Intent.createChooser(intent, "Odeslat zpětnou vazbu pomocí"));
+			activity.startActivity(createEmailOnlyChooserIntent(activity, intent, "Odeslat zpětnou vazbu pomocí"));
 		}
 	}
 
@@ -126,6 +133,27 @@ public class FeedbackHelper {
 			return "0.0";
 		}
 	}
+
+    protected static Intent createEmailOnlyChooserIntent(Context context, Intent source, CharSequence chooserTitle) {
+        Stack<Intent> intents = new Stack<>();
+        Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "info@domain.com", null));
+        List<ResolveInfo> activities = context.getPackageManager().queryIntentActivities(i, 0);
+
+        for(ResolveInfo ri : activities) {
+            Intent target = new Intent(source);
+            target.setPackage(ri.activityInfo.packageName);
+            intents.add(target);
+        }
+
+        if(!intents.isEmpty()) {
+            Intent chooserIntent = Intent.createChooser(intents.remove(0), chooserTitle);
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents.toArray(new Parcelable[intents.size()]));
+
+            return chooserIntent;
+        } else {
+            return Intent.createChooser(source, chooserTitle);
+        }
+    }
 
 	protected static class FeedBackServiceConnection implements ServiceConnection {
 		protected Window mWindow;
