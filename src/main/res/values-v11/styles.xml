@@ -8,6 +8,10 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
 
+    <style name="NoWindowTheme" parent="NoWindowBaseTheme">
+        <item name="android:windowActionBar">false</item>
+    </style>
+
     <style name="PopupTheme" parent="PopupBaseTheme">
         <item name="android:windowActionModeOverlay">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>

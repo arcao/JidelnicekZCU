@@ -20,7 +20,8 @@ import com.arcao.menza.fragment.PriceGroupSelectionDialogFragment;
 import com.arcao.menza.util.FeedbackHelper;
 
 public class MainActivity extends ActionBarActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
-	private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
+	public static final String PARAM_PLACE_ID = "PLACE_ID";
+    private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
 	public static final int RESULT_REFRESH = 101;
 
 	private DayPagerAdapter mDayPagerAdapter;
@@ -36,7 +37,7 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayShowTitleEnabled(false);
 
-		int placeId = 0;
+		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
 
 		if (savedInstanceState != null) {
 			placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);

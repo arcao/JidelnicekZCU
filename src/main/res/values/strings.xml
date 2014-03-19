@@ -59,5 +59,6 @@
     <string name="pref_licenses">Open source licence</string>
     <string name="pref_licenses_summary">Licenční detaily pro Open source software</string>
     <string name="pref_app_version">Verze applikace</string>
+    <string name="create_shortcut">Vytvořit zástupce na menzu / bufet…</string>
 </resources>
 

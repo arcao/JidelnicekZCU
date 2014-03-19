@@ -30,6 +30,12 @@
         <activity android:name=".WebViewActivity" android:theme="@style/AppTheme"/>
         <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/PopupTheme"/>
         <activity android:name=".PlacePreviewActivity" android:theme="@style/PopupTheme"/>
+        <activity android:name=".ShortcutActivity" android:theme="@style/NoWindowTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
