@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">JídelníčekZČU</string>
+    <string name="app_name">Jídelníček ZČU</string>
     <string name="action_settings">Nastavení</string>
 
     <string-array name="places">
