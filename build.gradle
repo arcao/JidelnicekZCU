@@ -44,6 +44,11 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
+    // use old PNGCruncher, the new one cause crash on 2.x devices
+    aaptOptions {
+        useAaptPngCruncher = true
+    }
 }
 
 dependencies {
