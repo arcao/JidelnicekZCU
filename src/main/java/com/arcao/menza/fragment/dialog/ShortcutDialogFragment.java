@@ -1,12 +1,10 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-
 import com.arcao.menza.R;
 
 /**
@@ -33,16 +31,16 @@ public class ShortcutDialogFragment extends AbstractDialogFragment implements Di
 		try {
 			listener = (ShortcutDialogListener) getActivity();
 		} catch (ClassCastException e) {
-			Log.e(TAG, "Activity must implement ShortcutDialogListener", e);
+			throw new ClassCastException(activity.toString() + " must implement ShortcutDialogListener");
 		}
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.create_shortcut);
-		builder.setItems(R.array.places, this);
-		return builder.create();
+		return new AlertDialog.Builder(getActivity())
+			.setTitle(R.string.create_shortcut)
+			.setItems(R.array.places, this)
+			.create();
 	}
 
 	@Override

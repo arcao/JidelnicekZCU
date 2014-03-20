@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.arcao.menza.R;
 
-/**
- * Created by Martin on 16.3.14.
- */
 public class ErrorFragment extends Fragment {
     protected static final String ARG_ERROR_MESSAGE = "ERROR_MESSAGE";
 

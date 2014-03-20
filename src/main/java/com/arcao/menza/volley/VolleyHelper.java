@@ -31,7 +31,7 @@ public class VolleyHelper {
 		JacksonRequest<T> request = new JacksonRequest<T>(Method.POST, url, clazz, listener, errorListener) {
 			@Override
 			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> paramsMap = new HashMap<String, String>();
+				Map<String, String> paramsMap = new HashMap<>();
 
 				if (params != null) {
 					for (String key : params.keySet()) {

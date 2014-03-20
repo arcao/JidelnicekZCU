@@ -23,9 +23,9 @@ import com.arcao.menza.volley.VolleyHelper;
 import java.util.Date;
 
 public class MealPreviewActivity extends AbstractPopupActionBarActivity implements RatingBar.OnRatingBarChangeListener {
-	public static final String PARAM_PLACE_ID = MealPreviewFragment.PARAM_PLACE_ID;
-	public static final String PARAM_DATE = MealPreviewFragment.PARAM_DATE;
-	public static final String PARAM_MEAL = MealPreviewFragment.PARAM_MEAL;
+	public static final String PARAM_PLACE_ID = "PLACE_ID";
+	public static final String PARAM_DATE = "DATE";
+	public static final String PARAM_MEAL = "MEAL";
 
 	protected int placeId = 1;
 	protected Date date;

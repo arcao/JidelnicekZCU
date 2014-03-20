@@ -1,4 +1,4 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,9 +7,6 @@ import android.support.v4.app.DialogFragment;
 
 import com.arcao.menza.R;
 
-/**
- * Created by msloup on 4.11.13.
- */
 public class PriceGroupChangeableDialogFragment extends DialogFragment {
 	public static final String TAG = "PriceGroupDialog";
 

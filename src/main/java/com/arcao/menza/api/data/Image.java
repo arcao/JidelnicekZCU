@@ -3,9 +3,6 @@ package com.arcao.menza.api.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by msloup on 3.11.13.
- */
 public class Image implements Parcelable {
 	String imageUrl;
 	User user;

@@ -1,4 +1,4 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.support.v4.app.DialogFragment;
 

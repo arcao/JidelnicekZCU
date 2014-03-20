@@ -10,9 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by msloup on 16.3.14.
- */
 public class WebViewActivity extends ActionBarActivity {
 	public static final String PARAM_RAW_RESOURCE = "RAW_RESOURCE";
 	public static final String PARAM_TITLE = "TITLE";

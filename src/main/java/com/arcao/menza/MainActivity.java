@@ -15,8 +15,8 @@ import android.widget.SpinnerAdapter;
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
-import com.arcao.menza.fragment.PriceGroupChangeableDialogFragment;
-import com.arcao.menza.fragment.PriceGroupSelectionDialogFragment;
+import com.arcao.menza.fragment.dialog.PriceGroupChangeableDialogFragment;
+import com.arcao.menza.fragment.dialog.PriceGroupSelectionDialogFragment;
 import com.arcao.menza.util.FeedbackHelper;
 
 public class MainActivity extends ActionBarActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {

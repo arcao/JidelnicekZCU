@@ -3,11 +3,8 @@ package com.arcao.menza;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 
-import com.arcao.menza.fragment.ShortcutDialogFragment;
+import com.arcao.menza.fragment.dialog.ShortcutDialogFragment;
 
-/**
- * Created by Martin on 19.3.14.
- */
 public class ShortcutActivity extends FragmentActivity implements ShortcutDialogFragment.ShortcutDialogListener {
 	private static final String ACTION_INSTALL_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT";
 

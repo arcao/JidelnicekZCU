@@ -1,4 +1,4 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

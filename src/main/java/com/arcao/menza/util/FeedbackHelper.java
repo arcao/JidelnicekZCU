@@ -66,7 +66,7 @@ public class FeedbackHelper {
 				Log.e(TAG, e.getMessage(), e);
 			}
 
-			activity.startActivity(createEmailOnlyChooserIntent(activity, intent, "Odeslat zpětnou vazbu pomocí"));
+			activity.startActivity(createEmailOnlyChooserIntent(activity, intent, null /*"Odeslat zpětnou vazbu pomocí"*/));
 		}
 	}
 
@@ -90,13 +90,13 @@ public class FeedbackHelper {
 	 * @throws IOException If I/O error occurs
 	 */
 	public static FileOutputStream getCacheFileOutputStream(Context context, String filename) throws IOException {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			return context.openFileOutput(filename, Context.MODE_WORLD_READABLE); // file has to be readable for Locus
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+			return context.openFileOutput(filename, Context.MODE_WORLD_READABLE); // file has to be readable for external APP
 		} else {
 			File file = getCacheFileName(context, filename);
 			FileOutputStream fos = new FileOutputStream(file);
 			fos.flush(); // create empty file
-			file.setReadable(true, false); // file has to be readable for Locus
+			file.setReadable(true, false); // file has to be readable for external APP
 
 			return fos;
 		}

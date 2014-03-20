@@ -1,4 +1,4 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,11 +11,8 @@ import com.arcao.menza.R;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Created by msloup on 4.11.13.
- */
 public class PriceGroupSelectionDialogFragment extends DialogFragment {
-	public static final String TAG = "PriceGroupDialog";
+	public static final String TAG = "PriceGroupSelectionDialogFragment";
 
 	public interface OnPriceGroupSelectedListener {
 		void onPriceGroupSelected(String priceGroup);

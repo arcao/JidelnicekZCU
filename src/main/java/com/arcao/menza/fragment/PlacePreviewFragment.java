@@ -11,11 +11,8 @@ import android.widget.TextView;
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Place;
 
-/**
- * Created by msloup on 8.3.14.
- */
 public class PlacePreviewFragment extends Fragment {
-	public static final String PARAM_PLACE = "PLACE";
+	protected static final String PARAM_PLACE = "PLACE";
 
 	public static PlacePreviewFragment getInstance(Place place) {
 		PlacePreviewFragment fragment = new PlacePreviewFragment();

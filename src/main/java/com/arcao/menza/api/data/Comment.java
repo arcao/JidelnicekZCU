@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-/**
- * Created by msloup on 3.11.13.
- */
 public class Comment implements Parcelable {
 	User user;
 	Date date;

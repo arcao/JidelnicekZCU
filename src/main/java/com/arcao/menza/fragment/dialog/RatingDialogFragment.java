@@ -1,10 +1,9 @@
-package com.arcao.menza.fragment;
+package com.arcao.menza.fragment.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
@@ -26,7 +25,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		try {
 			listener = (RatingBar.OnRatingBarChangeListener) getActivity();
 		} catch (ClassCastException e) {
-			Log.e(TAG, "Activity must implement RatingBar.OnRatingBarChangeListener.");
+			throw new ClassCastException(activity.toString() + " must implement RatingBar.OnRatingBarChangeListener");
 		}
 	}
 
@@ -43,11 +42,10 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 		ratingBar.setOnRatingBarChangeListener(this);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.header_rating);
-		builder.setView(view);
-
-		return builder.create();
+		return new AlertDialog.Builder(getActivity())
+			.setTitle(R.string.header_rating)
+			.setView(view)
+			.create();
 	}
 
 	@Override
