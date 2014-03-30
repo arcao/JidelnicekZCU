@@ -8,11 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
 import com.arcao.menza.R;
+import com.arcao.menza.constant.AppConstant;
 
 public class RatingDialogFragment extends AbstractDialogFragment implements RatingBar.OnRatingBarChangeListener {
 	public static final String TAG = "RatingDialogFragment";
 
-	protected RatingBar.OnRatingBarChangeListener listener;
+	public interface OnRatingChangeListener {
+		public void onRatingChanged(int rating);
+	}
+
+	protected OnRatingChangeListener listener;
 
 	public static RatingDialogFragment newInstance() {
 		return new RatingDialogFragment();
@@ -23,9 +28,9 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		super.onAttach(activity);
 
 		try {
-			listener = (RatingBar.OnRatingBarChangeListener) getActivity();
+			listener = (OnRatingChangeListener) getActivity();
 		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement RatingBar.OnRatingBarChangeListener");
+			throw new ClassCastException(activity.toString() + " must implement OnRatingChangeListener");
 		}
 	}
 
@@ -40,6 +45,8 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_rating, null);
 
 		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+		ratingBar.setMax(AppConstant.RATING__MAX);
+		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 		ratingBar.setOnRatingBarChangeListener(this);
 
 		return new AlertDialog.Builder(getActivity())
@@ -51,7 +58,8 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 		dismiss();
-		if (listener != null)
-			listener.onRatingChanged(ratingBar, rating, fromUser);
+
+		if (listener != null && fromUser)
+			listener.onRatingChanged((int) ((rating - AppConstant.RATING__STEP_SIZE) * AppConstant.RATING__QUANTIFIER));
 	}
 }

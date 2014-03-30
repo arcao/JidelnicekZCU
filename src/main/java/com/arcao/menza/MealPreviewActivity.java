@@ -9,20 +9,21 @@ import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RatingBar;
 import android.widget.Toast;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.MealPreviewFragment;
+import com.arcao.menza.fragment.dialog.RatingDialogFragment;
 import com.arcao.menza.util.RatingChecker;
 import com.arcao.menza.volley.VolleyHelper;
 
 import java.util.Date;
 
-public class MealPreviewActivity extends AbstractPopupActionBarActivity implements RatingBar.OnRatingBarChangeListener {
+public class MealPreviewActivity extends AbstractPopupActionBarActivity implements RatingDialogFragment.OnRatingChangeListener {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
 	public static final String PARAM_DATE = "DATE";
 	public static final String PARAM_MEAL = "MEAL";
@@ -97,13 +98,10 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	}
 
 	@Override
-	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-		if (!fromUser)
-			return;
-
+	public void onRatingChanged(int rating) {
 		Bundle params = new Bundle();
 		params.putString("hash", meal.hash);
-		params.putInt("vote", (int) rating);
+		params.putInt("vote", rating);
 
 		ratingChecker.addRating(date, meal.hash);
 
