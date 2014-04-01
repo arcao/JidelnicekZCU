@@ -66,19 +66,20 @@ public class MealPreviewFragment extends Fragment {
 		((TextView)view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal));
 
 		RatingBar ratingBar = ((RatingBar)view.findViewById(R.id.ratingBar));
-		prepareRatingBar(ratingBar, placeId, date, meal);
+		prepareRatingBar(ratingBar, meal);
 
 		return view;
 	}
 
-	protected void prepareRatingBar(RatingBar ratingBar, final int placeId, final Date date, final Meal meal) {
-		ratingBar.setMax(100);
+	protected void prepareRatingBar(RatingBar ratingBar, final Meal meal) {
+		ratingBar.setMax(AppConstant.RATING__MAX);
+		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 		ratingBar.setClickable(true);
 		ratingBar.setFocusable(true);
 		ratingBar.setFocusableInTouchMode(true);
 
 		if (meal.quality >= 0) {
-			ratingBar.setProgress((int) meal.quality);
+			ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + meal.quality / AppConstant.RATING__QUANTIFIER));
 		}
 
 		ratingBar.setOnClickListener(new View.OnClickListener() {

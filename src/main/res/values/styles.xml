@@ -72,7 +72,6 @@
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
         <item name="android:isIndicator">true</item>
-        <item name="android:numStars">5</item>
     </style>
 
     <style name="Item.Number" parent="@android:style/Widget.TextView">
@@ -167,7 +166,6 @@
         <item name="android:minHeight">35dip</item>
         <item name="android:maxHeight">35dip</item>
         <item name="android:isIndicator">true</item>
-        <item name="android:numStars">5</item>
     </style>
 
     <style name="Dialog"></style>
@@ -179,7 +177,6 @@
 
         <item name="android:progressDrawable">@drawable/ratingbar_full_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_full_holo_light</item>
-        <item name="android:numStars">5</item>
     </style>
 
 </resources>

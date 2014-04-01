@@ -110,7 +110,8 @@ public class DayMenuAdapter extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.price = (TextView) convertView.findViewById(R.id.price);
 			holder.rating = (RatingBar) convertView.findViewById(R.id.rating);
-			holder.rating.setMax(100);
+			holder.rating.setMax(AppConstant.RATING__MAX);
+			holder.rating.setNumStars(AppConstant.RATING__NUM_STARS);
 
 			convertView.setTag(holder);
 		} else {
@@ -127,11 +128,10 @@ public class DayMenuAdapter extends BaseAdapter {
 			holder.rating.setVisibility(View.INVISIBLE);
 		} else {
 			holder.rating.setVisibility(View.VISIBLE);
-			holder.rating.setProgress((int) meal.quality);
+			holder.rating.setProgress((int) (AppConstant.RATING__STEP_SIZE + meal.quality / AppConstant.RATING__QUANTIFIER));
 		}
 
 		return convertView;
-
 	}
 
 	protected String getMealPrice(Meal meal) {
@@ -145,7 +145,6 @@ public class DayMenuAdapter extends BaseAdapter {
 			case PrefConstant.PRICE_GROUP__STUDENT:
 			default:
 				return AppConstant.PRICE_FORMAT.format(meal.priceStudent);
-
 		}
 	}
 
@@ -163,5 +162,4 @@ public class DayMenuAdapter extends BaseAdapter {
 		TextView price;
 		RatingBar rating;
 	}
-
 }
