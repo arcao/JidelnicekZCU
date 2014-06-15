@@ -3,8 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.+'
     }
 }
 apply plugin: 'android-sdk-manager'
@@ -19,7 +19,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -54,8 +54,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.+'
-    compile 'com.android.support:appcompat-v7:19.0.+'
+    compile 'com.android.support:support-v4:19.+'
+    compile 'com.android.support:appcompat-v7:19.+'
     compile 'com.android:volley:1.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
 }
