@@ -37,7 +37,9 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayShowTitleEnabled(false);
 
-		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
+		int defaultPlaceId = Integer.parseInt(mSharedPreferences.getString(PrefConstant.DEFAULT_PLACE, "0"));
+
+		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, defaultPlaceId);
 
 		if (savedInstanceState != null) {
 			placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);

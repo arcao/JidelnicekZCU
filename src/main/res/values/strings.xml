@@ -21,7 +21,7 @@
     <string name="connection_error">Nepovedlo se stáhnout jídelní lístek!</string>
     <string name="action_today">Zobrazit dnešek</string>
     <string name="price_suffix">,- Kč</string>
-    <string name="pref_cat_appearance_title">Vzhled</string>
+    <string name="pref_cat_general_title">Obecné</string>
     <string name="pref_price_group_title">Cenová skupina</string>
 
     <string-array name="pref_price_group_entries">
@@ -29,6 +29,8 @@
         <item>Zaměstnanec</item>
         <item>Externí</item>
     </string-array>
+
+    <string name="pref_default_place_title">Výchozí výdejna</string>
 
     <string name="button_ok">OK</string>
     <string name="button_continue">Pokračovat</string>

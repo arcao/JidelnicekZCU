@@ -50,6 +50,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
 		// fix for Android 2.x
 		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.PRICE_GROUP);
+		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.DEFAULT_PLACE);
 	}
 
 	@Override
@@ -81,6 +82,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		switch (key) {
 			case PrefConstant.PRICE_GROUP:
+			case PrefConstant.DEFAULT_PLACE:
 				setResult(MainActivity.RESULT_REFRESH);
 				updateListPreferenceSummary(key);
 				break;

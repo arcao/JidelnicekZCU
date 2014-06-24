@@ -8,4 +8,17 @@
         <!-- External -->
         <item>2</item>
     </string-array>
+
+    <string-array name="pref_default_place_values" translatable="false">
+        <!-- Menza Bory -->
+        <item>0</item>
+        <!-- Menza Kollárova -->
+        <item>1</item>
+        <!-- Bufet Lochotín -->
+        <item>2</item>
+        <!-- Bufet FST -->
+        <item>3</item>
+        <!-- Bufet PF -->
+        <item>4</item>
+    </string-array>
 </resources>
