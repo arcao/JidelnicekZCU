@@ -17,9 +17,27 @@ repositories {
     mavenCentral()
 }
 
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
+def gitVersionCode = 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim().toInteger();
+
+def isTravis = "true".equals(System.getenv("TRAVIS"))
+def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+
 android {
     compileSdkVersion 19
     buildToolsVersion "20"
+
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries preDexEnabled && !isTravis
+    }
+
+    defaultConfig {
+        versionCode gitVersionCode
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -28,7 +46,7 @@ android {
     
     signingConfigs {
         release {
-            keyAlias = "jidelnicekzcu"
+            keyAlias "jidelnicekzcu"
         }
     }
 
@@ -45,11 +63,6 @@ android {
         // removed because of conflict in creating package
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
-    }
-
-    // use old PNGCruncher, the new one cause crash on 2.x devices
-    aaptOptions {
-        useAaptPngCruncher = true
     }
 }
 
