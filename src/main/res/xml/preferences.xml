@@ -22,6 +22,7 @@
         android:title="@string/pref_cat_developer_title">
         <Preference android:title="@string/pref_licenses" android:summary="@string/pref_licenses_summary" android:key="licenses" />
         <Preference android:title="@string/pref_app_version" android:key="version" />
+        <Preference android:title="@string/pref_app_build_time" android:key="build_time" />
         <Preference android:title="@string/action_feedback" android:key="feedback" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -1,6 +1,8 @@
 package com.arcao.menza;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,11 +11,19 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.MenuItem;
+
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.util.FeedbackHelper;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+	private static final String TAG = "SettingsActivity";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,12 +55,21 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 			}
 		});
 
-		findPreference("version").setSummary(getVersion(this));
+		findPreference("version").setSummary(getVersion(this) + " (" + BuildConfig.GIT_SHA + ")");
+		try {
+			findPreference("build_time").setSummary(
+							DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(BuildConfig.BUILD_TIME)
+							)
+			);
+		} catch (ParseException e) {
+			Log.e(TAG, e.getMessage(), e);
+		}
 
 
 		// fix for Android 2.x
-		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.PRICE_GROUP);
-		onSharedPreferenceChanged(getPreferenceScreen().getSharedPreferences(), PrefConstant.DEFAULT_PLACE);
+		updateListPreferenceSummary(PrefConstant.PRICE_GROUP);
+		updateListPreferenceSummary(PrefConstant.DEFAULT_PLACE);
 	}
 
 	@Override
@@ -82,11 +101,26 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		switch (key) {
 			case PrefConstant.PRICE_GROUP:
-			case PrefConstant.DEFAULT_PLACE:
 				setResult(MainActivity.RESULT_REFRESH);
 				updateListPreferenceSummary(key);
 				break;
+			case PrefConstant.DEFAULT_PLACE:
+				updateListPreferenceSummary(key);
+				showChangesApplyAfterRestartDialog();
+				break;
 		}
+	}
+
+	protected void showChangesApplyAfterRestartDialog() {
+		new AlertDialog.Builder(this)
+						.setTitle(R.string.pref_default_place_title)
+						.setMessage(R.string.dialog_changes_apply_after_restart)
+						.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+							}
+						})
+						.show();
 	}
 
 	protected void updateListPreferenceSummary(String key) {
