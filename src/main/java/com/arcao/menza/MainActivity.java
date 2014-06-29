@@ -33,6 +33,9 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
+		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -44,8 +47,6 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 		if (savedInstanceState != null) {
 			placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);
 		}
-
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager(), placeId);
 
