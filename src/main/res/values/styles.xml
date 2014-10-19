@@ -43,7 +43,7 @@
     <style name="Widget">
     </style>
 
-    <style name="Item"></style>
+    <style name="Item"/>
 
     <style name="Item.Layout">
         <item name="android:layout_width">fill_parent</item>

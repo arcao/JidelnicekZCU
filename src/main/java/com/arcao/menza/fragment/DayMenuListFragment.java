@@ -41,9 +41,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				DayMenuAdapter adapter = (DayMenuAdapter) getListAdapter();
-
-				Object item = adapter.getItem(position);
+				Object item = getListAdapter().getItem(position);
 				if (item instanceof Meal) {
 					Meal meal = (Meal) item;
 
