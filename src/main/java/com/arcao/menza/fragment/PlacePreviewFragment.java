@@ -26,7 +26,7 @@ public class PlacePreviewFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.place_preview, container, false);
+		View view = inflater.inflate(R.layout.fragment_place_preview, container, false);
 
 		Place place = getArguments().getParcelable(PARAM_PLACE);
 

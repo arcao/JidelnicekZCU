@@ -64,5 +64,7 @@
     <string name="create_shortcut">Vytvořit zástupce na menzu / bufet…</string>
     <string name="pref_app_build_time">Čas sestavení aplikace</string>
     <string name="dialog_changes_apply_after_restart">Změna se projeví až po opětovném spuštění aplikace.</string>
+    <string name="navigation_drawer_open">Zobrazit menu</string>
+    <string name="navigation_drawer_close">Schovat menu</string>
 </resources>
 

@@ -23,6 +23,8 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 		setTitle(getResources().getStringArray(R.array.places)[placeId]);
 
 		setContentView(R.layout.activity_fragment);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
@@ -38,7 +40,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 				setTitle(response.name);
 
 				Fragment fragment = PlacePreviewFragment.getInstance(response);
-				getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+				getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
 			}
 		};
 	}
@@ -49,10 +51,11 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 			public void onErrorResponse(VolleyError error) {
 				Log.e("VOLLEY", error.getMessage(), error);
 
-				Fragment fragment = ErrorFragment.newInstance(R.string.connection_error_data);
 
-				if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null)
-					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+				if (getSupportFragmentManager().findFragmentById(R.id.fragment) == null) {
+					getSupportFragmentManager().beginTransaction().add(R.id.fragment,
+									ErrorFragment.newInstance(R.string.connection_error_data)).commit();
+				}
 			}
 		};
 	}

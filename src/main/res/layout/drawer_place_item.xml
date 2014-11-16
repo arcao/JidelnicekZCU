@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@android:id/text1"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:minHeight="48dp"
+          android:paddingLeft="72dp"
+          android:paddingRight="16dp"
+          android:gravity="center_vertical"
+          android:textAppearance="?attr/textAppearanceListItem"
+          android:textColor="@color/drawer_selector_foreground"
+          android:background="@drawable/drawer_selector_background"
+          tools:text="Item 1"/>

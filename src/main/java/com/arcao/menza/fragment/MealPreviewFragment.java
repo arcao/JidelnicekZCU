@@ -53,7 +53,7 @@ public class MealPreviewFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.meal_preview, container, false);
+		View view = inflater.inflate(R.layout.fragment_meal_preview, container, false);
 
 		placeId = getArguments().getInt(PARAM_PLACE_ID);
 		date = new Date(getArguments().getLong(PARAM_DATE));

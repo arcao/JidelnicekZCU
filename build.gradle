@@ -76,7 +76,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:21.0.0'
     //noinspection GradleDependency
-    compile 'com.android.support:appcompat-v7:20.0.0' // version 21.0.0 use Material ActionBar
+    compile 'com.android.support:appcompat-v7:21.0.0'
     compile 'com.android:volley:1.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.4'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0-1@aar'

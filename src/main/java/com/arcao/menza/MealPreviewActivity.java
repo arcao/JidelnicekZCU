@@ -48,13 +48,18 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 
 		ratingChecker = new RatingChecker(getApplicationContext());
 
+		setTitle(meal.name);
+
 		setContentView(R.layout.activity_fragment);
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
 			fragment = MealPreviewFragment.getInstance(placeId, date, meal);
-			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
 		}
 	}
 

@@ -23,14 +23,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name=".MenzaApplication">
-        <activity android:name=".MainActivity" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" android:label="@string/action_settings" android:theme="@style/AppTheme"/>
-        <activity android:name=".WebViewActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".SettingsActivity" android:label="@string/action_settings"/>
+        <activity android:name=".WebViewActivity"/>
         <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/PopupTheme"/>
         <activity android:name=".PlacePreviewActivity" android:theme="@style/PopupTheme"/>
         <activity android:name=".ShortcutActivity" android:theme="@style/NoWindowTheme">

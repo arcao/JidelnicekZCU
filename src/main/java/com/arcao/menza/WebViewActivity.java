@@ -1,7 +1,6 @@
 package com.arcao.menza;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -10,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class WebViewActivity extends ActionBarActivity {
+public class WebViewActivity extends AbstractBaseActivity {
 	public static final String PARAM_RAW_RESOURCE = "RAW_RESOURCE";
 	public static final String PARAM_TITLE = "TITLE";
 
@@ -18,10 +17,10 @@ public class WebViewActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.activity_webview);
+
 		setTitle(getIntent().getIntExtra(PARAM_TITLE, 0));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		setContentView(R.layout.activity_webview);
 
 		WebView webView = (WebView) findViewById(R.id.content);
 		webView.setLongClickable(false);
