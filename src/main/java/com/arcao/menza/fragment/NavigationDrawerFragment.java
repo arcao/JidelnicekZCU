@@ -1,15 +1,20 @@
 package com.arcao.menza.fragment;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.arcao.menza.R;
+import com.arcao.menza.util.SharedPreferencesCompat;
 
 import java.lang.ref.WeakReference;
 
@@ -27,41 +33,55 @@ public class NavigationDrawerFragment extends Fragment {
 	private SharedPreferences mPrefs;
 	private View mFragmentContainerView;
 	private DrawerLayout mDrawerLayout;
-	private ArrayAdapter<CharSequence> mAdapterPlaces;
+	private ActionBarDrawerToggle mDrawerToggle;
+
 	private ListView mListPlaces;
+	private ArrayAdapter<CharSequence> mAdapterPlaces;
 	private WeakReference<OnDrawerCallbackListener> listenerRef;
+
 	private boolean userLearnedDrawer;
 
 	public interface OnDrawerCallbackListener {
 		public void placeSelected(int placeId);
 	}
 
-	public void setup(int drawerFragmentContainer, DrawerLayout drawerLayout, Toolbar toolbar) {
+	public void setup(@IdRes int drawerFragmentContainer, DrawerLayout drawerLayout, Toolbar toolbar) {
 		mDrawerLayout = drawerLayout;
-		Toolbar mToolbar = toolbar;
-
 		mFragmentContainerView = getActivity().findViewById(drawerFragmentContainer);
-
-		ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
-						getActivity(),  mDrawerLayout, mToolbar,
+		mDrawerToggle = new ActionBarDrawerToggle(
+						getActivity(),  mDrawerLayout, toolbar,
 						R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+
+				ActivityCompat.invalidateOptionsMenu(getActivity());
+			}
 
 			@Override
 			public void onDrawerClosed(View drawerView) {
 				super.onDrawerClosed(drawerView);
-				if (!userLearnedDrawer) {
-					userLearnedDrawer = true;
-					mPrefs.edit().putBoolean(PREF_USER_LEARNED_DRAWER, userLearnedDrawer).commit();
-				}
+
+				ActivityCompat.invalidateOptionsMenu(getActivity());
 			}
 		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (!userLearnedDrawer) {
+			userLearnedDrawer = true;
+			SharedPreferencesCompat.apply(mPrefs.edit().putBoolean(PREF_USER_LEARNED_DRAWER, userLearnedDrawer));
+
 			openDrawer();
 		}
 
-		mDrawerToggle.syncState();
+		mDrawerLayout.post(new Runnable() {
+			@Override
+			public void run() {
+				mDrawerToggle.syncState();
+			}
+		});
+
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
 	public void setPlaceId(int placeId) {
@@ -97,7 +117,7 @@ public class NavigationDrawerFragment extends Fragment {
 		super.onDestroyView();
 	}
 
-	private void preparePlaces(View view) {
+	private void preparePlaces(@NonNull View view) {
 		mAdapterPlaces = ArrayAdapter.createFromResource(getActivity(), R.array.places, R.layout.drawer_place_item);
 
 		mListPlaces = (ListView) view.findViewById(R.id.drawer);
@@ -126,5 +146,16 @@ public class NavigationDrawerFragment extends Fragment {
 
 	public void closeDrawer() {
 		mDrawerLayout.closeDrawer(mFragmentContainerView);
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 	}
 }
