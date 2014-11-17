@@ -13,5 +13,6 @@
         android:scrollbars="vertical"
         android:background="@color/drawer_background"
         android:choiceMode="singleChoice"
+        android:cacheColorHint="@null"
         tools:listitem="@layout/drawer_place_item"/>
 </FrameLayout>

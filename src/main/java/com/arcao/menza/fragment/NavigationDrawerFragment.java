@@ -46,6 +46,9 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	public void setup(@IdRes int drawerFragmentContainer, DrawerLayout drawerLayout, Toolbar toolbar) {
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		userLearnedDrawer = mPrefs.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+
 		mDrawerLayout = drawerLayout;
 		mFragmentContainerView = getActivity().findViewById(drawerFragmentContainer);
 		mDrawerToggle = new ActionBarDrawerToggle(
@@ -86,14 +89,12 @@ public class NavigationDrawerFragment extends Fragment {
 
 	public void setPlaceId(int placeId) {
 		mListPlaces.setItemChecked(placeId, true);
+		mListPlaces.setSelection(placeId);
 	}
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		userLearnedDrawer = mPrefs.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 		try {
 			listenerRef = new WeakReference<>((OnDrawerCallbackListener) getActivity());
@@ -125,7 +126,6 @@ public class NavigationDrawerFragment extends Fragment {
 		mListPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				mListPlaces.setItemChecked(position, true);
 				OnDrawerCallbackListener listener = listenerRef.get();
 				if (listener != null) {
 					listener.placeSelected(position);
