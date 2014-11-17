@@ -6,27 +6,23 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
+import com.arcao.menza.fragment.NavigationDrawerFragment;
 import com.arcao.menza.fragment.dialog.PriceGroupChangeableDialogFragment;
 import com.arcao.menza.fragment.dialog.PriceGroupSelectionDialogFragment;
 import com.arcao.menza.util.FeedbackHelper;
 
-public class MainActivity extends AbstractBaseActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
+public class MainActivity extends AbstractBaseActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener, NavigationDrawerFragment.OnDrawerCallbackListener {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
-    private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
+  private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
 	public static final int RESULT_REFRESH = 101;
 
+	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private DayPagerAdapter mDayPagerAdapter;
 	private ViewPager mViewPager;
 	private SharedPreferences mSharedPreferences;
@@ -52,44 +48,16 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		getSupportActionBar().setHomeButtonEnabled(true);
 
 		// prepare drawer
-		prepareDrawer();
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_drawer);
+		mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), getToolbar());
+		mNavigationDrawerFragment.setPlaceId(placeId);
+		setTitle(mNavigationDrawerFragment.getPlaceName(placeId));
 
 		// prepare day adapter
 		mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager(), placeId);
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mDayPagerAdapter);
 		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
-	}
-
-	private void prepareDrawer() {
-		Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-		final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
-						this,  mDrawerLayout, mToolbar,
-						R.string.navigation_drawer_open, R.string.navigation_drawer_close
-		);
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		mDrawerToggle.syncState();
-
-		// prepare places
-		final ArrayAdapter<CharSequence> mAdapterPlaces = ArrayAdapter.createFromResource(this, R.array.places, R.layout.drawer_place_item);
-
-		final ListView mListPlaces = (ListView) findViewById(R.id.drawer);
-		mListPlaces.setAdapter(mAdapterPlaces);
-		mListPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				placeId = position;
-				mListPlaces.setItemChecked(placeId, true);
-				setTitle(mAdapterPlaces.getItem(placeId));
-				mDayPagerAdapter.updatePlaceId(placeId);
-				mDrawerLayout.closeDrawers();
-			}
-		});
-
-		mListPlaces.setItemChecked(placeId, true);
-		setTitle(mAdapterPlaces.getItem(placeId));
 	}
 
 	@Override
@@ -151,5 +119,12 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 				// reload fragments
 				mDayPagerAdapter.notifyDataSetChanged();
 		}
+	}
+
+	@Override
+	public void placeSelected(int placeId) {
+		this.placeId = placeId;
+		setTitle(mNavigationDrawerFragment.getPlaceName(placeId));
+		mDayPagerAdapter.updatePlaceId(placeId);
 	}
 }

@@ -29,16 +29,11 @@
 
         </android.support.v4.view.ViewPager>
 
-        <ListView
-            android:id="@+id/drawer"
-            android:layout_width="240dp"
+        <fragment
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:scrollbars="vertical"
-            android:background="@color/drawer_background"
-            android:choiceMode="singleChoice"
-            tools:listitem="@layout/drawer_place_item"/>
+            android:id="@+id/fragment_drawer"
+            class="com.arcao.menza.fragment.NavigationDrawerFragment" />
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

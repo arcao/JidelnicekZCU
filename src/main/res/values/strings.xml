@@ -10,7 +10,6 @@
         <item>Bufet FST</item>
         <item>Bufet PF</item>
     </string-array>
-
     <string-array name="relative_day_title">
         <item>Včera</item>
         <item>Dnes</item>
@@ -31,7 +30,6 @@
     </string-array>
 
     <string name="pref_default_place_title">Výchozí výdejna</string>
-
     <string name="button_ok">OK</string>
     <string name="button_continue">Pokračovat</string>
     <string name="price_group_changeable">Cenovou skupinu lze kdykoliv později změnit v nastavení aplikace.</string>
@@ -43,8 +41,7 @@
     <string name="action_share">Sdílet</string>
     <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
     <string name="header_rating">Hodnocení strávníků</string>
-
-    <string name="vote_progress">Odesílám váše hodnocení...</string>
+    <string name="vote_progress">Odesílám váše hodnocení…</string>
     <string name="vote_finished">Hodnocení bylo úspěšně odesláno.</string>
     <string name="vote_failed">Nepovedlo se odeslat hodnocení.</string>
     <string name="vote_today_only">Hlasovat lze jen pro aktuální den!</string>
@@ -52,7 +49,7 @@
     <string name="vote_error_title">Upozornění</string>
     <string name="action_feedback">Zpětná vazba</string>
     <string name="feedback_subject">%1$s (%2$s): Zpětná vazba</string>
-    <string name="feedback_message">Váš text...</string>
+    <string name="feedback_message">Váš text…</string>
     <string name="pref_cat_developer_title">Vývojář</string>
     <string name="action_info">Informace místě</string>
     <string name="address">Adresa</string>
@@ -67,4 +64,3 @@
     <string name="navigation_drawer_open">Zobrazit menu</string>
     <string name="navigation_drawer_close">Schovat menu</string>
 </resources>
-
