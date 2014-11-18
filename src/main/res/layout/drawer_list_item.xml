@@ -10,6 +10,7 @@
           android:paddingRight="16dp"
           android:paddingTop="16dp"
           android:paddingBottom="20dp"
+          android:drawablePadding="16dp"
           android:textSize="16sp"
           android:gravity="center_vertical"
           android:textColor="@color/drawer_selector_foreground"

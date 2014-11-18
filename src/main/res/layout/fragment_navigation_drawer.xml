@@ -1,18 +1,40 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:orientation="vertical"
+             android:background="@color/drawer_background"
              tools:context="com.arcao.menza.fragment.NavigationDrawerFragment">
 
     <ListView
-        android:id="@+id/drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
+        android:id="@+id/place_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:scrollbars="vertical"
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/drawer_selector_background"
+        tools:listitem="@layout/drawer_place_item"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/drawer_divider" />
+
+    <ListView
+        android:id="@+id/action_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:scrollbars="vertical"
         android:background="@color/drawer_background"
-        android:choiceMode="singleChoice"
-        android:cacheColorHint="@null"
+        android:listSelector="@drawable/drawer_selector_background"
         tools:listitem="@layout/drawer_place_item"/>
-</FrameLayout>
+
+</LinearLayout>

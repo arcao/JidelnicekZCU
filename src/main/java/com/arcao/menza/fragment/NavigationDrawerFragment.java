@@ -22,9 +22,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.arcao.menza.R;
+import com.arcao.menza.adapter.DrawerListAdapter;
 import com.arcao.menza.util.SharedPreferencesCompat;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NavigationDrawerFragment extends Fragment {
 	private static final String TAG = "NavigationDrawerFragment";
@@ -39,15 +42,15 @@ public class NavigationDrawerFragment extends Fragment {
 	private ArrayAdapter<CharSequence> mAdapterPlaces;
 	private WeakReference<OnDrawerCallbackListener> listenerRef;
 
-	private boolean userLearnedDrawer;
-
 	public interface OnDrawerCallbackListener {
-		public void placeSelected(int placeId);
+		void onPlaceSelected(int placeId);
+		void onSettingsSelected();
+		void onFeedbackSelected();
 	}
 
 	public void setup(@IdRes int drawerFragmentContainer, DrawerLayout drawerLayout, Toolbar toolbar) {
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		userLearnedDrawer = mPrefs.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+		boolean userLearnedDrawer = mPrefs.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 		mDrawerLayout = drawerLayout;
 		mFragmentContainerView = getActivity().findViewById(drawerFragmentContainer);
@@ -108,6 +111,7 @@ public class NavigationDrawerFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, true);
 
 		preparePlaces(view);
+		prepareActions(view);
 
 		return view;
 	}
@@ -119,16 +123,44 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	private void preparePlaces(@NonNull View view) {
-		mAdapterPlaces = ArrayAdapter.createFromResource(getActivity(), R.array.places, R.layout.drawer_place_item);
+		mAdapterPlaces = ArrayAdapter.createFromResource(getActivity(), R.array.places, R.layout.drawer_list_item);
 
-		mListPlaces = (ListView) view.findViewById(R.id.drawer);
+		mListPlaces = (ListView) view.findViewById(R.id.place_list);
 		mListPlaces.setAdapter(mAdapterPlaces);
 		mListPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				OnDrawerCallbackListener listener = listenerRef.get();
 				if (listener != null) {
-					listener.placeSelected(position);
+					listener.onPlaceSelected(position);
+				}
+				closeDrawer();
+			}
+		});
+	}
+
+	private void prepareActions(@NonNull View view) {
+		List<DrawerListAdapter.Item> actions = new ArrayList<>();
+		actions.add(new DrawerListAdapter.Item(getString(R.string.action_settings), null));
+		actions.add(new DrawerListAdapter.Item(getString(R.string.action_feedback), null));
+
+		DrawerListAdapter mAdapterActions = new DrawerListAdapter(getActivity(), actions);
+
+		ListView mListActions = (ListView) view.findViewById(R.id.action_list);
+		mListActions.setAdapter(mAdapterActions);
+		mListActions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				OnDrawerCallbackListener listener = listenerRef.get();
+				if (listener != null) {
+					switch (position) {
+						case 0:
+							listener.onSettingsSelected();
+							break;
+						case 1:
+							listener.onFeedbackSelected();
+							break;
+					}
 				}
 				closeDrawer();
 			}

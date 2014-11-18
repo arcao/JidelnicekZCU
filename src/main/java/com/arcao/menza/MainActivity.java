@@ -104,6 +104,16 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	}
 
 	@Override
+	public void onSettingsSelected() {
+		startActivityForResult(new Intent(this, SettingsActivity.class), 0);
+	}
+
+	@Override
+	public void onFeedbackSelected() {
+		FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
+	}
+
+	@Override
 	public void onPriceGroupSelected(String priceGroup) {
 		mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).commit();
 		mDayPagerAdapter.notifyDataSetChanged();
@@ -122,7 +132,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	}
 
 	@Override
-	public void placeSelected(int placeId) {
+	public void onPlaceSelected(int placeId) {
 		this.placeId = placeId;
 		setTitle(mNavigationDrawerFragment.getPlaceName(placeId));
 		mDayPagerAdapter.updatePlaceId(placeId);
