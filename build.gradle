@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.2'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
     }
 }
@@ -76,7 +76,7 @@ android {
 dependencies {
     //noinspection GradleDependency
     compile 'com.android.support:support-v4:21.0.0'
-    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android:volley:1.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.4'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0-1@aar'
