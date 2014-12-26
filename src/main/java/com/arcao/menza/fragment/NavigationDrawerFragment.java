@@ -11,19 +11,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.arcao.menza.R;
-import com.arcao.menza.adapter.DrawerListAdapter;
+import com.arcao.menza.adapter.DrawerRecyclerAdapter;
 import com.arcao.menza.util.SharedPreferencesCompat;
+import com.arcao.menza.util.ThemedDrawable;
+import com.arcao.menza.util.WrapContentLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -38,8 +39,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	private ListView mListPlaces;
-	private ArrayAdapter<CharSequence> mAdapterPlaces;
+	private DrawerRecyclerAdapter mAdapterPlaces;
 	private WeakReference<OnDrawerCallbackListener> listenerRef;
 
 	public interface OnDrawerCallbackListener {
@@ -91,8 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	public void setPlaceId(int placeId) {
-		mListPlaces.setItemChecked(placeId, true);
-		mListPlaces.setSelection(placeId);
+	mAdapterPlaces.setSelected(placeId);
 	}
 
 	@Override
@@ -108,7 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, true);
+		View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
 		preparePlaces(view);
 		prepareActions(view);
@@ -123,13 +122,23 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	private void preparePlaces(@NonNull View view) {
-		mAdapterPlaces = ArrayAdapter.createFromResource(getActivity(), R.array.places, R.layout.drawer_list_item);
+		List<DrawerRecyclerAdapter.Item> items = new ArrayList<>();
 
-		mListPlaces = (ListView) view.findViewById(R.id.place_list);
-		mListPlaces.setAdapter(mAdapterPlaces);
-		mListPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		for (String place : getResources().getStringArray(R.array.places)) {
+			items.add(new DrawerRecyclerAdapter.Item(place, null));
+		}
+
+		mAdapterPlaces = new DrawerRecyclerAdapter(items);
+
+		RecyclerView listPlaces = (RecyclerView) view.findViewById(R.id.place_list);
+		listPlaces.setAdapter(mAdapterPlaces);
+		listPlaces.setLayoutManager(new LinearLayoutManager(getActivity()));
+		listPlaces.setHasFixedSize(true);
+
+		mAdapterPlaces.setSelectable(true);
+		mAdapterPlaces.setOnItemClickListener(new DrawerRecyclerAdapter.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(RecyclerView.Adapter<?> parent, View view, int position) {
 				OnDrawerCallbackListener listener = listenerRef.get();
 				if (listener != null) {
 					listener.onPlaceSelected(position);
@@ -140,17 +149,20 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	private void prepareActions(@NonNull View view) {
-		List<DrawerListAdapter.Item> actions = new ArrayList<>();
-		actions.add(new DrawerListAdapter.Item(getString(R.string.action_settings), null));
-		actions.add(new DrawerListAdapter.Item(getString(R.string.action_feedback), null));
+		List<DrawerRecyclerAdapter.Item> actions = new ArrayList<>();
+		actions.add(new DrawerRecyclerAdapter.Item(getString(R.string.action_settings), ThemedDrawable.getDrawable(getActivity(), R.drawable.ic_drawer_settings)));
+		actions.add(new DrawerRecyclerAdapter.Item(getString(R.string.action_feedback), ThemedDrawable.getDrawable(getActivity(), R.drawable.ic_drawer_question_answer)));
 
-		DrawerListAdapter mAdapterActions = new DrawerListAdapter(getActivity(), actions);
+		DrawerRecyclerAdapter mAdapterActions = new DrawerRecyclerAdapter(actions);
 
-		ListView mListActions = (ListView) view.findViewById(R.id.action_list);
-		mListActions.setAdapter(mAdapterActions);
-		mListActions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		RecyclerView listActions = (RecyclerView) view.findViewById(R.id.action_list);
+		listActions.setAdapter(mAdapterActions);
+		listActions.setLayoutManager(new WrapContentLinearLayoutManager(getActivity()));
+		listActions.setHasFixedSize(true);
+
+		mAdapterActions.setOnItemClickListener(new DrawerRecyclerAdapter.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(RecyclerView.Adapter<?> parent, View view, int position) {
 				OnDrawerCallbackListener listener = listenerRef.get();
 				if (listener != null) {
 					switch (position) {
@@ -168,7 +180,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	public CharSequence getPlaceName(int placeId) {
-		return mAdapterPlaces.getItem(placeId);
+		return mAdapterPlaces.getItem(placeId).name;
 	}
 
 	public void openDrawer() {

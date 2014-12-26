@@ -50,7 +50,7 @@ public class DrawerListAdapter extends BaseAdapter {
 
 		Item item = getItem(position);
 		textView.setText(item.name);
-		textView.setCompoundDrawables(item.drawable, null, null, null);
+		textView.setCompoundDrawablesWithIntrinsicBounds(item.drawable, null, null, null);
 
 		return convertView;
 	}

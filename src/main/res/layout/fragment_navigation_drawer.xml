@@ -6,17 +6,15 @@
              android:background="@color/drawer_background"
              tools:context="com.arcao.menza.fragment.NavigationDrawerFragment">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/place_list"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="0dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
+        android:layout_weight="1"
         android:scrollbars="vertical"
-        android:choiceMode="singleChoice"
         android:listSelector="@drawable/drawer_selector_background"
-        tools:listitem="@layout/drawer_place_item"/>
+        tools:listitem="@layout/drawer_place_item"
+        />
 
 
     <View
@@ -26,15 +24,12 @@
         android:layout_marginBottom="4dp"
         android:background="@color/drawer_divider" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/action_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
         android:scrollbars="vertical"
         android:background="@color/drawer_background"
         android:listSelector="@drawable/drawer_selector_background"
         tools:listitem="@layout/drawer_place_item"/>
-
 </LinearLayout>
