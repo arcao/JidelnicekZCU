@@ -9,7 +9,7 @@ import android.text.format.DateUtils;
 import com.arcao.menza.MenzaApplication;
 import com.arcao.menza.R;
 import com.arcao.menza.constant.AppConstant;
-import com.arcao.menza.fragment.DayMenuListFragment;
+import com.arcao.menza.fragment.DayMenuFragment;
 import com.arcao.menza.fragment.UpdateableFragment;
 
 import java.util.Calendar;
@@ -25,11 +25,11 @@ public class DayPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		Fragment fragment = new DayMenuListFragment();
+		Fragment fragment = new DayMenuFragment();
 
 		Bundle args = new Bundle();
-		args.putInt(DayMenuListFragment.ARG_DAY_ID, position);
-		args.putInt(DayMenuListFragment.ARG_PLACE_ID, placeId);
+		args.putInt(DayMenuFragment.ARG_DAY_ID, position);
+		args.putInt(DayMenuFragment.ARG_PLACE_ID, placeId);
 		fragment.setArguments(args);
 
 		return fragment;
@@ -39,7 +39,7 @@ public class DayPagerAdapter extends FragmentStatePagerAdapter {
 	public int getItemPosition(Object object) {
 		if (object instanceof UpdateableFragment) {
 			UpdateableFragment fragment = (UpdateableFragment) object;
-			fragment.getArguments().putInt(DayMenuListFragment.ARG_PLACE_ID, placeId);
+			fragment.getArguments().putInt(DayMenuFragment.ARG_PLACE_ID, placeId);
 			fragment.update();
 		}
 

@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     style="@style/Item.Layout"
-    android:addStatesFromChildren="true">
+    android:background="?attr/listChoiceBackgroundIndicator">
     <TextView
-            android:id="@+id/number"
-            style="@style/Item.Number"/>
+        android:id="@+id/number"
+        style="@style/Item.Number"/>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-                android:id="@+id/name"
-                style="@style/Item.Name"/>
+            android:id="@+id/name"
+            style="@style/Item.Name"
+            android:clickable="false"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -20,13 +21,15 @@
             <RatingBar
                 android:id="@+id/rating"
                 style="@style/Item.RatingBar"
-                />
+                android:clickable="false"/>
             <TextView
-                    android:id="@+id/price"
-                    style="@style/Item.Price"/>
+                android:id="@+id/price"
+                style="@style/Item.Price"
+                android:clickable="false"/>
             <TextView
-                    android:text="@string/price_suffix"
-                    style="@style/Item.Price.Suffix"/>
+                android:text="@string/price_suffix"
+                style="@style/Item.Price.Suffix"
+                android:clickable="false"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
