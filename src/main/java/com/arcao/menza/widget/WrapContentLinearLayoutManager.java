@@ -1,4 +1,4 @@
-package com.arcao.menza.util;
+package com.arcao.menza.widget;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

@@ -24,7 +24,7 @@ import com.arcao.menza.R;
 import com.arcao.menza.adapter.DrawerRecyclerAdapter;
 import com.arcao.menza.util.SharedPreferencesCompat;
 import com.arcao.menza.util.ThemedDrawable;
-import com.arcao.menza.util.WrapContentLinearLayoutManager;
+import com.arcao.menza.widget.WrapContentLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
