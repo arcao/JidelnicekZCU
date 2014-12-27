@@ -23,6 +23,8 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
 	public DrawerRecyclerAdapter(List<Item> items) {
 		this.items = items;
+
+		setHasStableIds(true);
 	}
 
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -59,7 +61,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
 	protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 		private final SelectableTextView textView;
-		private Item item;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
@@ -68,9 +69,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 		}
 
 		public void bind(Item item) {
-			this.item = item;
-
-			textView.setChecked(selectable && isSelected(item));
+			textView.setChecked(selectable && isSelected(getPosition()));
 
 			textView.setText(item.name);
 			textView.setCompoundDrawablesWithIntrinsicBounds(item.drawable, null, null, null);
@@ -78,15 +77,15 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
 		@Override
 		public void onClick(View v) {
-			setSelected(item);
+			setSelected(getPosition());
 			if (onItemClickListener != null) {
-				onItemClickListener.onItemClick(DrawerRecyclerAdapter.this, v, items.indexOf(item));
+				onItemClickListener.onItemClick(DrawerRecyclerAdapter.this, v, getPosition());
 			}
 		}
 	}
 
-	private boolean isSelected(Item item) {
-		return lastSelectedPosition == items.indexOf(item);
+	private boolean isSelected(int pos) {
+		return lastSelectedPosition == pos;
 	}
 
 	public void setSelectable(boolean selectable) {
@@ -94,10 +93,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
 		if (lastSelectedPosition >= 0)
 			notifyDataSetChanged();
-	}
-
-	private void setSelected(Item item) {
-		setSelected(items.indexOf(item));
 	}
 
 	public void setSelected(int position) {
