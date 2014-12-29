@@ -21,11 +21,11 @@ public class DayMenuDividerItemDecoration extends DividerItemDecoration {
 		int adapterPos = parent.getChildPosition(parent.getChildAt(pos));
 
 		// skip drawing above section position
-		if (isSectionPosition(parent, adapterPos))
-			return;
+		//if (!isSectionPosition(parent, adapterPos))
+		//	return;
 
 		// skip drawing bellow section position
-		if (isSectionPosition(parent, adapterPos + 1))
+		if (!isSectionPosition(parent, adapterPos + 1))
 			return;
 
 		super.drawVerticalDivider(c, parent, left, right, pos);
@@ -36,13 +36,13 @@ public class DayMenuDividerItemDecoration extends DividerItemDecoration {
 		int adapterPos = parent.getChildPosition(view);
 
 		// skip setting item offset if current item is section - we don't draw divider
-		if (isSectionPosition(parent, adapterPos)) {
-			outRect.set(0, 0, 0, 0);
-			return;
-		}
+		//if (!isSectionPosition(parent, adapterPos)) {
+		//	outRect.set(0, 0, 0, 0);
+		//	return;
+		//}
 
 		// skip setting item offset if next item is section - we don't draw divider
-		if (isSectionPosition(parent, adapterPos + 1)) {
+		if (!isSectionPosition(parent, adapterPos + 1)) {
 			outRect.set(0, 0, 0, 0);
 			return;
 		}
