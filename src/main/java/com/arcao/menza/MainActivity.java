@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -58,6 +59,9 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mDayPagerAdapter);
 		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
+
+		PagerTitleStrip pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
+		pagerTitleStrip.setNonPrimaryAlpha(0.3F); // in percent
 	}
 
 	@Override
