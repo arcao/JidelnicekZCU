@@ -2,7 +2,7 @@
       xmlns:yourapp="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_share"
           android:title="@string/action_share"
-          android:icon="@drawable/ic_action_share"
+          android:icon="@drawable/ic_action_social_share"
           yourapp:actionProviderClass="android.support.v7.widget.ShareActionProvider"
           yourapp:showAsAction="always" />
 </menu>
