@@ -70,6 +70,7 @@ android {
         // removed because of conflict in creating package
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+        exclude '.readme'
     }
 }
 
