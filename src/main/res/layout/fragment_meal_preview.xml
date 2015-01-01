@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbarStyle="outsideOverlay"
-    android:fillViewport="true"
-    android:background="@color/background_holo_light">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:fillViewport="true"
+            android:background="@color/background_material_under_card">
 
     <LinearLayout
         android:orientation="vertical"
@@ -13,70 +15,126 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            style="@style/Card">
-            <com.arcao.menza.widget.CardHeaderTextView
-                style="@style/Card.Header"
-                android:id="@+id/mealName"
-                tools:text="Ovocné knedlíky s tvarohem 400g" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="16dp"
+            style="@style/HeaderLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                tools:text="Kuřecí prsa 100 g zapečená s brambory na rozmarýnu"/>
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/Card">
-            <com.arcao.menza.widget.CardHeaderTextView
-                android:text="@string/price"
-                style="@style/Card.Header" />
-            <LinearLayout
-                style="@style/Card.Item">
-                <TextView
-                    android:text="@string/price_student"
-                    style="@style/Card.Item.Label" />
-                <TextView
-                    android:id="@+id/priceStudent"
-                    tools:text="0"
-                    style="@style/Card.Item.Value" />
-                <TextView
-                    android:text="@string/price_suffix"
-                    style="@style/Card.Item.Value.PriceSuffix" />
-            </LinearLayout>
-            <View style="@style/Card.Item.Divider"/>
-            <LinearLayout
-                style="@style/Card.Item">
-                <TextView
-                    android:text="@string/price_staff"
-                    style="@style/Card.Item.Label" />
-                <TextView
-                    android:id="@+id/priceStaff"
-                    tools:text="0"
-                    style="@style/Card.Item.Value" />
-                <TextView
-                    android:text="@string/price_suffix"
-                    style="@style/Card.Item.Value.PriceSuffix" />
-            </LinearLayout>
-            <View style="@style/Card.Item.Divider"/>
-            <LinearLayout
-                style="@style/Card.Item">
-                <TextView
-                    android:text="@string/price_external"
-                    style="@style/Card.Item.Label" />
-                <TextView
-                    android:id="@+id/priceExternal"
-                    tools:text="0"
-                    style="@style/Card.Item.Value" />
-                <TextView
-                    android:text="@string/price_suffix"
-                    style="@style/Card.Item.Value.PriceSuffix" />
-            </LinearLayout>
-        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardElevation="2dp">
 
-        <LinearLayout
-            style="@style/Card">
-            <com.arcao.menza.widget.CardHeaderTextView
-                android:text="@string/header_rating"
-                style="@style/Card.Header" />
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_gravity="center"
-                style="@style/Card.Item.RatingBar"/>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <com.arcao.menza.widget.CardHeaderTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    style="@style/Card.Header"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price_student"
+                        style="@style/Card.Label" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/priceStudent"
+                        tools:text="0"
+                        style="@style/Card.Value" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price_suffix"
+                        style="@style/Card.Value.PriceSuffix" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    style="@style/Card.Divider"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price_staff"
+                        style="@style/Card.Label" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/priceStaff"
+                        tools:text="0"
+                        style="@style/Card.Value" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price_suffix"
+                        style="@style/Card.Value.PriceSuffix" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    style="@style/Card.Divider"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price_external"
+                        style="@style/Card.Label"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/priceExternal"
+                        tools:text="0"
+                        style="@style/Card.Value" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price_suffix"
+                        style="@style/Card.Value.PriceSuffix" />
+                </LinearLayout>
+
+                <com.arcao.menza.widget.CardHeaderTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:text="@string/header_rating"
+                    style="@style/Card.Header" />
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+                    android:layout_gravity="center"
+                    style="@style/Card.RatingBar"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </ScrollView>

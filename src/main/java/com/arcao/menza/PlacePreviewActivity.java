@@ -23,8 +23,10 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 		setTitle(getResources().getStringArray(R.array.places)[placeId]);
 
 		setContentView(R.layout.activity_fragment);
+
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 

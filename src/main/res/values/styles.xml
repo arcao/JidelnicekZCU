@@ -44,6 +44,8 @@
     <style name="PopupTheme" parent="PopupBaseTheme">
     </style>
 
+    <style name="HeaderLayout" />
+
     <style name="Widget">
     </style>
 
@@ -61,63 +63,34 @@
     </style>
 
     <style name="Card">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/card_margin</item>
-        <item name="android:layout_marginLeft">@dimen/card_margin</item>
-        <item name="android:layout_marginRight">@dimen/card_margin</item>
-        <item name="android:background">@drawable/card_background</item>
-        <item name="android:padding">@dimen/card_padding</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:textColor">@color/card_text</item>
     </style>
 
     <style name="Card.Header" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/card_title_text</item>
-        <item name="android:textSize">@dimen/card_header_text_size</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">2</item>
-        <item name="android:paddingBottom">@dimen/card_padding</item>
-    </style>
-    <style name="Card.Text" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/card_text</item>
-        <item name="android:textSize">@dimen/card_text_size</item>
-    </style>
-    <style name="Card.Item" parent="">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">4dp</item>
+        <item name="android:maxLines">1</item>
         <item name="android:paddingBottom">4dp</item>
     </style>
-    <style name="Card.Item.Divider" parent="">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+
+    <style name="Card.Text" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+    </style>
+    <style name="Card.Divider" parent="">
         <item name="android:background">?android:attr/listDivider</item>
     </style>
-    <style name="Card.Item.Label" parent="Card.Text">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
+    <style name="Card.Label" parent="Card.Text">
     </style>
-
-    <style name="Card.Item.Value" parent="Card.Text">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="Card.Value" parent="Card.Text">
         <item name="android:layout_gravity">right</item>
     </style>
 
-    <style name="Card.Item.Value.PriceSuffix"></style>
+    <style name="Card.Value.PriceSuffix"></style>
 
-    <style name="Card.Item.Value.Left">
+    <style name="Card.Value.Left">
         <item name="android:layout_gravity">left</item>
     </style>
 
-    <style name="Card.Item.RatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-
+    <style name="Card.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
         <item name="android:minHeight">35dip</item>
@@ -125,7 +98,7 @@
         <item name="android:isIndicator">true</item>
     </style>
 
-    <style name="Dialog"></style>
+    <style name="Dialog" />
     <style name="Dialog.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

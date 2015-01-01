@@ -9,7 +9,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.AppConstant;
@@ -53,13 +55,13 @@ public class MealPreviewFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_meal_preview, container, false);
+		ScrollView view = (ScrollView) inflater.inflate(R.layout.fragment_meal_preview, container, false);
 
 		placeId = getArguments().getInt(PARAM_PLACE_ID);
 		date = new Date(getArguments().getLong(PARAM_DATE));
 		meal = getArguments().getParcelable(PARAM_MEAL);
 
-		((TextView)view.findViewById(R.id.mealName)).setText(meal.name);
+		((TextView)view.findViewById(R.id.title)).setText(meal.name);
 
 		((TextView)view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent));
 		((TextView)view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff));
@@ -67,6 +69,18 @@ public class MealPreviewFragment extends Fragment {
 
 		RatingBar ratingBar = ((RatingBar)view.findViewById(R.id.ratingBar));
 		prepareRatingBar(ratingBar, meal);
+
+		// fix for situation when scroll view scroll to first focusable view
+		view.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		view.setFocusable(true);
+		view.setFocusableInTouchMode(true);
+		view.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				v.requestFocusFromTouch();
+				return false;
+			}
+		});
 
 		return view;
 	}

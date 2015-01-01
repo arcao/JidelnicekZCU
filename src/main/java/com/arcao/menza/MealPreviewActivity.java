@@ -54,6 +54,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
