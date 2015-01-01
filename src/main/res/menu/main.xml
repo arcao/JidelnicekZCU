@@ -8,7 +8,4 @@
         android:title="@string/action_info"
         android:icon="@drawable/ic_action_action_info_outline"
         yourapp:showAsAction="always" />
-    <item android:id="@+id/action_feedback"
-        android:title="@string/action_feedback"
-        yourapp:showAsAction="never" />
 </menu>

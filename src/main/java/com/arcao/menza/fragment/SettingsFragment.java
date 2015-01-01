@@ -39,7 +39,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				FeedbackHelper.sendFeedBack(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
+				FeedbackHelper.sendFeedBack(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message, false);
 				return true;
 			}
 		});

@@ -1,5 +1,6 @@
 package com.arcao.menza.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,9 +25,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Stack;
 
-/**
- * Created by msloup on 6.3.14.
- */
 public class FeedbackHelper {
 	private static final String TAG = "FeedbackHelper";
 
@@ -36,7 +34,7 @@ public class FeedbackHelper {
 	private static int MAX_HEIGHT = 600;
 
 
-	public static void sendFeedBack(Activity activity, int resEmail, int resSubject, int resMessageText) {
+	public static void sendFeedBack(Activity activity, int resEmail, int resSubject, int resMessageText, boolean includeScreensshot) {
 		if (!ALLOW_GMS_FEEDBACK || !activity.bindService(new Intent(Intent.ACTION_BUG_REPORT), new FeedBackServiceConnection(activity.getWindow()), Context.BIND_AUTO_CREATE)) {
 			String subject = activity.getString(resSubject, getApplicationName(activity), getVersion(activity));
 
@@ -50,20 +48,22 @@ public class FeedbackHelper {
             intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-			// try to add screenshot
-			try {
-				Bitmap bitmap = getScreenshot(activity.getWindow(), MAX_WIDTH, MAX_HEIGHT);
-				if (bitmap != null) {
-					FileOutputStream fos = getCacheFileOutputStream(activity, FEEDBACK_IMAGE);
-					bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
-					fos.flush();
-					fos.close();
-					bitmap.recycle();
+			if (includeScreensshot) {
+				// try to add screenshot
+				try {
+					Bitmap bitmap = getScreenshot(activity.getWindow(), MAX_WIDTH, MAX_HEIGHT);
+					if (bitmap != null) {
+						FileOutputStream fos = getCacheFileOutputStream(activity, FEEDBACK_IMAGE);
+						bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
+						fos.flush();
+						fos.close();
+						bitmap.recycle();
 
-					intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(getCacheFileName(activity, FEEDBACK_IMAGE)));
+						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(getCacheFileName(activity, FEEDBACK_IMAGE)));
+					}
+				} catch (IOException e) {
+					Log.e(TAG, e.getMessage(), e);
 				}
-			} catch (IOException e) {
-				Log.e(TAG, e.getMessage(), e);
 			}
 
 			activity.startActivity(createEmailOnlyChooserIntent(activity, intent, null /*"Odeslat zpětnou vazbu pomocí"*/));
@@ -89,6 +89,7 @@ public class FeedbackHelper {
 	 * @return OutputFileStream object for world readable file returned by getCacheFileName method
 	 * @throws IOException If I/O error occurs
 	 */
+	@SuppressLint("WorldReadableFiles")
 	public static FileOutputStream getCacheFileOutputStream(Context context, String filename) throws IOException {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
 			return context.openFileOutput(filename, Context.MODE_WORLD_READABLE); // file has to be readable for external APP

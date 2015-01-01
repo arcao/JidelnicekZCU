@@ -96,9 +96,6 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 			case R.id.action_info:
 				startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId));
 				return true;
-			case R.id.action_feedback:
-				FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -111,7 +108,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 
 	@Override
 	public void onFeedbackSelected() {
-		FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
+		FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message, false);
 	}
 
 	@Override
