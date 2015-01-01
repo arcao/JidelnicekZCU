@@ -90,6 +90,7 @@ public class FeedbackHelper {
 	 * @throws IOException If I/O error occurs
 	 */
 	@SuppressLint("WorldReadableFiles")
+	@SuppressWarnings("deprecation")
 	public static FileOutputStream getCacheFileOutputStream(Context context, String filename) throws IOException {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
 			return context.openFileOutput(filename, Context.MODE_WORLD_READABLE); // file has to be readable for external APP
