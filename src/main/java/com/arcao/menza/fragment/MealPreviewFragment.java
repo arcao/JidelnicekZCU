@@ -70,6 +70,8 @@ public class MealPreviewFragment extends Fragment {
 		RatingBar ratingBar = ((RatingBar)view.findViewById(R.id.ratingBar));
 		prepareRatingBar(ratingBar, meal);
 
+		prepareAlergens(inflater, (ViewGroup) view.findViewById(R.id.alergens_container), meal);
+
 		// fix for situation when scroll view scroll to first focusable view
 		view.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 		view.setFocusable(true);
@@ -83,6 +85,26 @@ public class MealPreviewFragment extends Fragment {
 		});
 
 		return view;
+	}
+
+	protected void prepareAlergens(LayoutInflater inflater, ViewGroup container, Meal meal) {
+		if (meal.alergens == null || meal.alergens.length == 0)
+			return;
+
+		container.removeAllViews();
+
+		String[] alergenTexts = getResources().getStringArray(R.array.alergens);
+
+		for (int alergenId : meal.alergens) {
+			if (alergenId < 1 || alergenId > alergenTexts.length)
+				continue;
+
+			View alergenView = inflater.inflate(R.layout.view_alergen_item, container, false);
+			((TextView)alergenView.findViewById(R.id.number)).setText(String.valueOf(alergenId));
+			((TextView)alergenView.findViewById(R.id.text)).setText(String.valueOf(alergenTexts[alergenId]));
+
+			container.addView(alergenView);
+		}
 	}
 
 	protected void prepareRatingBar(RatingBar ratingBar, final Meal meal) {

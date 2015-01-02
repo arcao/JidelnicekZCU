@@ -8,7 +8,7 @@ import java.util.Date;
 public class MenzaUrlGenerator {
 	protected static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
 
-	protected static final String URL_PREFIX = "http://menza.arcao.com/api/v2/";
+	protected static final String URL_PREFIX = "http://menza.arcao.com/api/v2.1/";
 	protected static final String DAY_URL = URL_PREFIX + "get/%d/%s";
 	protected static final String RATING_URL = URL_PREFIX + "vote/";
 	protected static final String PLACE_URL = URL_PREFIX + "places/%d/";

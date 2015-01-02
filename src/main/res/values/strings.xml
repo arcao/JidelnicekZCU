@@ -63,4 +63,24 @@
     <string name="dialog_changes_apply_after_restart">Změna se projeví až po opětovném spuštění aplikace.</string>
     <string name="navigation_drawer_open">Zobrazit menu</string>
     <string name="navigation_drawer_close">Schovat menu</string>
+    <string name="header_alergens">Alergení složky</string>
+    <string name="no_alergens">Neobsahuje alergení složky</string>
+
+    <string-array name="alergens">
+        <item/>
+        <item>Obiloviny obsahující lepek (tj. pšenice, žito, ječmen, oves, pšenice špalda, kamut nebo jejich hybridní odrůdy) a výrobky z nich</item> <!-- 1 -->
+        <item>Korýši a výrobky z nich</item> <!-- 2 -->
+        <item>Vejce a výrobky z nich</item> <!-- 3 -->
+        <item>Ryby a výrobky z nich</item> <!-- 4 -->
+        <item>Jádra podzemnice olejné (arašídy) a výrobky z nich</item> <!-- 5 -->
+        <item>Sojové boby (sója) a výrobky z nich</item> <!-- 6 -->
+        <item>Mléko a výrobky z něj (včetně laktózy)</item> <!-- 7 -->
+        <item>Suché skořápkové plody (tj. mandle, lístkové ořechy, vlašské ořechy, kešu ořechy, para ořechy, pistácie, ořechy makadamie a queensland) a výrobky z nich</item> <!-- 8 -->
+        <item>Celer a výrobky z něj</item> <!-- 9 -->
+        <item>Hořčice a výrobky z ní</item> <!-- 10 -->
+        <item>Sezamová semena (sezam) a výrobky z nich</item> <!-- 11 -->
+        <item>Oxid siřičitý a siřičitany v koncentrátech vyšších než 10 mg/kg nebo 10 mg/l, vyjádřeno jako SO₂</item> <!-- 12 -->
+        <item>Vlčí bob (lupina) a výrobky z něj</item> <!-- 13 -->
+        <item>Měkkýši a výrobky z nich</item> <!-- 14 -->
+    </string-array>
 </resources>

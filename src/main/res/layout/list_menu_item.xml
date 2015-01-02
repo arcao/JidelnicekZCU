@@ -20,6 +20,7 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
         android:background="@drawable/round_button"
         android:singleLine="true"
+        android:includeFontPadding="false"
         tools:text="20"/>
     <LinearLayout
         android:layout_width="match_parent"

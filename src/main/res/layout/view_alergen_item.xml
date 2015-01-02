@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="4dp"
+    android:paddingBottom="16dp"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:background="@drawable/round_button"
+        android:singleLine="true"
+        android:includeFontPadding="false"
+        tools:text="1"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:singleLine="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Suché skořápkové plody (tj. mandle, lístkové ořechy, vlašské ořechy, kešu ořechy, para ořechy, pistácie, ořechy makadamie a queensland) a výrobky z nich"/>
+</LinearLayout>
