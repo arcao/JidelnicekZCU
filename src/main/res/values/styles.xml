@@ -70,6 +70,10 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">20dp</item>
+    </style>
+    <style name="Card.Header.First">
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="Card.Text" parent="@android:style/Widget.TextView">

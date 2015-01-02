@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/price"
-                    style="@style/Card.Header"/>
+                    style="@style/Card.Header.First"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,7 +125,6 @@
                 <com.arcao.menza.widget.CardHeaderTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
                     android:text="@string/header_rating"
                     style="@style/Card.Header" />
                 <RatingBar
@@ -138,7 +137,6 @@
                 <com.arcao.menza.widget.CardHeaderTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
                     android:text="@string/header_alergens"
                     style="@style/Card.Header" />
                 <LinearLayout
