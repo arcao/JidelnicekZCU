@@ -7,7 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Widget.Toolbar.NoElevation"/>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

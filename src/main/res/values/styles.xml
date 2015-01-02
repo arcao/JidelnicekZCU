@@ -46,15 +46,18 @@
 
     <style name="HeaderLayout" />
 
-    <style name="Widget">
-    </style>
-
-    <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
+
+    <style name="Widget">
+    </style>
+
+    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar"/>
+    <style name="Widget.Toolbar.NoElevation"/>
 
     <style name="Widget.PagerTitleStrip">
         <item name="android:background">?attr/colorPrimaryLight</item>
@@ -95,7 +98,7 @@
         <item name="android:layout_gravity">right</item>
     </style>
 
-    <style name="Card.Value.PriceSuffix"></style>
+    <style name="Card.Value.PriceSuffix"/>
 
     <style name="Card.Value.Left">
         <item name="android:layout_gravity">left</item>
@@ -119,7 +122,5 @@
         <item name="android:progressDrawable">@drawable/ratingbar_full_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_full_holo_light</item>
     </style>
-
-
 </resources>
 

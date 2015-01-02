@@ -8,7 +8,17 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="HeaderLayout">
-        <item name="android:elevation">1dp</item>
+    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar">
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="Widget.Toolbar.NoElevation">
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Widget.PagerTitleStrip">
+        <item name="android:background">?attr/colorPrimaryLight</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:elevation">4dp</item>
     </style>
 </resources>
