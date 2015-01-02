@@ -30,9 +30,6 @@ public class PlacePreviewFragment extends Fragment {
 
 		Place place = getArguments().getParcelable(PARAM_PLACE);
 
-		((TextView)view.findViewById(R.id.title)).setText(place.name);
-		((TextView)view.findViewById(R.id.address)).setText(place.address);
-
 		TextView descriptionView = (TextView) view.findViewById(R.id.description);
 		descriptionView.setText(Html.fromHtml(place.description));
 		descriptionView.setLinksClickable(true);

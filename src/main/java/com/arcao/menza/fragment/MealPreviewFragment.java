@@ -61,8 +61,6 @@ public class MealPreviewFragment extends Fragment {
 		date = new Date(getArguments().getLong(PARAM_DATE));
 		meal = getArguments().getParcelable(PARAM_MEAL);
 
-		((TextView)view.findViewById(R.id.title)).setText(meal.name);
-
 		((TextView)view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent));
 		((TextView)view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff));
 		((TextView)view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal));

@@ -3,6 +3,9 @@ package com.arcao.menza;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
@@ -13,16 +16,23 @@ import com.arcao.menza.volley.VolleyHelper;
 
 public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
+	public static final String STATE_TITLE = "TITLE";
+	public static final String STATE_SUBTITLE = "SUBTITLE";
+
+	TextView titleTextView;
+	TextView subTitleTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.activity_place_preview);
+
+		titleTextView = (TextView) findViewById(R.id.title);
+		subTitleTextView = (TextView) findViewById(R.id.subTitle);
+
 		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
-
 		setTitle(getResources().getStringArray(R.array.places)[placeId]);
-
-		setContentView(R.layout.activity_fragment);
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -32,7 +42,31 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 
 		if (savedInstanceState == null) {
 			VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
+		} else {
+			// reset the title and subtitle
+			setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
+			setSubTitle(savedInstanceState.getCharSequence(STATE_SUBTITLE));
 		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putCharSequence(STATE_TITLE, titleTextView.getText());
+		outState.putCharSequence(STATE_SUBTITLE, subTitleTextView.getText());
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		super.setTitle(title);
+
+		titleTextView.setText(title);
+	}
+
+	public void setSubTitle(CharSequence subTitle) {
+		subTitleTextView.setText(subTitle);
+		subTitleTextView.setVisibility(View.VISIBLE);
 	}
 
 	private Response.Listener<Place> createPlaceReqSuccessListener() {
@@ -40,6 +74,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 			@Override
 			public void onResponse(Place response) {
 				setTitle(response.name);
+				setSubTitle(response.address);
 
 				Fragment fragment = PlacePreviewFragment.getInstance(response);
 				getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();

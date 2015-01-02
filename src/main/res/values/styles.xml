@@ -49,6 +49,13 @@
     <style name="Widget">
     </style>
 
+    <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
     <style name="Widget.PagerTitleStrip">
         <item name="android:background">?attr/colorPrimaryLight</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
@@ -112,6 +119,7 @@
         <item name="android:progressDrawable">@drawable/ratingbar_full_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/ratingbar_full_holo_light</item>
     </style>
+
 
 </resources>
 

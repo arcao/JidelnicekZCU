@@ -9,6 +9,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -28,6 +29,8 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	public static final String PARAM_DATE = "DATE";
 	public static final String PARAM_MEAL = "MEAL";
 
+	protected TextView titleTextView;
+
 	protected int placeId = 1;
 	protected Date date;
 	protected Meal meal;
@@ -38,6 +41,9 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_meal_preview);
+		titleTextView = (TextView) findViewById(R.id.title);
 
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		priceGroup = mSharedPreferences.getString(PrefConstant.PRICE_GROUP, PrefConstant.PRICE_GROUP__STUDENT);
@@ -50,8 +56,6 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 
 		setTitle(meal.name);
 
-		setContentView(R.layout.activity_fragment);
-
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -62,6 +66,13 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 			fragment = MealPreviewFragment.getInstance(placeId, date, meal);
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
 		}
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		super.setTitle(title);
+
+		titleTextView.setText(title);
 	}
 
 	@Override
