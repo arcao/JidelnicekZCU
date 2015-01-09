@@ -1,6 +1,8 @@
 package com.arcao.menza.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -17,16 +19,32 @@ import android.util.TypedValue;
 import com.arcao.menza.R;
 
 public class ThemedDrawable {
-	public static Drawable getDrawable(Context context, @DrawableRes int resId) {
-		Drawable drawable = ContextCompat.getDrawable(context, resId);
+	@SuppressLint("InlinedApi")
+	private static final int[][] STATES_LIST = {
+					new int[] { -android.R.attr.state_enabled },
+					new int[] { android.R.attr.state_focused },
+					new int[] { android.R.attr.state_activated },
+					new int[] { android.R.attr.state_pressed },
+					new int[] { android.R.attr.state_checked },
+					new int[] { android.R.attr.state_selected }
+	};
 
+	public static Drawable getDrawable(Context context, @DrawableRes int resId) {
+		return getDrawable(context, resId, PorterDuff.Mode.SRC_IN);
+	}
+
+	public static Drawable getDrawable(Context context, @DrawableRes int resId, PorterDuff.Mode mode) {
+		return createThemedDrawable(context, ContextCompat.getDrawable(context, resId), mode);
+	}
+
+	public static Drawable createThemedDrawable(Context context, Drawable drawable, PorterDuff.Mode mode) {
 		final int colorControlNormal = getThemeAttrColor(context, R.attr.colorControlNormal);
 		final int colorControlActivated = getThemeAttrColor(context, R.attr.colorControlActivated);
 		final int colorControlDisabled = getDisabledThemeAttrColor(context, R.attr.colorControlNormal);
 
-		ColorFilter colorFilterNormal = new PorterDuffColorFilter(colorControlNormal, PorterDuff.Mode.SRC_IN);
-		ColorFilter colorFilterActivated = new PorterDuffColorFilter(colorControlActivated, PorterDuff.Mode.SRC_IN);
-		ColorFilter colorFilterDisabled = new PorterDuffColorFilter(colorControlDisabled, PorterDuff.Mode.SRC_IN);
+		ColorFilter colorFilterNormal = new PorterDuffColorFilter(colorControlNormal, mode);
+		ColorFilter colorFilterActivated = new PorterDuffColorFilter(colorControlActivated, mode);
+		ColorFilter colorFilterDisabled = new PorterDuffColorFilter(colorControlDisabled, mode);
 
 		Drawable drawableNormal = drawable.getConstantState().newDrawable().mutate();
 		Drawable drawableActivated = drawable.getConstantState().newDrawable().mutate();
@@ -34,7 +52,6 @@ public class ThemedDrawable {
 
 		FilterableStateListDrawable listDrawable = new FilterableStateListDrawable();
 		listDrawable.addState(new int[] { -android.R.attr.state_enabled }, drawableDisabled, colorFilterDisabled);
-		listDrawable.addState(new int[] { android.R.attr.state_focused }, drawableActivated, colorFilterActivated);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			listDrawable.addState(new int[]{android.R.attr.state_activated}, drawableActivated, colorFilterActivated);
 		}
@@ -46,31 +63,24 @@ public class ThemedDrawable {
 		return listDrawable;
 	}
 
-	public static Drawable getCheckedDrawable(Context context, @DrawableRes int resId) {
-		Drawable drawable = ContextCompat.getDrawable(context, resId);
+	public static Drawable createColorStateListDrawable(Drawable drawable, ColorStateList colorStateList, PorterDuff.Mode mode) {
+		FilterableStateListDrawable listDrawable = new FilterableStateListDrawable();
+		for (int[] states : STATES_LIST) {
+			int color = colorStateList.getColorForState(states, colorStateList.getDefaultColor());
+			if (color != colorStateList.getDefaultColor()) {
+				PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, mode);
+				Drawable newDrawable = drawable.getConstantState().newDrawable().mutate();
+				listDrawable.addState(states, newDrawable, colorFilter);
+			}
+		}
 
-		final int colorControlNormal = getThemeAttrColor(context, R.attr.colorControlNormal);
-		final int colorControlActivated = getThemeAttrColor(context, R.attr.colorControlActivated);
-		final int colorControlDisabled = getDisabledThemeAttrColor(context, R.attr.colorControlNormal);
-
-		Drawable drawableNormal = drawable.mutate();
-		drawableNormal.setColorFilter(colorControlNormal, PorterDuff.Mode.MULTIPLY);
-
-		Drawable drawableActivated = drawable.mutate();
-		drawableActivated.setColorFilter(colorControlActivated, PorterDuff.Mode.MULTIPLY);
-
-		Drawable drawableDisabled = drawable.mutate();
-		drawableDisabled.setColorFilter(colorControlDisabled, PorterDuff.Mode.MULTIPLY);
-
-
-		StateListDrawable listDrawable = new StateListDrawable();
-		listDrawable.addState(new int[] { -android.R.attr.state_enabled }, drawableDisabled);
-		listDrawable.addState(new int[] { android.R.attr.state_checked }, drawableActivated);
-		listDrawable.addState(StateSet.WILD_CARD, drawableNormal);
+		int color = colorStateList.getDefaultColor();
+		PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, mode);
+		Drawable newDrawable = drawable.getConstantState().newDrawable().mutate();
+		listDrawable.addState(StateSet.WILD_CARD, newDrawable, colorFilter);
 
 		return listDrawable;
 	}
-
 
 	private static int getThemeAttrColor(Context context, int attr) {
 		TypedValue typedValue = new TypedValue();
@@ -119,7 +129,7 @@ public class ThemedDrawable {
 
 		public FilterableStateListDrawable() {
 			super();
-			filterMap = new SparseArray<ColorFilter>();
+			filterMap = new SparseArray<>();
 		}
 
 		@Override

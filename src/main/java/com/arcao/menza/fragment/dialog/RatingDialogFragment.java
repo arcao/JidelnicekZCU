@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
+
 import com.arcao.menza.R;
 import com.arcao.menza.constant.AppConstant;
 
@@ -45,6 +46,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_rating, null);
 
 		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+
 		ratingBar.setMax(AppConstant.RATING__MAX);
 		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 		ratingBar.setOnRatingBarChangeListener(this);

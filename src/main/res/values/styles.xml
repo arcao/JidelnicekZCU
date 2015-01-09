@@ -105,8 +105,8 @@
     </style>
 
     <style name="Card.RatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/ratingbar_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar_holo_light</item>
+        <item name="android:progressDrawable">@drawable/ic_toggle_star_normal</item>
+        <item name="android:indeterminateDrawable">@drawable/ic_toggle_star_normal</item>
         <item name="android:minHeight">35dip</item>
         <item name="android:maxHeight">35dip</item>
         <item name="android:isIndicator">true</item>
@@ -114,13 +114,10 @@
 
     <style name="Dialog" />
     <style name="Dialog.RatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-
         <item name="android:layout_gravity">center</item>
 
-        <item name="android:progressDrawable">@drawable/ratingbar_full_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/ratingbar_full_holo_light</item>
+        <item name="android:progressDrawable">@drawable/ic_toggle_star_big</item>
+        <item name="android:indeterminateDrawable">@drawable/ic_toggle_star_big</item>
     </style>
 </resources>
 

@@ -4,5 +4,7 @@
     android:layout_height="wrap_content">
     <RatingBar
         android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/Dialog.RatingBar" />
 </FrameLayout>
