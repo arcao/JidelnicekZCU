@@ -52,7 +52,6 @@
     <string name="feedback_message">Váš text…</string>
     <string name="pref_cat_developer_title">Vývojář</string>
     <string name="action_info">Informace místě</string>
-    <string name="address">Adresa</string>
     <string name="open_time">Otevírací doba</string>
     <string name="connection_error_data">Nepovedlo se stáhnout data!</string>
     <string name="pref_licenses">Licence Open Source</string>
