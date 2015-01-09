@@ -1,5 +1,6 @@
 package com.arcao.menza.fragment.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -43,6 +44,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		@SuppressLint("InflateParams")
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_rating, null);
 
 		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
