@@ -17,7 +17,7 @@ public abstract class AbstractBaseActivity extends ActionBarActivity {
 		}
 	}
 
-	public Toolbar getToolbar() {
+	protected Toolbar getToolbar() {
 		return mToolbar;
 	}
 }

@@ -6,9 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-/**
- * Created by msloup on 27.2.14.
- */
 public abstract class AbstractPopupActionBarActivity extends AbstractBaseActivity {
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {

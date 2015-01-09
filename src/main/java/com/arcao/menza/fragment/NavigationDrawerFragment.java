@@ -34,7 +34,6 @@ public class NavigationDrawerFragment extends Fragment {
 	private static final String TAG = "NavigationDrawerFragment";
 	private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
-	private SharedPreferences mPrefs;
 	private View mFragmentContainerView;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -49,7 +48,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	public void setup(@IdRes int drawerFragmentContainer, DrawerLayout drawerLayout, Toolbar toolbar) {
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		boolean userLearnedDrawer = mPrefs.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 		mDrawerLayout = drawerLayout;

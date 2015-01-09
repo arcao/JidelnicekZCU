@@ -29,14 +29,14 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	public static final String PARAM_DATE = "DATE";
 	public static final String PARAM_MEAL = "MEAL";
 
-	protected TextView titleTextView;
+	private TextView titleTextView;
 
-	protected int placeId = 1;
-	protected Date date;
-	protected Meal meal;
-	protected String priceGroup;
-	protected MealPreviewFragment fragment;
-	protected RatingChecker ratingChecker;
+	private int placeId = 1;
+	private Date date;
+	private Meal meal;
+	private String priceGroup;
+	private MealPreviewFragment fragment;
+	private RatingChecker ratingChecker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

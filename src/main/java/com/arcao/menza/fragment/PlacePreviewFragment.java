@@ -12,7 +12,7 @@ import com.arcao.menza.R;
 import com.arcao.menza.api.data.Place;
 
 public class PlacePreviewFragment extends Fragment {
-	protected static final String PARAM_PLACE = "PLACE";
+	private static final String PARAM_PLACE = "PLACE";
 
 	public static PlacePreviewFragment getInstance(Place place) {
 		PlacePreviewFragment fragment = new PlacePreviewFragment();

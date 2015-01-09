@@ -75,7 +75,7 @@ public class JacksonRequest<T> extends Request<T> {
 	 * @param response The network response to parse headers from
 	 * @return a cache entry for the given response, or null if the response is not cacheable.
 	 */
-	protected static Cache.Entry parseIgnoreCacheHeaders(NetworkResponse response) {
+	private static Cache.Entry parseIgnoreCacheHeaders(NetworkResponse response) {
 		long now = System.currentTimeMillis();
 
 		Map<String, String> headers = response.headers;

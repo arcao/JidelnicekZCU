@@ -5,7 +5,7 @@ import android.app.Application;
 import com.arcao.menza.volley.VolleyHelper;
 
 public class MenzaApplication extends Application {
-	protected static MenzaApplication instance;
+	private static MenzaApplication instance;
 
 	@Override
 	public void onCreate() {

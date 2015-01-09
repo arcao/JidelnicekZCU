@@ -15,12 +15,12 @@ import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
 
 public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
-	public static final String PARAM_PLACE_ID = "PLACE_ID";
-	public static final String STATE_TITLE = "TITLE";
-	public static final String STATE_SUBTITLE = "SUBTITLE";
+	private static final String PARAM_PLACE_ID = "PLACE_ID";
+	private static final String STATE_TITLE = "TITLE";
+	private static final String STATE_SUBTITLE = "SUBTITLE";
 
-	TextView titleTextView;
-	TextView subTitleTextView;
+	private TextView titleTextView;
+	private TextView subTitleTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

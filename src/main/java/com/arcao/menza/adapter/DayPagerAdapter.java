@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DayPagerAdapter extends FragmentStatePagerAdapter {
-	protected int placeId;
+	private int placeId;
 
 	public DayPagerAdapter(FragmentManager fm, int initialPlaceId) {
 		super(fm);

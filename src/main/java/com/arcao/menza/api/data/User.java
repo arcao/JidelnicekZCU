@@ -3,9 +3,6 @@ package com.arcao.menza.api.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by msloup on 17.9.13.
- */
 public class User implements Parcelable {
 	public int id;
 	public UserType type;
@@ -17,7 +14,7 @@ public class User implements Parcelable {
 
 	public static enum UserType {
 		GOOGLE,
-		FACEBOOK;
+		FACEBOOK
 	}
 
 

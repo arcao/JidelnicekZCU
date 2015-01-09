@@ -30,14 +30,14 @@ public class DayMenuFragment extends Fragment implements UpdateableFragment, Day
 	public static final String ARG_DAY_ID = "DAY_ID";
 	public static final String ARG_PLACE_ID = "PLACE_ID";
 
-	protected int placeId = 0;
-	protected Date date = null;
+	private int placeId = 0;
+	private Date date = null;
 
-	protected DayMenuRecyclerAdapter adapter;
+	private DayMenuRecyclerAdapter adapter;
 
-	protected View progressContainer;
-	protected View listContainer;
-	protected TextView textEmpty;
+	private View progressContainer;
+	private View listContainer;
+	private TextView textEmpty;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

@@ -19,7 +19,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		public void onRatingChanged(int rating);
 	}
 
-	protected OnRatingChangeListener listener;
+	private OnRatingChangeListener listener;
 
 	public static RatingDialogFragment newInstance() {
 		return new RatingDialogFragment();

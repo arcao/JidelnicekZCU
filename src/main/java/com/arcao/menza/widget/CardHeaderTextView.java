@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 public class CardHeaderTextView extends TextView {
-	protected static Typeface FONT = null;
+	private static Typeface FONT = null;
 
 	public CardHeaderTextView(Context context) {
 		super(context);
@@ -23,7 +23,7 @@ public class CardHeaderTextView extends TextView {
 		init(this, context);
 	}
 
-	protected void init(CardHeaderTextView textView, Context context) {
+	void init(CardHeaderTextView textView, Context context) {
 		if (isInEditMode()) return;
 
 		if (FONT == null)

@@ -8,16 +8,17 @@ import android.preference.PreferenceManager;
 import com.arcao.menza.constant.PrefConstant;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class RatingChecker {
-	protected static final int CAPACITY = 100;
+	private static final int CAPACITY = 100;
 
-	protected static final Queue<String> ratingKeys = new LinkedList<>();
-	protected static boolean loaded = false;
-	protected final SharedPreferences mSharedPreferences;
+	private static final Queue<String> ratingKeys = new LinkedList<>();
+	private static boolean loaded = false;
+	private final SharedPreferences mSharedPreferences;
 
 
 	public RatingChecker(Context context) {
@@ -38,9 +39,7 @@ public class RatingChecker {
 
 
 			ratingKeys.clear();
-			for (String key : keys) {
-				ratingKeys.add(key);
-			}
+			Collections.addAll(ratingKeys, keys);
 
 			loaded = true;
 		}
@@ -101,8 +100,8 @@ public class RatingChecker {
 		}
 	}
 
-	protected static String join(Collection<String> collection, String separator) {
-		StringBuffer sb = new StringBuffer();
+	private static String join(Collection<String> collection, String separator) {
+		StringBuilder sb = new StringBuilder();
 
 		for (String item : collection) {
 			if (item == null || item.length() == 0)

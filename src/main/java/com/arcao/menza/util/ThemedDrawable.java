@@ -125,7 +125,7 @@ public class ThemedDrawable {
 
 		private int currIdx = -1;
 		private int childrenCount = 0;
-		private SparseArray<ColorFilter> filterMap;
+		private final SparseArray<ColorFilter> filterMap;
 
 		public FilterableStateListDrawable() {
 			super();

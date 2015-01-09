@@ -20,17 +20,16 @@ import java.util.Collections;
 import java.util.List;
 
 public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-	public static final int TYPE_ITEM = 0;
+	private static final int TYPE_ITEM = 0;
 	public static final int TYPE_SECTION = 1;
-	public static final int COUNT_OF_TYPES = TYPE_SECTION + 1;
 
 	public interface OnItemClickListener {
 		void onItemClick(Meal item);
 	}
 
-	protected final List<Object> items = new ArrayList<>();
-	protected final String priceGroup;
-	protected OnItemClickListener onItemClickListener;
+	private final List<Object> items = new ArrayList<>();
+	private final String priceGroup;
+	private OnItemClickListener onItemClickListener;
 
 	public DayMenuRecyclerAdapter(Context mContext) {
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);

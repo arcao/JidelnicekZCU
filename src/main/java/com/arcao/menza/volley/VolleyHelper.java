@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VolleyHelper {
-	protected static RequestQueue requestQueue;
+	private static RequestQueue requestQueue;
 
 	public static void init(Context mContext) {
 		requestQueue = Volley.newRequestQueue(mContext);

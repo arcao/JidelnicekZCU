@@ -19,20 +19,18 @@ import com.arcao.menza.fragment.dialog.ErrorDialogFragment;
 import com.arcao.menza.fragment.dialog.RatingDialogFragment;
 import com.arcao.menza.util.RatingChecker;
 
-import java.lang.ref.WeakReference;
 import java.util.Date;
 
 public class MealPreviewFragment extends Fragment {
-	protected static final String PARAM_PLACE_ID = "PLACE_ID";
-	protected static final String PARAM_MEAL = "MEAL";
-	protected static final String PARAM_DATE = "DATE";
+	private static final String PARAM_PLACE_ID = "PLACE_ID";
+	private static final String PARAM_MEAL = "MEAL";
+	private static final String PARAM_DATE = "DATE";
 
-	protected RatingChecker ratingChecker;
-	protected WeakReference<RatingBar> ratingBarRef;
+	private RatingChecker ratingChecker;
 
-	protected int placeId;
-	protected Date date;
-	protected Meal meal;
+	private int placeId;
+	private Date date;
+	private Meal meal;
 
 	public static MealPreviewFragment getInstance(int placeId, Date date, Meal meal) {
 		MealPreviewFragment fragment = new MealPreviewFragment();

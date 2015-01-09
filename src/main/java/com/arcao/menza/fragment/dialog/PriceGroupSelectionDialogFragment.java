@@ -18,7 +18,7 @@ public class PriceGroupSelectionDialogFragment extends DialogFragment {
 		void onPriceGroupSelected(String priceGroup);
 	}
 
-	protected WeakReference<OnPriceGroupSelectedListener> priceGroupSelectedListenerRef;
+	private WeakReference<OnPriceGroupSelectedListener> priceGroupSelectedListenerRef;
 
 	public static PriceGroupSelectionDialogFragment newInstance() {
 		return new PriceGroupSelectionDialogFragment();

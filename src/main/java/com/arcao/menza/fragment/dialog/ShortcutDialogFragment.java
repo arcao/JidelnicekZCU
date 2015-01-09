@@ -7,9 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import com.arcao.menza.R;
 
-/**
- * Created by Martin on 19.3.14.
- */
 public class ShortcutDialogFragment extends AbstractDialogFragment implements DialogInterface.OnClickListener {
 	public static final String TAG = "ShortcutDialogFragment";
 

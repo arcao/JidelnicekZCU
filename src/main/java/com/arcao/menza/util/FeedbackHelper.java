@@ -30,8 +30,8 @@ public class FeedbackHelper {
 
 	private static final String FEEDBACK_IMAGE = "screenshot.jpg";
 	private static final boolean ALLOW_GMS_FEEDBACK = false; // unable to get feedback from this
-	private static int MAX_WIDTH = 600;
-	private static int MAX_HEIGHT = 600;
+	private static final int MAX_WIDTH = 600;
+	private static final int MAX_HEIGHT = 600;
 
 
 	public static void sendFeedBack(Activity activity, int resEmail, int resSubject, int resMessageText, boolean includeScreensshot) {
@@ -76,7 +76,7 @@ public class FeedbackHelper {
 	 * @return	path to file
 	 * @throws java.io.IOException If external storage isn't available or writable
 	 */
-	public static File getCacheFileName(Context context, String filename) throws IOException {
+	private static File getCacheFileName(Context context, String filename) throws IOException {
 		File cacheFile = context.getFileStreamPath(filename);
 		Log.d(TAG, "Cache file for Locus: " + cacheFile.toString());
 
@@ -91,7 +91,7 @@ public class FeedbackHelper {
 	 */
 	@SuppressLint("WorldReadableFiles")
 	@SuppressWarnings("deprecation")
-	public static FileOutputStream getCacheFileOutputStream(Context context, String filename) throws IOException {
+	private static FileOutputStream getCacheFileOutputStream(Context context, String filename) throws IOException {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
 			return context.openFileOutput(filename, Context.MODE_WORLD_READABLE); // file has to be readable for external APP
 		} else {
@@ -104,7 +104,7 @@ public class FeedbackHelper {
 		}
 	}
 
-	protected static Bitmap getScreenshot(Window window, int maxWidth, int maxHeight) {
+	private static Bitmap getScreenshot(Window window, int maxWidth, int maxHeight) {
 		try {
 			View rootView = window.getDecorView().getRootView();
 			rootView.setDrawingCacheEnabled(true);
@@ -122,12 +122,12 @@ public class FeedbackHelper {
 		return null;
 	}
 
-	public static String getApplicationName(Context context) {
+	private static String getApplicationName(Context context) {
 		int stringId = context.getApplicationInfo().labelRes;
 		return context.getString(stringId);
 	}
 
-	public static String getVersion(Context context) {
+	private static String getVersion(Context context) {
 		try {
 			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
 		} catch (PackageManager.NameNotFoundException e) {
@@ -136,7 +136,7 @@ public class FeedbackHelper {
 		}
 	}
 
-    protected static Intent createEmailOnlyChooserIntent(Context context, Intent source, CharSequence chooserTitle) {
+    private static Intent createEmailOnlyChooserIntent(Context context, Intent source, CharSequence chooserTitle) {
         Stack<Intent> intents = new Stack<>();
         Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "info@domain.com", null));
         List<ResolveInfo> activities = context.getPackageManager().queryIntentActivities(i, 0);
@@ -158,7 +158,7 @@ public class FeedbackHelper {
     }
 
 	protected static class FeedBackServiceConnection implements ServiceConnection {
-		protected Window mWindow;
+		protected final Window mWindow;
 
 		public FeedBackServiceConnection(Window window) {
 			this.mWindow = window;

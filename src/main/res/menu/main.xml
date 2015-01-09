@@ -3,9 +3,9 @@
     <item android:id="@+id/action_today"
         android:title="@string/action_today"
         android:icon="@drawable/ic_action_action_today"
-        yourapp:showAsAction="always" />
+        yourapp:showAsAction="ifRoom" />
     <item android:id="@+id/action_info"
         android:title="@string/action_info"
         android:icon="@drawable/ic_action_action_info_outline"
-        yourapp:showAsAction="always" />
+        yourapp:showAsAction="ifRoom" />
 </menu>

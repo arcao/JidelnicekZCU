@@ -55,7 +55,7 @@ public class WebViewActivity extends AbstractBaseActivity {
 		try {
 			reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(res), "UTF-8"));
 
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -67,6 +67,7 @@ public class WebViewActivity extends AbstractBaseActivity {
 				try {
 					reader.close();
 				} catch (IOException e) {
+					// do nothing
 				}
 			}
 		}

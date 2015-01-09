@@ -116,7 +116,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		return (P)super.findPreference(key);
 	}
 
-	public static String getVersion(Context context) {
+	private static String getVersion(Context context) {
 		try {
 			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
 		} catch (PackageManager.NameNotFoundException e) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.arcao.menza.R;
 
 public class ErrorFragment extends Fragment {
-    protected static final String ARG_ERROR_MESSAGE = "ERROR_MESSAGE";
+    private static final String ARG_ERROR_MESSAGE = "ERROR_MESSAGE";
 
     public static ErrorFragment newInstance(int resErrorMessage) {
         ErrorFragment fragment = new ErrorFragment();

@@ -8,8 +8,8 @@ import com.arcao.menza.R;
 public class ErrorDialogFragment extends AbstractDialogFragment {
 	public static final String TAG = "ErrorDialogFragment";
 
-	protected static String ARG_TITLE = "TITLE";
-	protected static String ARG_MESSAGE = "MESSAGE";
+	private static final String ARG_TITLE = "TITLE";
+	private static final String ARG_MESSAGE = "MESSAGE";
 
 	public static ErrorDialogFragment newInstance(int resTitle, int resMessage) {
 		ErrorDialogFragment fragment = new ErrorDialogFragment();

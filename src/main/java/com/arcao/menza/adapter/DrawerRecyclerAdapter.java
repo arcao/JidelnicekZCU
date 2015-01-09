@@ -50,8 +50,8 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
 
 	public static class Item {
-		public String name;
-		public Drawable drawable;
+		public final String name;
+		public final Drawable drawable;
 
 		public Item(String name, Drawable drawable) {
 			this.name = name;
