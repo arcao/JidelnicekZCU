@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="section">#33B5E5</color>
-    <color name="background_holo_light">#fff3f3f3</color>
-    <color name="background_material_under_card">#e9e9e9</color>
     <!-- color name="card_title_text">#ff707070</color -->
     <!-- color name="card_text">#ff8d8d8d</color -->
     <color name="card_title_text">#000</color>
