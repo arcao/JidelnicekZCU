@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import com.arcao.menza.R;
 import com.arcao.menza.adapter.DrawerRecyclerAdapter;
 import com.arcao.menza.util.SharedPreferencesCompat;
@@ -34,6 +35,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private static final String TAG = "NavigationDrawerFragment";
 	private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
+	private TextView placeTextView;
 	private View mFragmentContainerView;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -90,7 +92,8 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	public void setPlaceId(int placeId) {
-	mAdapterPlaces.setSelected(placeId);
+		mAdapterPlaces.setSelected(placeId);
+		placeTextView.setText(mAdapterPlaces.getItem(placeId).name);
 	}
 
 	@Override
@@ -107,6 +110,8 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+		placeTextView = (TextView) view.findViewById(R.id.title);
 
 		preparePlaces(view);
 		prepareActions(view);
@@ -138,6 +143,8 @@ public class NavigationDrawerFragment extends Fragment {
 		mAdapterPlaces.setOnItemClickListener(new DrawerRecyclerAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(RecyclerView.Adapter<?> parent, View view, int position) {
+				placeTextView.setText(mAdapterPlaces.getItem(position).name);
+
 				OnDrawerCallbackListener listener = listenerRef.get();
 				if (listener != null) {
 					listener.onPlaceSelected(position);
