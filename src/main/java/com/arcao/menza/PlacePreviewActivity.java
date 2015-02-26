@@ -18,11 +18,10 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
-
-		setTitle(getResources().getStringArray(R.array.places)[placeId]);
-
 		setContentView(R.layout.activity_fragment);
+
+		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
+		setTitle(getResources().getStringArray(R.array.places)[placeId]);
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 

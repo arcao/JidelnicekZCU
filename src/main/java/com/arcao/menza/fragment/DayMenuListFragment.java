@@ -59,7 +59,7 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 
 	@Override
 	public void update() {
-		setListShown(false);
+		setListShownNoAnimation(false);
 
 		if (getActivity() != null) {
 			setListAdapter(new DayMenuAdapter(getActivity(), new Section[0]));
@@ -92,7 +92,12 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 				setEmptyText(getResources().getText(R.string.list_empty));
 
 				setListAdapter(new DayMenuAdapter(getActivity(), response));
-				setListShown(true);
+
+				if (isResumed()) {
+					setListShownNoAnimation(true);
+				} else {
+					setListShown(true);
+				}
 			}
 		};
 	}
@@ -108,7 +113,11 @@ public class DayMenuListFragment extends ListFragment implements UpdateableFragm
 				Log.e("VOLLEY", error.getMessage(), error);
 
 				setEmptyText(getResources().getText(R.string.connection_error));
-				setListShown(true);
+				if (isResumed()) {
+					setListShownNoAnimation(true);
+				} else {
+					setListShown(true);
+				}
 			}
 		};
 	}
