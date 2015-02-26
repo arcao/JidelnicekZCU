@@ -16,7 +16,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 	public static final String TAG = "RatingDialogFragment";
 
 	public interface OnRatingChangeListener {
-		public void onRatingChanged(int rating);
+		public void onRatingChanged(float rating);
 	}
 
 	private OnRatingChangeListener listener;
@@ -64,6 +64,6 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		dismiss();
 
 		if (listener != null && fromUser)
-			listener.onRatingChanged((int) ((rating - AppConstant.RATING__STEP_SIZE) * AppConstant.RATING__QUANTIFIER));
+			listener.onRatingChanged(rating);
 	}
 }

@@ -115,10 +115,10 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	}
 
 	@Override
-	public void onRatingChanged(int rating) {
+	public void onRatingChanged(float rating) {
 		Bundle params = new Bundle();
 		params.putString("hash", meal.hash);
-		params.putInt("vote", rating);
+		params.putFloat("vote", rating);
 
 		ratingChecker.addRating(date, meal.hash);
 
