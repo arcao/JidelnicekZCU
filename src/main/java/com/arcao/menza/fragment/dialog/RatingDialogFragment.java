@@ -60,6 +60,6 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		dismiss();
 
 		if (listener != null && fromUser)
-			listener.onRatingChanged((int) ((rating - AppConstant.RATING__STEP_SIZE) * AppConstant.RATING__QUANTIFIER));
+			listener.onRatingChanged(Math.round(rating));
 	}
 }
