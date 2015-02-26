@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity implements PriceGroupSelecti
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(!getResources().getBoolean(R.bool.hide_activity_main_icon));
 
 		int defaultPlaceId = Integer.parseInt(mSharedPreferences.getString(PrefConstant.DEFAULT_PLACE, "0"));
 
