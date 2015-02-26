@@ -18,6 +18,12 @@ public abstract class AbstractPopupActionBarActivity extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	@Override
+	public void setTitle(CharSequence title) {
+		super.setTitle(title);
+		getSupportActionBar().setTitle(title);
+	}
+
 	protected boolean showAsPopup(int widthResId, int heightResId) {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Not supported, because of problems with touching outside of window
