@@ -4,7 +4,10 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryLight">@color/primary_light</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
@@ -17,6 +20,8 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
     </style>
+
+    <style name="AppTheme.NavigationDrawer" />
 
     <style name="NoWindowBaseTheme" parent="AppTheme">
         <item name="android:windowBackground">@null</item>

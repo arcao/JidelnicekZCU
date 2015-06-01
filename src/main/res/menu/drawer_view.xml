@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" android:id="@+id/place">
+        <item
+            android:title="@string/place_menza_bory" />
+        <item
+            android:title="@string/place_menza_kollarova" />
+        <item
+            android:title="@string/place_bufet_lochotin" />
+        <item
+            android:title="@string/place_bufet_fst" />
+        <item
+            android:title="@string/place_bufet_pf" />
+    </group>
+
+    <group android:id="@+id/second_menu">
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/ic_drawer_settings"
+            android:title="@string/action_settings" />
+        <item
+            android:id="@+id/action_feedback"
+            android:icon="@drawable/ic_drawer_question_answer"
+            android:title="@string/action_feedback" />
+    </group>
+
+</menu>

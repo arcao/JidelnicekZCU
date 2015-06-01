@@ -3,6 +3,12 @@
     <string name="app_name">Jídelníček ZČU</string>
     <string name="action_settings">Nastavení</string>
 
+    <string name="place_menza_bory">Menza Bory</string>
+    <string name="place_menza_kollarova">Menza Kollárova</string>
+    <string name="place_bufet_lochotin">Bufet Lochotín</string>
+    <string name="place_bufet_fst">Bufet FST</string>
+    <string name="place_bufet_pf">Bufet PF</string>
+
     <string-array name="places">
         <item>Menza Bory</item>
         <item>Menza Kollárova</item>

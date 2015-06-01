@@ -8,6 +8,11 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
+    <style name="AppTheme.NavigationDrawer">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="Widget.Toolbar" parent="Base.Widget.Toolbar">
         <item name="android:elevation">4dp</item>
     </style>
