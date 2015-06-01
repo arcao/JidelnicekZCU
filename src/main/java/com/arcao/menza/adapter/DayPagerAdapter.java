@@ -1,12 +1,12 @@
 package com.arcao.menza.adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.text.format.DateUtils;
 
-import com.arcao.menza.MenzaApplication;
 import com.arcao.menza.R;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.fragment.DayMenuFragment;
@@ -17,9 +17,11 @@ import java.util.Date;
 
 public class DayPagerAdapter extends FragmentStatePagerAdapter {
 	private int placeId;
+	private final Context mContext;
 
-	public DayPagerAdapter(FragmentManager fm, int initialPlaceId) {
+	public DayPagerAdapter(Context context, FragmentManager fm, int initialPlaceId) {
 		super(fm);
+		mContext = context;
 		this.placeId = initialPlaceId;
 	}
 
@@ -66,9 +68,9 @@ public class DayPagerAdapter extends FragmentStatePagerAdapter {
 			case AppConstant.DAY_ID_YESTERDAY:
 			case AppConstant.DAY_ID_TODAY:
 			case AppConstant.DAY_ID_TOMORROW:
-				return MenzaApplication.getInstance().getResources().getStringArray(R.array.relative_day_title)[position - AppConstant.DAY_ID_YESTERDAY];
+				return mContext.getResources().getStringArray(R.array.relative_day_title)[position - AppConstant.DAY_ID_YESTERDAY];
 			default:
-				return DateUtils.formatDateTime(MenzaApplication.getInstance(), date.getTime(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH);
+				return DateUtils.formatDateTime(mContext, date.getTime(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_MONTH);
 		}
 	}
 

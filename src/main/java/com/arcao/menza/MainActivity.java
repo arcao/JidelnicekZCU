@@ -55,7 +55,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		setTitle(mNavigationDrawerFragment.getPlaceName(placeId));
 
 		// prepare day adapter
-		mDayPagerAdapter = new DayPagerAdapter(getSupportFragmentManager(), placeId);
+		mDayPagerAdapter = new DayPagerAdapter(this, getSupportFragmentManager(), placeId);
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mDayPagerAdapter);
 		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);

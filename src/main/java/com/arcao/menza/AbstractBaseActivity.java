@@ -1,9 +1,9 @@
 package com.arcao.menza;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public abstract class AbstractBaseActivity extends ActionBarActivity {
+public abstract class AbstractBaseActivity extends AppCompatActivity {
 	private Toolbar mToolbar;
 
 	@Override

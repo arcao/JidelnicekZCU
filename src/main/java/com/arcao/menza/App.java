@@ -4,19 +4,11 @@ import android.app.Application;
 
 import com.arcao.menza.volley.VolleyHelper;
 
-public class MenzaApplication extends Application {
-	private static MenzaApplication instance;
-
+public class App extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
 
-		instance = this;
-
 		VolleyHelper.init(getApplicationContext());
-	}
-
-	public static MenzaApplication getInstance() {
-		return instance;
 	}
 }
