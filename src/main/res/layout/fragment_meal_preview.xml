@@ -116,7 +116,7 @@
             <com.arcao.menza.widget.CardHeaderTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/header_alergens"
+                android:text="@string/header_allergens"
                 style="@style/Card.Header" />
             <LinearLayout
                 android:id="@+id/alergens_container"
@@ -126,7 +126,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/no_alergens"
+                    android:text="@string/no_allergens"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
              </LinearLayout>
         </LinearLayout>

@@ -29,7 +29,7 @@ public class Image implements Parcelable {
 		this.description = in.readString();
 	}
 
-	public static Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
+	public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
 		public Image createFromParcel(Parcel source) {
 			return new Image(source);
 		}

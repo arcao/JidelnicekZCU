@@ -10,7 +10,7 @@ import android.text.format.DateUtils;
 import com.arcao.menza.R;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.fragment.DayMenuFragment;
-import com.arcao.menza.fragment.UpdateableFragment;
+import com.arcao.menza.fragment.UpdatableFragment;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,8 +39,8 @@ public class DayPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getItemPosition(Object object) {
-		if (object instanceof UpdateableFragment) {
-			UpdateableFragment fragment = (UpdateableFragment) object;
+		if (object instanceof UpdatableFragment) {
+			UpdatableFragment fragment = (UpdatableFragment) object;
 			fragment.getArguments().putInt(DayMenuFragment.ARG_PLACE_ID, placeId);
 			fragment.update();
 		}

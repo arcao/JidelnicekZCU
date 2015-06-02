@@ -30,10 +30,12 @@ public class PlacePreviewFragment extends Fragment {
 
 		Place place = getArguments().getParcelable(PARAM_PLACE);
 
-		TextView descriptionView = (TextView) view.findViewById(R.id.description);
-		descriptionView.setText(Html.fromHtml(place.description));
-		descriptionView.setLinksClickable(true);
-		descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+		if (place != null) {
+			TextView descriptionView = (TextView) view.findViewById(R.id.description);
+			descriptionView.setText(Html.fromHtml(place.description));
+			descriptionView.setLinksClickable(true);
+			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+		}
 
 		return view;
 	}

@@ -80,15 +80,13 @@ public class JacksonRequest<T> extends Request<T> {
 
 		Map<String, String> headers = response.headers;
 		long serverDate = 0;
-		String serverEtag = null;
-		String headerValue;
 
-		headerValue = headers.get("Date");
+		String headerValue = headers.get("Date");
 		if (headerValue != null) {
 			serverDate = HttpHeaderParser.parseDateAsEpoch(headerValue);
 		}
 
-		serverEtag = headers.get("ETag");
+		String serverETag = headers.get("ETag");
 
 		final long cacheHitButRefreshed = 30 * 60 * 1000; // in 30 minutes cache will be hit, but also refreshed on background
 		final long cacheExpired = 24 * 60 * 60 * 1000; // in 24 hours this cache entry expires completely
@@ -97,7 +95,7 @@ public class JacksonRequest<T> extends Request<T> {
 
 		Cache.Entry entry = new Cache.Entry();
 		entry.data = response.data;
-		entry.etag = serverEtag;
+		entry.etag = serverETag;
 		entry.softTtl = softExpire;
 		entry.ttl = ttl;
 		entry.serverDate = serverDate;

@@ -55,7 +55,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		this.onItemClickListener = onItemClickListener;
 	}
 
-	protected String getMealPrice(Meal meal) {
+	private String getMealPrice(Meal meal) {
 		switch (priceGroup) {
 			case PrefConstant.PRICE_GROUP__STAFF:
 				return AppConstant.PRICE_FORMAT.format(meal.priceStaff);
@@ -164,7 +164,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		@Override
 		public void onClick(View v) {
 			if (onItemClickListener != null) {
-				onItemClickListener.onItemClick((Meal) items.get(getPosition()));
+				onItemClickListener.onItemClick((Meal) items.get(getLayoutPosition()));
 			}
 		}
 	}

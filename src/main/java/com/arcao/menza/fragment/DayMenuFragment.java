@@ -26,11 +26,10 @@ import com.arcao.menza.widget.decorator.DayMenuDividerItemDecoration;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DayMenuFragment extends Fragment implements UpdateableFragment, DayMenuRecyclerAdapter.OnItemClickListener {
+public class DayMenuFragment extends Fragment implements UpdatableFragment, DayMenuRecyclerAdapter.OnItemClickListener {
 	public static final String ARG_DAY_ID = "DAY_ID";
 	public static final String ARG_PLACE_ID = "PLACE_ID";
 
-	private int placeId = 0;
 	private Date date = null;
 
 	private DayMenuRecyclerAdapter adapter;
@@ -75,7 +74,7 @@ public class DayMenuFragment extends Fragment implements UpdateableFragment, Day
 			adapter.clearItems();
 		}
 
-		placeId = getArguments().getInt(ARG_PLACE_ID, 0);
+		int placeId = getArguments().getInt(ARG_PLACE_ID, 0);
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
 		Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);

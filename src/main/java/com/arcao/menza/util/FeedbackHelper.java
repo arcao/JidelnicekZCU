@@ -74,9 +74,8 @@ public class FeedbackHelper {
 	 * Get a path including file name to save data
 	 * @param context	Context
 	 * @return	path to file
-	 * @throws java.io.IOException If external storage isn't available or writable
 	 */
-	private static File getCacheFileName(Context context, String filename) throws IOException {
+	private static File getCacheFileName(Context context, String filename) {
 		File cacheFile = context.getFileStreamPath(filename);
 		Log.d(TAG, "Cache file for Locus: " + cacheFile.toString());
 

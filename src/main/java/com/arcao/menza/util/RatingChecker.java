@@ -26,7 +26,7 @@ public class RatingChecker {
 		loadRatingKeys();
 	}
 
-	protected void loadRatingKeys() {
+	private void loadRatingKeys() {
 		synchronized (ratingKeys) {
 			if (loaded)
 				return;

@@ -23,7 +23,7 @@ public class CardHeaderTextView extends TextView {
 		init(this, context);
 	}
 
-	void init(CardHeaderTextView textView, Context context) {
+	private void init(CardHeaderTextView textView, Context context) {
 		if (isInEditMode()) return;
 
 		if (FONT == null)

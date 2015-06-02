@@ -51,9 +51,11 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		setContentView(R.layout.activity_main);
 
 		// prepare toolbar
-		final ActionBar ab = getSupportActionBar();
-		ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-		ab.setDisplayHomeAsUpEnabled(true);
+		final ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -170,11 +172,11 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		}
 	}
 
-	public void onSettingsSelected() {
+	private void onSettingsSelected() {
 		startActivityForResult(new Intent(this, SettingsActivity.class), 0);
 	}
 
-	public void onFeedbackSelected() {
+	private void onFeedbackSelected() {
 		FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message, false);
 	}
 
@@ -196,7 +198,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		}
 	}
 
-	public void onPlaceSelected(MenuItem menuItem) {
+	private void onPlaceSelected(MenuItem menuItem) {
 		placeId = getMenuIndexInGroup(mNavigationView.getMenu(), menuItem);
 		menuItem.setChecked(true);
 		setTitle(menuItem.getTitle());

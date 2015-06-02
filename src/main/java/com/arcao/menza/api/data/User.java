@@ -7,12 +7,12 @@ public class User implements Parcelable {
 	public int id;
 	public UserType type;
 	public String login;
-	public String firstname;
-	public String lastname;
+	public String firstName;
+	public String lastName;
 	public String publicProfileUrl;
 	public String imageUrl;
 
-	public static enum UserType {
+	public enum UserType {
 		GOOGLE,
 		FACEBOOK
 	}
@@ -28,8 +28,8 @@ public class User implements Parcelable {
 		dest.writeInt(this.id);
 		dest.writeInt(this.type == null ? -1 : this.type.ordinal());
 		dest.writeString(this.login);
-		dest.writeString(this.firstname);
-		dest.writeString(this.lastname);
+		dest.writeString(this.firstName);
+		dest.writeString(this.lastName);
 		dest.writeString(this.publicProfileUrl);
 		dest.writeString(this.imageUrl);
 	}
@@ -42,8 +42,8 @@ public class User implements Parcelable {
 		int tmpType = in.readInt();
 		this.type = tmpType == -1 ? null : UserType.values()[tmpType];
 		this.login = in.readString();
-		this.firstname = in.readString();
-		this.lastname = in.readString();
+		this.firstName = in.readString();
+		this.lastName = in.readString();
 		this.publicProfileUrl = in.readString();
 		this.imageUrl = in.readString();
 	}

@@ -28,7 +28,6 @@ public class MealPreviewFragment extends Fragment {
 
 	private RatingChecker ratingChecker;
 
-	private int placeId;
 	private Date date;
 	private Meal meal;
 
@@ -55,7 +54,6 @@ public class MealPreviewFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ScrollView view = (ScrollView) inflater.inflate(R.layout.fragment_meal_preview, container, false);
 
-		placeId = getArguments().getInt(PARAM_PLACE_ID);
 		date = new Date(getArguments().getLong(PARAM_DATE));
 		meal = getArguments().getParcelable(PARAM_MEAL);
 
@@ -66,7 +64,7 @@ public class MealPreviewFragment extends Fragment {
 		RatingBar ratingBar = ((RatingBar)view.findViewById(R.id.ratingBar));
 		prepareRatingBar(ratingBar, meal);
 
-		prepareAlergens(inflater, (ViewGroup) view.findViewById(R.id.alergens_container), meal);
+		prepareAllergens(inflater, (ViewGroup) view.findViewById(R.id.alergens_container), meal);
 
 		// fix for situation when scroll view scroll to first focusable view
 		view.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -83,27 +81,27 @@ public class MealPreviewFragment extends Fragment {
 		return view;
 	}
 
-	protected void prepareAlergens(LayoutInflater inflater, ViewGroup container, Meal meal) {
-		if (meal.alergens == null || meal.alergens.length == 0)
+	private void prepareAllergens(LayoutInflater inflater, ViewGroup container, Meal meal) {
+		if (meal.allergens == null || meal.allergens.length == 0)
 			return;
 
 		container.removeAllViews();
 
-		String[] alergenTexts = getResources().getStringArray(R.array.alergens);
+		String[] allergenTexts = getResources().getStringArray(R.array.allergens);
 
-		for (int alergenId : meal.alergens) {
-			if (alergenId < 1 || alergenId > alergenTexts.length)
+		for (int allergenId : meal.allergens) {
+			if (allergenId < 1 || allergenId > allergenTexts.length)
 				continue;
 
-			View alergenView = inflater.inflate(R.layout.view_alergen_item, container, false);
-			((TextView)alergenView.findViewById(R.id.number)).setText(String.valueOf(alergenId));
-			((TextView)alergenView.findViewById(R.id.text)).setText(String.valueOf(alergenTexts[alergenId]));
+			View allergenView = inflater.inflate(R.layout.view_alergen_item, container, false);
+			((TextView)allergenView.findViewById(R.id.number)).setText(String.valueOf(allergenId));
+			((TextView)allergenView.findViewById(R.id.text)).setText(String.valueOf(allergenTexts[allergenId]));
 
-			container.addView(alergenView);
+			container.addView(allergenView);
 		}
 	}
 
-	protected void prepareRatingBar(RatingBar ratingBar, final Meal meal) {
+	private void prepareRatingBar(RatingBar ratingBar, final Meal meal) {
 		ratingBar.setMax(AppConstant.RATING__MAX);
 		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 		ratingBar.setClickable(true);
@@ -132,7 +130,7 @@ public class MealPreviewFragment extends Fragment {
 		});
 	}
 
-	public void performVote() {
+	private void performVote() {
 		if (ratingChecker.isRated(date, meal.hash)) {
 			ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_already_before).show(getActivity().getSupportFragmentManager(), ErrorDialogFragment.TAG);
 			return;

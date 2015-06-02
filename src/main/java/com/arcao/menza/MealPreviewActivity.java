@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
@@ -35,7 +36,6 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 	private Date date;
 	private Meal meal;
 	private String priceGroup;
-	private MealPreviewFragment fragment;
 	private RatingChecker ratingChecker;
 
 	@Override
@@ -56,14 +56,17 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 
 		setTitle(meal.name);
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayShowTitleEnabled(false);
+		}
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
-			fragment = MealPreviewFragment.getInstance(placeId, date, meal);
+			MealPreviewFragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
 		}
 	}
@@ -87,7 +90,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	protected Intent getShareIntent() {
+	private Intent getShareIntent() {
 		String place = getResources().getStringArray(R.array.places)[placeId];
 
 		String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
@@ -99,7 +102,7 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 		return intent;
 	}
 
-	protected float getMealPrice(Meal meal) {
+	private float getMealPrice(Meal meal) {
 		switch (priceGroup) {
 			case PrefConstant.PRICE_GROUP__STAFF:
 				return meal.priceStaff;
@@ -125,10 +128,10 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 		// show message
 		Toast.makeText(getApplicationContext(), R.string.vote_progress, Toast.LENGTH_LONG).show();
 
-		VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date, meal), createRatingReqErrorListener(meal));
+		VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date), createRatingReqErrorListener(meal));
 	}
 
-	private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date, final Meal meal) {
+	private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date) {
 		return new Response.Listener<Object>() {
 			@Override
 			public void onResponse(Object response) {

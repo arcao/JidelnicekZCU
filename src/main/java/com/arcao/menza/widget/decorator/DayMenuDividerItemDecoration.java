@@ -18,7 +18,7 @@ public class DayMenuDividerItemDecoration extends DividerItemDecoration {
 
 	@Override
 	protected void drawVerticalDivider(Canvas c, RecyclerView parent, int left, int right, int pos) {
-		int adapterPos = parent.getChildPosition(parent.getChildAt(pos));
+		int adapterPos = parent.getChildAdapterPosition(parent.getChildAt(pos));
 
 		// skip drawing above section position
 		//if (!isSectionPosition(parent, adapterPos))
@@ -33,7 +33,7 @@ public class DayMenuDividerItemDecoration extends DividerItemDecoration {
 
 	@Override
 	public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-		int adapterPos = parent.getChildPosition(view);
+		int adapterPos = parent.getChildAdapterPosition(view);
 
 		// skip setting item offset if current item is section - we don't draw divider
 		//if (!isSectionPosition(parent, adapterPos)) {

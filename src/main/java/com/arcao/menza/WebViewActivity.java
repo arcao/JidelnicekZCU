@@ -1,6 +1,7 @@
 package com.arcao.menza;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -20,7 +21,11 @@ public class WebViewActivity extends AbstractBaseActivity {
 		setContentView(R.layout.activity_webview);
 
 		setTitle(getIntent().getIntExtra(PARAM_TITLE, 0));
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 
 		WebView webView = (WebView) findViewById(R.id.content);
 		webView.setLongClickable(false);
@@ -50,7 +55,7 @@ public class WebViewActivity extends AbstractBaseActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	protected String getHtmlPageData(int res) throws IOException {
+	private String getHtmlPageData(int res) throws IOException {
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(res), "UTF-8"));

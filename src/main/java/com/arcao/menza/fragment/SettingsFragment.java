@@ -25,6 +25,7 @@ import com.arcao.menza.util.FeedbackHelper;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private static final String TAG = "SettingsFragment";
@@ -61,7 +62,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		try {
 			findPreference("build_time").setSummary(
 							DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
-											new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(BuildConfig.BUILD_TIME)
+											new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
 							)
 			);
 		} catch (ParseException e) {
@@ -102,17 +103,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		}
 	}
 
-	protected void showChangesApplyAfterRestartDialog() {
+	private void showChangesApplyAfterRestartDialog() {
 		ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
 	}
 
-	protected void updateListPreferenceSummary(String key) {
+	private void updateListPreferenceSummary(String key) {
 		ListPreference p = findPreference(key);
 		p.setSummary(p.getEntry());
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <P extends Preference> P findPreference(String key) {
+	private <P extends Preference> P findPreference(String key) {
 		return (P)super.findPreference(key);
 	}
 

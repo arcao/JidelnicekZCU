@@ -23,7 +23,7 @@ public class VolleyHelper {
 		requestQueue.add(createGetRequest(url, clazz, listener, errorListener));
 	}
 
-	public static <T> JacksonRequest<T> createGetRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+	private static <T> JacksonRequest<T> createGetRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
 		return new JacksonRequest<>(Method.GET, url, clazz, listener, errorListener);
 	}
 
@@ -35,7 +35,9 @@ public class VolleyHelper {
 
 				if (params != null) {
 					for (String key : params.keySet()) {
-						paramsMap.put(key, params.get(key).toString());
+						Object value = params.get(key);
+						if (value != null)
+							paramsMap.put(key, String.valueOf(value));
 					}
 				}
 

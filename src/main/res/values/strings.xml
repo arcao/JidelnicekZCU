@@ -66,12 +66,10 @@
     <string name="create_shortcut">Vytvořit zástupce na menzu / bufet…</string>
     <string name="pref_app_build_time">Čas sestavení aplikace</string>
     <string name="dialog_changes_apply_after_restart">Změna se projeví až po opětovném spuštění aplikace.</string>
-    <string name="navigation_drawer_open">Zobrazit menu</string>
-    <string name="navigation_drawer_close">Schovat menu</string>
-    <string name="header_alergens">Alergení složky</string>
-    <string name="no_alergens">Neobsahuje alergení složky</string>
+    <string name="header_allergens">Alergení složky</string>
+    <string name="no_allergens">Neobsahuje alergení složky</string>
 
-    <string-array name="alergens">
+    <string-array name="allergens">
         <item/>
         <item>Obiloviny obsahující lepek (tj. pšenice, žito, ječmen, oves, pšenice špalda, kamut nebo jejich hybridní odrůdy) a výrobky z nich</item> <!-- 1 -->
         <item>Korýši a výrobky z nich</item> <!-- 2 -->

@@ -3,6 +3,8 @@ package com.arcao.menza.fragment.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+
 import com.arcao.menza.R;
 
 public class ErrorDialogFragment extends AbstractDialogFragment {
@@ -22,6 +24,7 @@ public class ErrorDialogFragment extends AbstractDialogFragment {
 		return fragment;
 	}
 
+	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

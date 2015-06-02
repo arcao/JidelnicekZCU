@@ -2,6 +2,7 @@ package com.arcao.menza;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -34,9 +35,12 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
 		setTitle(getResources().getStringArray(R.array.places)[placeId]);
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayShowTitleEnabled(false);
+		}
 
 		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
@@ -64,7 +68,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 		titleTextView.setText(title);
 	}
 
-	public void setSubTitle(CharSequence subTitle) {
+	private void setSubTitle(CharSequence subTitle) {
 		subTitleTextView.setText(subTitle);
 		subTitleTextView.setVisibility(View.VISIBLE);
 	}

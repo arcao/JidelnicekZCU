@@ -4,9 +4,10 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MenzaUrlGenerator {
-	private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
+	private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd", Locale.US);
 
 	private static final String URL_PREFIX = "http://menza.arcao.com/api/v2.1/";
 	private static final String DAY_URL = URL_PREFIX + "get/%d/%s";

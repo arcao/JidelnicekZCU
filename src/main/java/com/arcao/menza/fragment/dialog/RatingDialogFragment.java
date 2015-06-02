@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
@@ -16,7 +17,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 	public static final String TAG = "RatingDialogFragment";
 
 	public interface OnRatingChangeListener {
-		public void onRatingChanged(float rating);
+		void onRatingChanged(float rating);
 	}
 
 	private OnRatingChangeListener listener;
@@ -42,6 +43,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		super.onDetach();
 	}
 
+	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		@SuppressLint("InflateParams")

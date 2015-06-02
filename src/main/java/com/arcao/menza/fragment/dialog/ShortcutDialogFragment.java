@@ -5,17 +5,19 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+
 import com.arcao.menza.R;
 
 public class ShortcutDialogFragment extends AbstractDialogFragment implements DialogInterface.OnClickListener {
 	public static final String TAG = "ShortcutDialogFragment";
 
 	public interface ShortcutDialogListener {
-		public void onCreateShortcut(int placeId);
-		public void onCancel();
+		void onCreateShortcut(int placeId);
+		void onCancel();
 	}
 
-	protected ShortcutDialogListener listener;
+	private ShortcutDialogListener listener;
 
 	public static ShortcutDialogFragment newInstance() {
 		return new ShortcutDialogFragment();
@@ -32,6 +34,7 @@ public class ShortcutDialogFragment extends AbstractDialogFragment implements Di
 		}
 	}
 
+	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		return new AlertDialog.Builder(getActivity())

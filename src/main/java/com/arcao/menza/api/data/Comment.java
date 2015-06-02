@@ -32,7 +32,7 @@ public class Comment implements Parcelable {
 		this.text = in.readString();
 	}
 
-	public static Parcelable.Creator<Comment> CREATOR = new Parcelable.Creator<Comment>() {
+	public static final Parcelable.Creator<Comment> CREATOR = new Parcelable.Creator<Comment>() {
 		public Comment createFromParcel(Parcel source) {
 			return new Comment(source);
 		}
