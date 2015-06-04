@@ -6,7 +6,7 @@
               android:orientation="vertical"
               android:layout_marginBottom="8dp"
               android:background="@color/primary"
-              android:paddingTop="25dp"
+              android:paddingTop="@dimen/nav_header_padding_top"
               android:paddingBottom="8dp">
 
     <TextView
