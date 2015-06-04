@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="?attr/actionBarSize"
-        android:paddingBottom="16dp">
+        android:gravity="left|center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
