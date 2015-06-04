@@ -68,6 +68,8 @@
     <string name="dialog_changes_apply_after_restart">Změna se projeví až po opětovném spuštění aplikace.</string>
     <string name="header_allergens">Alergení složky</string>
     <string name="no_allergens">Neobsahuje alergení složky</string>
+    <string name="button_cancel">Storno</string>
+    <string name="button_send">Odeslat</string>
 
     <string-array name="allergens">
         <item/>

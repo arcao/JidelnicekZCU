@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 	}
 
 	private OnRatingChangeListener listener;
+	private float newRating = -1F;
 
 	public static RatingDialogFragment newInstance() {
 		return new RatingDialogFragment();
@@ -55,17 +57,35 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 		ratingBar.setOnRatingBarChangeListener(this);
 
-		return new AlertDialog.Builder(getActivity())
+		final AlertDialog dialog = new AlertDialog.Builder(getActivity())
 			.setTitle(R.string.header_rating)
 			.setView(view)
+			.setNegativeButton(R.string.button_cancel, null)
+			.setPositiveButton(R.string.button_send, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if (listener != null && newRating > 0)
+						listener.onRatingChanged(newRating);
+				}
+			})
 			.create();
+
+		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface di) {
+				dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
+			}
+		});
+
+		return dialog;
 	}
 
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-		dismiss();
+		if (!fromUser)
+			return;
 
-		if (listener != null && fromUser)
-			listener.onRatingChanged(rating);
+		newRating = rating;
+		((AlertDialog)getDialog()).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
 	}
 }
