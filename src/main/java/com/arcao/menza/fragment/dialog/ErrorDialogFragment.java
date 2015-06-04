@@ -1,9 +1,9 @@
 package com.arcao.menza.fragment.dialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 
 import com.arcao.menza.R;
 
@@ -27,11 +27,10 @@ public class ErrorDialogFragment extends AbstractDialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(getArguments().getInt(ARG_TITLE));
-		builder.setMessage(getArguments().getInt(ARG_MESSAGE));
-		builder.setPositiveButton(R.string.button_ok, null);
-
-		return builder.create();
+		return new AlertDialog.Builder(getActivity())
+						.setTitle(getArguments().getInt(ARG_TITLE))
+						.setMessage(getArguments().getInt(ARG_MESSAGE))
+						.setPositiveButton(R.string.button_ok, null)
+						.create();
 	}
 }
