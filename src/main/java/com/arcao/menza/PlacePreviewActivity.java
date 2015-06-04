@@ -81,7 +81,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 				setSubTitle(response.address);
 
 				Fragment fragment = PlacePreviewFragment.getInstance(response);
-				getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
+				getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
 			}
 		};
 	}
@@ -95,7 +95,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 
 				if (getSupportFragmentManager().findFragmentById(R.id.fragment) == null) {
 					getSupportFragmentManager().beginTransaction().add(R.id.fragment,
-									ErrorFragment.newInstance(R.string.connection_error_data)).commit();
+									ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
 				}
 			}
 		};
