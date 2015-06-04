@@ -3,20 +3,22 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/pref_cat_general_title">
-        <ListPreference
+        <com.arcao.menza.preference.MaterialListPreference
             android:title="@string/pref_price_group_title"
             android:key="price_group"
             android:entries="@array/pref_price_group_entries"
             android:entryValues="@array/pref_price_group_values"
             android:defaultValue="@string/pref_price_group_default"
-            android:summary="%s"/>
-        <ListPreference
+            android:summary="%s"
+            android:negativeButtonText="@string/button_cancel"/>
+        <com.arcao.menza.preference.MaterialListPreference
             android:title="@string/pref_default_place_title"
             android:key="default_place"
             android:entries="@array/places"
             android:entryValues="@array/pref_default_place_values"
             android:defaultValue="@string/pref_default_place_default"
-            android:summary="%s"/>
+            android:summary="%s"
+            android:negativeButtonText="@string/button_cancel"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_cat_developer_title">

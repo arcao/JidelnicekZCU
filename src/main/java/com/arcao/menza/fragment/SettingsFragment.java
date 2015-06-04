@@ -1,9 +1,7 @@
 package com.arcao.menza.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +10,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.arcao.menza.BuildConfig;
@@ -138,11 +137,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 			return new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.pref_default_place_title)
 				.setMessage(R.string.dialog_changes_apply_after_restart)
-				.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-					}
-				})
+				.setPositiveButton(R.string.button_ok, null)
 				.create();
 		}
 	}
