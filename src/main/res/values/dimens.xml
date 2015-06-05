@@ -7,4 +7,6 @@
     <dimen name="popup_height">0dp</dimen>
 
     <dimen name="nav_header_padding_top">0dp</dimen>
+
+    <dimen name="toolbar_extended_title_height">-2dp</dimen>
 </resources>
