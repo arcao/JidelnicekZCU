@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:id="@+id/message"
     android:gravity="center"
-    android:background="@color/background_material_light" />
+    android:background="@color/card_window_background" />
