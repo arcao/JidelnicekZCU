@@ -83,6 +83,8 @@ dependencies {
     compile 'com.android:volley:1.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.4'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0-1@aar'
+    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile 'commons-io:commons-io:2.4'
 }
 
 if (project.hasProperty('storeFile') &&

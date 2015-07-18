@@ -16,12 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.dialog.PriceGroupChangeableDialogFragment;
 import com.arcao.menza.fragment.dialog.PriceGroupSelectionDialogFragment;
-import com.arcao.menza.util.FeedbackHelper;
 
 public class MainActivity extends AbstractBaseActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
@@ -177,7 +177,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	}
 
 	private void onFeedbackSelected() {
-		FeedbackHelper.sendFeedBack(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message, false);
+		FeedbackHelper.sendFeedback(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
 	}
 
 	@Override

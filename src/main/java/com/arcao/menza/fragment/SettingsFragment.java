@@ -13,13 +13,13 @@ import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.BuildConfig;
 import com.arcao.menza.MainActivity;
 import com.arcao.menza.R;
 import com.arcao.menza.WebViewActivity;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.dialog.AbstractDialogFragment;
-import com.arcao.menza.util.FeedbackHelper;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,7 +40,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				FeedbackHelper.sendFeedBack(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message, false);
+				FeedbackHelper.sendFeedback(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
 				return true;
 			}
 		});
