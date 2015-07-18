@@ -7,7 +7,7 @@
             android:layout_height="match_parent"
             android:scrollbarStyle="outsideOverlay"
             android:clipToPadding="false"
-            android:background="@color/background_material_light">
+            android:background="@color/card_window_background">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
