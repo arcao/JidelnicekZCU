@@ -40,9 +40,9 @@
     <string name="button_continue">Pokračovat</string>
     <string name="price_group_changeable">Cenovou skupinu lze kdykoliv později změnit v nastavení aplikace.</string>
     <string name="price">Cena</string>
-    <string name="price_external">Externí:</string>
-    <string name="price_student">Student:</string>
-    <string name="price_staff">Zaměstnanec:</string>
+    <string name="price_external">Externí</string>
+    <string name="price_student">Student</string>
+    <string name="price_staff">Zaměstnanec</string>
     <string name="preview_meal">Náhled jídla</string>
     <string name="action_share">Sdílet</string>
     <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
