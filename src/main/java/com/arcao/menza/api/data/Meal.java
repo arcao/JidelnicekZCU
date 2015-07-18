@@ -16,6 +16,7 @@ public class Meal implements Parcelable {
 	public Image[] images;
 	public Comment[] comments;
 	public int[] allergens;
+	public boolean premium;
 
 	@Override
 	public int describeContents() {
@@ -36,6 +37,7 @@ public class Meal implements Parcelable {
 		dest.writeTypedArray(this.images, flags);
 		dest.writeTypedArray(this.comments, flags);
 		dest.writeIntArray(allergens);
+		dest.writeInt(premium ? 1 : 0);
 	}
 
 	public Meal() {
@@ -54,6 +56,7 @@ public class Meal implements Parcelable {
 		this.images = in.createTypedArray(Image.CREATOR);
 		this.comments = in.createTypedArray(Comment.CREATOR);
 		this.allergens = in.createIntArray();
+		this.premium = in.readInt() != 0;
 	}
 
 	public static final Parcelable.Creator<Meal> CREATOR = new Parcelable.Creator<Meal>() {

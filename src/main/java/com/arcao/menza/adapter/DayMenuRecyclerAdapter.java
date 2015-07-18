@@ -130,6 +130,8 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		private final TextView idTextView;
 		private final TextView priceTextView;
 		private final RatingBar ratingBar;
+		private final int titleTextViewOriginalColor;
+		private final int titleTextViewPremiumColor;
 
 		public ItemViewHolder(View view) {
 			super(view);
@@ -145,12 +147,16 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 			ratingBar.setMax(AppConstant.RATING__MAX);
 			ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
+
+			titleTextViewOriginalColor = titleTextView.getCurrentTextColor();
+			titleTextViewPremiumColor = view.getContext().getResources().getColor(R.color.premium_meal);
 		}
 
 		public void bind(Meal item) {
 			titleTextView.setText(item.name);
 			idTextView.setText(String.valueOf(item.id));
 			priceTextView.setText(getMealPrice(item));
+			titleTextView.setTextColor(item.premium ? titleTextViewPremiumColor : titleTextViewOriginalColor);
 
 			if (item.quality > 0) {
 				ratingBar.setVisibility(View.VISIBLE);
