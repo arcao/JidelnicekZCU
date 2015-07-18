@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<com.arcao.menza.widget.CardHeaderTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,6 @@
     android:minHeight="?attr/listPreferredItemHeightSmall"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
     android:paddingRight="?attr/listPreferredItemPaddingRight"
-    android:textAppearance="?attr/textAppearanceListItem"
+    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
     android:textColor="@color/accent_dark"
     tools:text="Header"/>
