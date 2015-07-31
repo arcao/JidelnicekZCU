@@ -10,12 +10,11 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
+import timber.log.Timber;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import timber.log.Timber;
 
 public class DisplayManagerCollector extends Collector {
 	private final Context mContext;
@@ -82,13 +81,10 @@ public class DisplayManagerCollector extends Collector {
 
 	private static String collectIsValid(Display display) {
 		StringBuilder result = new StringBuilder();
-		try {
-			// since API v17
-			Method isValid = display.getClass().getMethod("isValid");
-			Boolean value = (Boolean) isValid.invoke(display);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			boolean value = display.isValid();
 			result.append(display.getDisplayId()).append(".isValid=").append(value).append('\n');
-		} catch (SecurityException | NoSuchMethodException | IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-			Timber.e(e, e.getMessage());
 		}
 
 		return result.toString();
@@ -96,44 +92,38 @@ public class DisplayManagerCollector extends Collector {
 
 	private static String collectRotation(Display display) {
 		StringBuilder result = new StringBuilder();
-		try {
-			// since API v8
-			int rotation = display.getRotation();
-			switch (rotation) {
-				case Surface.ROTATION_0:
-					result.append("ROTATION_0");
-					break;
-				case Surface.ROTATION_90:
-					result.append("ROTATION_90");
-					break;
-				case Surface.ROTATION_180:
-					result.append("ROTATION_180");
-					break;
-				case Surface.ROTATION_270:
-					result.append("ROTATION_270");
-					break;
-				default:
-					result.append(rotation);
-					break;
-			}
-			result.append('\n');
-		} catch (SecurityException | IllegalArgumentException e) {
-			Timber.e(e, e.getMessage());
+		// since API v8
+		int rotation = display.getRotation();
+		switch (rotation) {
+			case Surface.ROTATION_0:
+				result.append("ROTATION_0");
+				break;
+			case Surface.ROTATION_90:
+				result.append("ROTATION_90");
+				break;
+			case Surface.ROTATION_180:
+				result.append("ROTATION_180");
+				break;
+			case Surface.ROTATION_270:
+				result.append("ROTATION_270");
+				break;
+			default:
+				result.append(rotation);
+				break;
 		}
+		result.append('\n');
 
 		return result.toString();
 	}
 
 	private static String collectRectSize(Display display) {
 		StringBuilder result = new StringBuilder();
-		try {
-			// since API v13
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			Rect size = new Rect();
 			display.getRectSize(size);
 			result.append(display.getDisplayId()).append(".rectSize=[").append(size.top).append(',').append(size.left)
 							.append(',').append(size.width()).append(',').append(size.height()).append(']').append('\n');
-		} catch (SecurityException | IllegalArgumentException e) {
-			Timber.e(e, e.getMessage());
 		}
 		return result.toString();
 	}
