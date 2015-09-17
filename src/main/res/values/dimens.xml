@@ -8,5 +8,5 @@
 
     <dimen name="nav_header_padding_top">0dp</dimen>
 
-    <dimen name="toolbar_extended_title_height">-2dp</dimen>
+    <dimen name="toolbar_extended_title_height">@dimen/abc_action_bar_default_height_material</dimen>
 </resources>

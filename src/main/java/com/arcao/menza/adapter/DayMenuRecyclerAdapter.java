@@ -127,7 +127,6 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 		private final TextView titleTextView;
-		private final TextView idTextView;
 		private final TextView priceTextView;
 		private final RatingBar ratingBar;
 		private final int titleTextViewOriginalColor;
@@ -141,7 +140,6 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			view.setOnClickListener(this);
 
 			titleTextView = (TextView) view.findViewById(R.id.name);
-			idTextView = (TextView) view.findViewById(R.id.number);
 			priceTextView = (TextView) view.findViewById(R.id.price);
 			ratingBar = (RatingBar) view.findViewById(R.id.rating);
 
@@ -154,7 +152,6 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		public void bind(Meal item) {
 			titleTextView.setText(item.name);
-			idTextView.setText(String.valueOf(item.id));
 			priceTextView.setText(getMealPrice(item));
 			titleTextView.setTextColor(item.premium ? titleTextViewPremiumColor : titleTextViewOriginalColor);
 
