@@ -2,6 +2,7 @@ package com.arcao.menza;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -49,14 +50,18 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 
 		setContentView(R.layout.activity_main);
 
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 		// prepare toolbar
 		final ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
+		if (actionBar != null && mDrawerLayout != null) {
 			actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		if (mDrawerLayout != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+		}
 
 		// prepare drawer
 		mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -78,7 +83,8 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 										}
 									}
 
-									mDrawerLayout.closeDrawers();
+									if (mDrawerLayout != null)
+										mDrawerLayout.closeDrawers();
 									return true;
 								}
 							});
@@ -158,7 +164,8 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
-				mDrawerLayout.openDrawer(GravityCompat.START);
+				if (mDrawerLayout != null)
+					mDrawerLayout.openDrawer(GravityCompat.START);
 				return true;
 			case R.id.action_today:
 				mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY, true);
