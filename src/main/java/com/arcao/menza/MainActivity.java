@@ -8,14 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerTitleStrip;
+import android.support.v4.view.PagerTitleStripV22;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
@@ -91,7 +90,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		mViewPager.setAdapter(mDayPagerAdapter);
 		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
 
-		PagerTitleStrip pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
+		PagerTitleStripV22 pagerTitleStrip = (PagerTitleStripV22) findViewById(R.id.pager_title_strip);
 		pagerTitleStrip.setNonPrimaryAlpha(0.3F); // in percent
 
 		MenuItem menuItem = getMenuItemInGroup(mNavigationView.getMenu(), R.id.place, placeId);
