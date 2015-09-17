@@ -41,7 +41,7 @@ public class LogCatCollector extends Collector {
 		final List<String> commandLine = new ArrayList<>();
 		commandLine.add("logcat");
 		commandLine.add("-t");
-		commandLine.add("1000");
+		commandLine.add("10000");
 		commandLine.add("-v");
 		commandLine.add("time");
 

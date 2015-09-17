@@ -10,11 +10,12 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
-import timber.log.Timber;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import timber.log.Timber;
 
 public class DisplayManagerCollector extends Collector {
 	private final Context mContext;
@@ -83,6 +84,7 @@ public class DisplayManagerCollector extends Collector {
 		StringBuilder result = new StringBuilder();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			// since API v17
 			boolean value = display.isValid();
 			result.append(display.getDisplayId()).append(".isValid=").append(value).append('\n');
 		}
@@ -121,6 +123,7 @@ public class DisplayManagerCollector extends Collector {
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			Rect size = new Rect();
+			// since API v13
 			display.getRectSize(size);
 			result.append(display.getDisplayId()).append(".rectSize=[").append(size.top).append(',').append(size.left)
 							.append(',').append(size.width()).append(',').append(size.height()).append(']').append('\n');
