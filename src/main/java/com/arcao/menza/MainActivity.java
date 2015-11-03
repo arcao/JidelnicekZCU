@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.adapter.DayPagerAdapter;
@@ -34,6 +35,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	private ViewPager mViewPager;
 	private SharedPreferences mSharedPreferences;
 	private int placeId;
+	private View headerLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		// prepare drawer
 		mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 		if (mNavigationView != null) {
+			// FIX for https://code.google.com/p/android/issues/detail?id=190226
+			headerLayout = mNavigationView.inflateHeaderView(R.layout.nav_header);
 			mNavigationView.setNavigationItemSelectedListener(
 							new NavigationView.OnNavigationItemSelectedListener() {
 								@Override
@@ -188,7 +192,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 
 	@Override
 	public void onPriceGroupSelected(String priceGroup) {
-		mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).commit();
+		mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).apply();
 		mDayPagerAdapter.notifyDataSetChanged();
 
 		PriceGroupChangeableDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupChangeableDialogFragment.TAG);
@@ -208,7 +212,9 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		placeId = getMenuIndexInGroup(mNavigationView.getMenu(), menuItem);
 		menuItem.setChecked(true);
 		setTitle(menuItem.getTitle());
-		((TextView)mNavigationView.findViewById(R.id.title)).setText(menuItem.getTitle());
+		if (headerLayout != null)
+			((TextView)headerLayout.findViewById(R.id.title)).setText(menuItem.getTitle());
+
 		mDayPagerAdapter.updatePlaceId(placeId);
 	}
 }
