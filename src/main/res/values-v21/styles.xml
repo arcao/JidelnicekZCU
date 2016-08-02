@@ -12,15 +12,15 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
-    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar">
+    <style name="Widget.AppTheme.Toolbar" parent="Base.Widget.Toolbar">
         <item name="android:elevation">4dp</item>
     </style>
 
-    <style name="Widget.Toolbar.NoElevation">
+    <style name="Widget.AppTheme.Toolbar.NoElevation">
         <item name="android:elevation">0dp</item>
     </style>
 
-    <style name="Widget.PagerTitleStrip">
+    <style name="Widget.AppTheme.PagerTitleStrip">
         <item name="android:background">?attr/colorPrimaryLight</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
         <item name="android:elevation">4dp</item>

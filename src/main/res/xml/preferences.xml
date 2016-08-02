@@ -3,7 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/pref_cat_general_title">
-        <com.arcao.menza.preference.MaterialListPreference
+        <ListPreference
             android:title="@string/pref_price_group_title"
             android:key="price_group"
             android:entries="@array/pref_price_group_entries"
@@ -11,7 +11,7 @@
             android:defaultValue="@string/pref_price_group_default"
             android:summary="%s"
             android:negativeButtonText="@string/button_cancel"/>
-        <com.arcao.menza.preference.MaterialListPreference
+        <ListPreference
             android:title="@string/pref_default_place_title"
             android:key="default_place"
             android:entries="@array/places"

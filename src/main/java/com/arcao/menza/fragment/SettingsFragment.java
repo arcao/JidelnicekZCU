@@ -7,10 +7,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.arcao.feedback.FeedbackHelper;
@@ -20,17 +20,18 @@ import com.arcao.menza.R;
 import com.arcao.menza.WebViewActivity;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.dialog.AbstractDialogFragment;
+import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private static final String TAG = "SettingsFragment";
 
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
 
@@ -56,14 +57,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		});
 
 		findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
-		try {
-			findPreference("build_time").setSummary(
-					DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
-							new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
-					)
-			);
-		} catch (ParseException e) {
-			Log.e(TAG, e.getMessage(), e);
+		if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {
+			try {
+				findPreference("build_time").setSummary(
+						DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
+						)
+				);
+			} catch (ParseException e) {
+				Log.e(TAG, e.getMessage(), e);
+			}
 		}
 
 
@@ -91,10 +94,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		switch (key) {
 			case PrefConstant.PRICE_GROUP:
 				getActivity().setResult(MainActivity.RESULT_REFRESH);
-				updateListPreferenceSummary(key);
+				//updateListPreferenceSummary(key);
 				break;
 			case PrefConstant.DEFAULT_PLACE:
-				updateListPreferenceSummary(key);
+				//updateListPreferenceSummary(key);
 				showChangesApplyAfterRestartDialog();
 				break;
 		}
