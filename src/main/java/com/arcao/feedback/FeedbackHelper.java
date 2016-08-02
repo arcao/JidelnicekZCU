@@ -62,13 +62,13 @@ public class FeedbackHelper {
 		ZipOutputStream zos = null;
 
 		if (reportFile.exists()) {
-			Timber.d("Report file " + reportFile + " already exist.");
+			Timber.d("Report file '%s' already exist.", reportFile.toString());
 			if (reportFile.delete()) {
 				Timber.d("Report file removed.");
 			}
 		}
 
-		Timber.d("Creating report to " + reportFile);
+		Timber.d("Creating report to '%s'...", reportFile.toString());
 		try {
 			zos = new ZipOutputStream(new FileOutputStream(reportFile));
 			writeCollectors(zos, context);

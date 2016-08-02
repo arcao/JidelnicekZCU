@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -59,6 +58,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 		findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
 		if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {
 			try {
+				//noinspection deprecation
 				findPreference("build_time").setSummary(
 						DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
 								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
@@ -105,11 +105,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
 	private void showChangesApplyAfterRestartDialog() {
 		ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
-	}
-
-	private void updateListPreferenceSummary(String key) {
-		ListPreference p = (ListPreference) findPreference(key);
-		p.setSummary(p.getEntry());
 	}
 
 	private static String getVersion(Context context) {

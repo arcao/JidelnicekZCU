@@ -13,7 +13,7 @@ public enum JsonMapper {
 	JsonMapper() {
 		mapper = new ObjectMapper();
 		VisibilityChecker<?> visibilityChecker = mapper.getSerializationConfig().getDefaultVisibilityChecker();
-		mapper.setVisibilityChecker(visibilityChecker
+		mapper.setVisibility(visibilityChecker
 						.withFieldVisibility(Visibility.ANY)
 						.withCreatorVisibility(Visibility.NONE)
 						.withGetterVisibility(Visibility.NONE)
