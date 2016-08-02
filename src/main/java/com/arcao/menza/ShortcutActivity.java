@@ -12,7 +12,7 @@ public class ShortcutActivity extends AbstractBaseActivity implements ShortcutDi
 		super.onResumeFragments();
 
 		if (getSupportFragmentManager().findFragmentByTag(ShortcutDialogFragment.TAG) == null) {
-			ShortcutDialogFragment.newInstance().show(getSupportFragmentManager(), ShortcutDialogFragment.TAG);
+			ShortcutDialogFragment.newInstance().show(getFragmentManager(), ShortcutDialogFragment.TAG);
 		}
 	}
 

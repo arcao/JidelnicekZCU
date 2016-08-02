@@ -19,7 +19,10 @@ public class SettingsActivity extends AbstractBaseActivity {
 		}
 
 		// Display the fragment as the main content.
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new SettingsFragment()).commit();
+		if (savedInstanceState == null)
+			getFragmentManager().beginTransaction()
+					.replace(R.id.fragment, new SettingsFragment())
+					.commit();
 	}
 
 	@Override

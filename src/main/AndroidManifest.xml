@@ -14,8 +14,8 @@
         android:anyDensity="true" />
 
     <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="24" />
 
     <application
         android:allowBackup="true"

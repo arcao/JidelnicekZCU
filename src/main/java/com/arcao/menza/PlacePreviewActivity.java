@@ -1,7 +1,7 @@
 package com.arcao.menza;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +15,7 @@ import com.arcao.menza.fragment.ErrorFragment;
 import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
 
-public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
+public class PlacePreviewActivity extends AbstractBaseActivity {
 	private static final String PARAM_PLACE_ID = "PLACE_ID";
 	private static final String STATE_TITLE = "TITLE";
 	private static final String STATE_SUBTITLE = "SUBTITLE";
@@ -41,8 +41,6 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 			actionBar.setHomeButtonEnabled(true);
 			actionBar.setDisplayShowTitleEnabled(false);
 		}
-
-		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
 
 		if (savedInstanceState == null) {
 			VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
@@ -81,7 +79,7 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 				setSubTitle(response.address);
 
 				Fragment fragment = PlacePreviewFragment.getInstance(response);
-				getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
+				getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
 			}
 		};
 	}
@@ -93,8 +91,8 @@ public class PlacePreviewActivity extends AbstractPopupActionBarActivity {
 				Log.e("VOLLEY", error.getMessage(), error);
 
 
-				if (getSupportFragmentManager().findFragmentById(R.id.fragment) == null) {
-					getSupportFragmentManager().beginTransaction().add(R.id.fragment,
+				if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
+					getFragmentManager().beginTransaction().add(R.id.fragment,
 									ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
 				}
 			}

@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Queue;
 
 public class RatingChecker {
@@ -47,12 +48,12 @@ public class RatingChecker {
 
 	public boolean isRated(Date date, String hash) {
 		synchronized (ratingKeys) {
-			return ratingKeys.contains(String.format(PrefConstant.VOTES_VALUE_FORMAT, date, hash));
+			return ratingKeys.contains(String.format(Locale.US, PrefConstant.VOTES_VALUE_FORMAT, date, hash));
 		}
 	}
 
 	public void addRating(Date date, String hash) {
-		String key = String.format(PrefConstant.VOTES_VALUE_FORMAT, date, hash);
+		String key = String.format(Locale.US, PrefConstant.VOTES_VALUE_FORMAT, date, hash);
 
 		synchronized (ratingKeys) {
 			if (ratingKeys.contains(key))
@@ -78,7 +79,7 @@ public class RatingChecker {
 	}
 
 	public synchronized void removeRating(Date date, String hash) {
-		String key = String.format(PrefConstant.VOTES_VALUE_FORMAT, date, hash);
+		String key = String.format(Locale.US, PrefConstant.VOTES_VALUE_FORMAT, date, hash);
 
 		synchronized (ratingKeys) {
 			if (ratingKeys.contains(key))

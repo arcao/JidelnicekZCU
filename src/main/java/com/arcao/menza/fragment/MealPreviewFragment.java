@@ -1,8 +1,8 @@
 package com.arcao.menza.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -132,15 +132,15 @@ public class MealPreviewFragment extends Fragment {
 
 	private void performVote() {
 		if (ratingChecker.isRated(date, meal.hash)) {
-			ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_already_before).show(getActivity().getSupportFragmentManager(), ErrorDialogFragment.TAG);
+			ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_already_before).show(getActivity().getFragmentManager(), ErrorDialogFragment.TAG);
 			return;
 		}
 
 		if (!DateUtils.isToday(date.getTime())) {
-			ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_today_only).show(getActivity().getSupportFragmentManager(), ErrorDialogFragment.TAG);
+			ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_today_only).show(getActivity().getFragmentManager(), ErrorDialogFragment.TAG);
 			return;
 		}
 
-		RatingDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), RatingDialogFragment.TAG);
+		RatingDialogFragment.newInstance().show(getActivity().getFragmentManager(), RatingDialogFragment.TAG);
 	}
 }

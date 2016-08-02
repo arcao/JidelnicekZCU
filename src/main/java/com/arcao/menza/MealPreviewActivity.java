@@ -25,7 +25,7 @@ import com.arcao.menza.volley.VolleyHelper;
 
 import java.util.Date;
 
-public class MealPreviewActivity extends AbstractPopupActionBarActivity implements RatingDialogFragment.OnRatingChangeListener {
+public class MealPreviewActivity extends AbstractBaseActivity implements RatingDialogFragment.OnRatingChangeListener {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
 	public static final String PARAM_DATE = "DATE";
 	public static final String PARAM_MEAL = "MEAL";
@@ -63,11 +63,9 @@ public class MealPreviewActivity extends AbstractPopupActionBarActivity implemen
 			actionBar.setDisplayShowTitleEnabled(false);
 		}
 
-		showAsPopup(R.dimen.popup_width, R.dimen.popup_height);
-
 		if (savedInstanceState == null) {
 			MealPreviewFragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
-			getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
+			getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
 		}
 	}
 
