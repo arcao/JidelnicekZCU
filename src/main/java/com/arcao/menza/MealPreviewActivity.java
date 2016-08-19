@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.PrefConstant;
@@ -151,33 +150,27 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
 	}
 
 	private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date) {
-		return new Response.Listener<Object>() {
-			@Override
-			public void onResponse(Object response) {
-				// invalidate soft cache
-				VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
+		return response -> {
+            // invalidate soft cache
+            VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
 
-				setResult(MainActivity.RESULT_REFRESH);
+            setResult(MainActivity.RESULT_REFRESH);
 
-				// show message
-				Toast.makeText(getApplicationContext(), R.string.vote_finished, Toast.LENGTH_LONG).show();
-			}
-		};
+            // show message
+            Toast.makeText(getApplicationContext(), R.string.vote_finished, Toast.LENGTH_LONG).show();
+        };
 	}
 
 
 	private Response.ErrorListener createRatingReqErrorListener(final Meal meal) {
-		return new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("VOLLEY", error.getMessage(), error);
+		return error -> {
+            Log.e("VOLLEY", error.getMessage(), error);
 
-				ratingChecker.removeRating(date, meal.hash);
+            ratingChecker.removeRating(date, meal.hash);
 
-				// show error message
-				Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();
-			}
-		};
+            // show error message
+            Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();
+        };
 	}
 }
 

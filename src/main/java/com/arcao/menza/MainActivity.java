@@ -68,27 +68,24 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 		if (mNavigationView != null) {
 			mNavigationView.setNavigationItemSelectedListener(
-							new NavigationView.OnNavigationItemSelectedListener() {
-								@Override
-								public boolean onNavigationItemSelected(MenuItem menuItem) {
-									if (menuItem.getGroupId() == R.id.place) {
-										onPlaceSelected(menuItem);
-									} else {
-										switch (menuItem.getItemId()) {
-											case R.id.action_settings:
-												onSettingsSelected();
-												break;
-											case R.id.action_feedback:
-												onFeedbackSelected();
-												break;
-										}
-									}
+					menuItem -> {
+                        if (menuItem.getGroupId() == R.id.place) {
+                            onPlaceSelected(menuItem);
+                        } else {
+                            switch (menuItem.getItemId()) {
+                                case R.id.action_settings:
+                                    onSettingsSelected();
+                                    break;
+                                case R.id.action_feedback:
+                                    onFeedbackSelected();
+                                    break;
+                            }
+                        }
 
-									if (mDrawerLayout != null)
-										mDrawerLayout.closeDrawers();
-									return true;
-								}
-							});
+                        if (mDrawerLayout != null)
+                            mDrawerLayout.closeDrawers();
+                        return true;
+                    });
 		}
 
 		// prepare day adapter

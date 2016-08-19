@@ -70,13 +70,10 @@ public class MealPreviewFragment extends Fragment {
 		view.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 		view.setFocusable(true);
 		view.setFocusableInTouchMode(true);
-		view.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				v.requestFocusFromTouch();
-				return false;
-			}
-		});
+		view.setOnTouchListener((v, event) -> {
+            v.requestFocusFromTouch();
+            return false;
+        });
 
 		return view;
 	}
@@ -112,22 +109,14 @@ public class MealPreviewFragment extends Fragment {
 			ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + meal.quality / AppConstant.RATING__QUANTIFIER));
 		}
 
-		ratingBar.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				performVote();
-			}
-		});
+		ratingBar.setOnClickListener(v -> performVote());
 
-		ratingBar.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					performVote();
-				}
-				return true;
-			}
-		});
+		ratingBar.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                performVote();
+            }
+            return true;
+        });
 	}
 
 	private void performVote() {

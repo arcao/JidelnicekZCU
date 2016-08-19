@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Place;
 import com.arcao.menza.fragment.ErrorFragment;
@@ -94,30 +93,24 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 	}
 
 	private Response.Listener<Place> createPlaceReqSuccessListener() {
-		return new Response.Listener<Place>() {
-			@Override
-			public void onResponse(Place response) {
-				setTitle(response.name);
-				setSubTitle(response.address);
+		return response -> {
+            setTitle(response.name);
+            setSubTitle(response.address);
 
-				Fragment fragment = PlacePreviewFragment.getInstance(response);
-				getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
-			}
-		};
+            Fragment fragment = PlacePreviewFragment.getInstance(response);
+            getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
+        };
 	}
 
 	private Response.ErrorListener createPlaceReqErrorListener() {
-		return new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("VOLLEY", error.getMessage(), error);
+		return error -> {
+            Log.e("VOLLEY", error.getMessage(), error);
 
 
-				if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
-					getFragmentManager().beginTransaction().add(R.id.fragment,
-									ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
-				}
-			}
-		};
+            if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
+                getFragmentManager().beginTransaction().add(R.id.fragment,
+                                ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
+            }
+        };
 	}
 }

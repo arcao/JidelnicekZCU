@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.arcao.menza.MealPreviewActivity;
 import com.arcao.menza.R;
 import com.arcao.menza.adapter.DayMenuRecyclerAdapter;
@@ -116,32 +115,26 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 	}
 
 	private Response.Listener<Section[]> createDayMenuReqSuccessListener() {
-		return new Response.Listener<Section[]>() {
-			@Override
-			public void onResponse(Section[] response) {
-				if (getActivity() == null)
-					return;
+		return response -> {
+            if (getActivity() == null)
+                return;
 
-				setEmptyText(getResources().getText(R.string.list_empty));
-				adapter.fillItems(response);
-				setListShown(true);
-			}
-		};
+            setEmptyText(getResources().getText(R.string.list_empty));
+            adapter.fillItems(response);
+            setListShown(true);
+        };
 	}
 
 	private Response.ErrorListener createDayMenuReqErrorListener() {
-		return new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				if (getActivity() == null)
-					return;
+		return error -> {
+            if (getActivity() == null)
+                return;
 
-				Log.e("VOLLEY", error.getMessage(), error);
+            Log.e("VOLLEY", error.getMessage(), error);
 
-				adapter.clearItems();
-				setEmptyText(getResources().getText(R.string.connection_error));
-				setListShown(true);
-			}
-		};
+            adapter.clearItems();
+            setEmptyText(getResources().getText(R.string.connection_error));
+            setListShown(true);
+        };
 	}
 }

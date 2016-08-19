@@ -35,25 +35,19 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 		addPreferencesFromResource(R.xml.preferences);
 
 		Preference feedBackPref = findPreference("feedback");
-		feedBackPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				FeedbackHelper.sendFeedback(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
-				return true;
-			}
-		});
+		feedBackPref.setOnPreferenceClickListener(preference -> {
+            FeedbackHelper.sendFeedback(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
+            return true;
+        });
 
 		Preference licensesPref = findPreference("licenses");
-		licensesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Intent i = new Intent(getActivity(), WebViewActivity.class);
-				i.putExtra(WebViewActivity.PARAM_TITLE, R.string.pref_licenses);
-				i.putExtra(WebViewActivity.PARAM_RAW_RESOURCE, R.raw.licenses);
-				startActivity(i);
-				return true;
-			}
-		});
+		licensesPref.setOnPreferenceClickListener(preference -> {
+            Intent i = new Intent(getActivity(), WebViewActivity.class);
+            i.putExtra(WebViewActivity.PARAM_TITLE, R.string.pref_licenses);
+            i.putExtra(WebViewActivity.PARAM_RAW_RESOURCE, R.raw.licenses);
+            startActivity(i);
+            return true;
+        });
 
 		findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
 		if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {

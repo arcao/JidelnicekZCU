@@ -61,21 +61,13 @@ public class RatingDialogFragment extends AbstractDialogFragment implements Rati
 			.setTitle(R.string.header_rating)
 			.setView(view)
 			.setNegativeButton(R.string.button_cancel, null)
-			.setPositiveButton(R.string.button_send, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (listener != null && newRating > 0)
-						listener.onRatingChanged(newRating);
-				}
-			})
+			.setPositiveButton(R.string.button_send, (dialog1, which) -> {
+                if (listener != null && newRating > 0)
+                    listener.onRatingChanged(newRating);
+            })
 			.create();
 
-		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface di) {
-				dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
-			}
-		});
+		dialog.setOnShowListener(di -> dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false));
 
 		return dialog;
 	}

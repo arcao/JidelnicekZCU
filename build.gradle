@@ -48,12 +48,15 @@ android {
         buildConfigField 'String', 'BUILD_TIME', 'null'
 
         resConfigs 'en', 'cs', 'sk'
+        jackOptions {
+            enabled true
+        }
     }
 
     compileOptions {
         encoding "UTF-8"
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     signingConfigs {

@@ -53,22 +53,20 @@ public class LogCatCollector extends Collector {
 
 			Timber.d("Retrieving logcat output...");
 			// Dump stderr to null
-			new Thread(new Runnable() {
-				public void run() {
-					InputStream stderr = process.getErrorStream();
-					try {
-						byte[] dummy = new byte[DEFAULT_BUFFER_SIZE_IN_BYTES];
-						//noinspection StatementWithEmptyBody
-						while (stderr.read(dummy) >= 0) {
-							// discard all data
-						}
-					} catch (IOException e) {
-						// fall trough
-					} finally {
-						IOUtils.closeQuietly(stderr);
-					}
-				}
-			}).start();
+			new Thread(() -> {
+                InputStream stderr = process.getErrorStream();
+                try {
+                    byte[] dummy = new byte[DEFAULT_BUFFER_SIZE_IN_BYTES];
+                    //noinspection StatementWithEmptyBody
+                    while (stderr.read(dummy) >= 0) {
+                        // discard all data
+                    }
+                } catch (IOException e) {
+                    // fall trough
+                } finally {
+                    IOUtils.closeQuietly(stderr);
+                }
+            }).start();
 
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
