@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jídelníček ZČU</string>
+    <string name="action_settings">Nastavenie</string>
+
+    <string name="place_menza_bory">Menza Bory</string>
+    <string name="place_menza_kollarova">Menza Kollárova</string>
+    <string name="place_bufet_lochotin">Bufet Lochotín</string>
+    <string name="place_bufet_fst">Bufet FST</string>
+    <string name="place_bufet_pf">Bufet PF</string>
+
+    <string-array name="places">
+        <item>Menza Bory</item>
+        <item>Menza Kollárova</item>
+        <item>Bufet Lochotín</item>
+        <item>Bufet FST</item>
+        <item>Bufet PF</item>
+    </string-array>
+    <string-array name="relative_day_title">
+        <item>Včera</item>
+        <item>Dnes</item>
+        <item>Zajtra</item>
+    </string-array>
+
+    <string name="list_empty">Tento deň sa nevarí.</string>
+    <string name="connection_error">Nepodarilo sa stiahnuť jedálny lístok!</string>
+    <string name="action_today">Zobraziť dnešok</string>
+    <string name="price_suffix">,- Kč</string>
+    <string name="pref_cat_general_title">Obecné</string>
+    <string name="pref_price_group_title">Cenová skupina</string>
+
+    <string-array name="pref_price_group_entries">
+        <item>Študent</item>
+        <item>Zamestnanec</item>
+        <item>Externý</item>
+    </string-array>
+
+    <string name="pref_default_place_title">Predvolené výdajňa</string>
+    <string name="button_ok">OK</string>
+    <string name="button_continue">Pokračovať</string>
+    <string name="price_group_changeable">Cenovú skupinu je možné kedykoľvek neskôr zmeniť v nastavenie aplikácie.</string>
+    <string name="price">Cena</string>
+    <string name="price_external">Externý</string>
+    <string name="price_student">Študent</string>
+    <string name="price_staff">Zamestnanec</string>
+    <string name="preview_meal">Náhľad jedlá</string>
+    <string name="action_share">Zdieľať</string>
+    <string name="share_text">V %1$s odporúčam jedlo %2$s za %3$d,- Kč.</string>
+    <string name="header_rating">Hodnotenie stravníkov</string>
+    <string name="vote_progress">Odosielam váše hodnotenie…</string>
+    <string name="vote_finished">Hodnotenie bolo úspešne odoslané.</string>
+    <string name="vote_failed">Nepodarilo sa odoslať hodnotenia.</string>
+    <string name="vote_today_only">Hlasovať možno len pre aktuálny deň!</string>
+    <string name="vote_already_before">Už ste toto jedlo ohodnotil!</string>
+    <string name="vote_error_title">Upozornenie</string>
+    <string name="action_feedback">Spätná väzba</string>
+    <string name="feedback_subject">%1$s (%2$s): Spätná väzba</string>
+    <string name="feedback_message">Váš text…</string>
+    <string name="pref_cat_developer_title">Vývojár</string>
+    <string name="action_info">Informácie o mieste</string>
+    <string name="open_time">Otváracia doba</string>
+    <string name="connection_error_data">Nepodarilo sa stiahnuť dáta!</string>
+    <string name="pref_licenses">Licencia Open Source</string>
+    <string name="pref_licenses_summary">Licenčné detaily pre Open source softvér </string>
+    <string name="pref_app_version">Verzia applikace</string>
+    <string name="create_shortcut">Vytvoriť zástupcu pre…</string>
+    <string name="pref_app_build_time">Čas zostavenia aplikácie</string>
+    <string name="dialog_changes_apply_after_restart">Zmena sa prejaví až po opätovnom spustení aplikácie.</string>
+    <string name="header_allergens">Alergénne zložky</string>
+    <string name="no_allergens">Neobsahuje alergénne zložky</string>
+    <string name="button_cancel">Storno</string>
+    <string name="button_send">Odoslať</string>
+
+    <string-array name="allergens">
+        <item/>
+        <item>Obilniny obsahujúce lepok (tj. pšenica, raž, jačmeň, ovos, špalda, cirok alebo ich hybridné odrody) a výrobky z nich</item> <!-- 1 -->
+        <item>Kôrovce a výrobky z nich</item> <!-- 2 -->
+        <item>Vajcia a výrobky z nich</item> <!-- 3 -->
+        <item>Ryby a výrobky z nich</item> <!-- 4 -->
+        <item>Jadra podzemnice olejnej (arašidy) a výrobky z nich</item> <!-- 5 -->
+        <item>Sójové bôby (sója) a výrobky z nich</item> <!-- 6 -->
+        <item>Mlieko a výrobky z neho (vrátane laktózy)</item> <!-- 7 -->
+        <item>Suché škrupinové plody (tj. mandle, lístkové orechy, vlašské orechy, kešu orechy, para orechy, pistácie, orechy makadamie a queensland) a výrobky z nich</item> <!-- 8 -->
+        <item>Zeler a výrobky z neho</item> <!-- 9 -->
+        <item>Horčica a výrobky z nej</item> <!-- 10 -->
+        <item>Sezamové semená (sezam) a výrobky z nich</item> <!-- 11 -->
+        <item>Oxid siričitý a siričitany v koncentrátoch vyšších ako 10 mg/kg alebo 10 mg/l vyjadrené ako SO₂</item> <!-- 12 -->
+        <item>Vlčí bôb (lupina) a výrobky z neho</item> <!-- 13 -->
+        <item>Mäkkýše a výrobky z nich</item> <!-- 14 -->
+    </string-array>
+</resources>
