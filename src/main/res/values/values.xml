@@ -2,5 +2,5 @@
 <resources>
     <string name="pref_price_group_default">0</string>
     <string name="pref_default_place_default">0</string>
-    <string name="feedback_email">arcao@arcao.com</string>
+    <string name="feedback_email">feedback@arcao.com</string>
 </resources>
