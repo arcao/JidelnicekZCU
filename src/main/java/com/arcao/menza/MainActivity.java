@@ -51,6 +51,9 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 
 		setContentView(R.layout.activity_main);
 
+		getWindow().setBackgroundDrawable(null);
+
+
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		// prepare toolbar

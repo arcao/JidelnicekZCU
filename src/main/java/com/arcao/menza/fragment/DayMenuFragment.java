@@ -70,9 +70,10 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 	public void update() {
 		setListShown(false);
 
-		if (getActivity() != null) {
-			adapter.clearItems();
-		}
+		if (getActivity() == null)
+			return;
+
+		adapter.clearItems();
 
 		int placeId = getArguments().getInt(ARG_PLACE_ID, 0);
 		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
@@ -122,8 +123,8 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 				if (getActivity() == null)
 					return;
 
-				setEmptyText(getResources().getText(R.string.list_empty));
 				adapter.fillItems(response);
+				setEmptyText(getResources().getText(R.string.list_empty));
 				setListShown(true);
 			}
 		};
@@ -138,9 +139,10 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 
 				Log.e("VOLLEY", error.getMessage(), error);
 
-				adapter.clearItems();
-				setEmptyText(getResources().getText(R.string.connection_error));
-				setListShown(true);
+				if (adapter.getItemCount() == 0) {
+					setEmptyText(getResources().getText(R.string.connection_error));
+					setListShown(true);
+				}
 			}
 		};
 	}

@@ -38,6 +38,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	public void clearItems() {
 		items.clear();
+		notifyDataSetChanged();
 	}
 
 	public void fillItems(com.arcao.menza.api.data.Section[] sections) {
@@ -100,9 +101,9 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	private static class Section {
-		public final String name;
+		final String name;
 
-		public Section(String name) {
+		Section(String name) {
 			this.name = name;
 		}
 	}
@@ -110,7 +111,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private class SectionViewHolder extends RecyclerView.ViewHolder {
 		private final TextView titleTextView;
 
-		public SectionViewHolder(View view) {
+		SectionViewHolder(View view) {
 			super(view);
 
 			view.setClickable(false);
@@ -120,7 +121,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			titleTextView = (TextView) view.findViewById(R.id.name);
 		}
 
-		public void bind(Section item) {
+		void bind(Section item) {
 			titleTextView.setText(item.name);
 		}
 	}
@@ -132,7 +133,7 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		private final int titleTextViewOriginalColor;
 		private final int titleTextViewPremiumColor;
 
-		public ItemViewHolder(View view) {
+		ItemViewHolder(View view) {
 			super(view);
 
 			view.setClickable(true);
@@ -147,10 +148,11 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
 
 			titleTextViewOriginalColor = titleTextView.getCurrentTextColor();
+			//noinspection deprecation
 			titleTextViewPremiumColor = view.getContext().getResources().getColor(R.color.premium_meal);
 		}
 
-		public void bind(Meal item) {
+		void bind(Meal item) {
 			titleTextView.setText(item.name);
 			priceTextView.setText(getMealPrice(item));
 			titleTextView.setTextColor(item.premium ? titleTextViewPremiumColor : titleTextViewOriginalColor);

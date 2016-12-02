@@ -11,7 +11,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/drawer_view"
-        app:itemTextColor="@color/drawer_selector_foreground"/>
+        app:itemTextColor="@color/drawer_selector_foreground"
+        app:headerLayout="@layout/nav_header"/>
 
 
     <LinearLayout

@@ -6,7 +6,8 @@
             android:layout_height="match_parent"
             android:scrollbarStyle="outsideOverlay"
             android:clipToPadding="false"
-            android:background="@color/card_window_background">
+            android:background="@color/card_window_background"
+            tools:context=".MealPreviewActivity">
 
     <LinearLayout
         android:orientation="vertical"
