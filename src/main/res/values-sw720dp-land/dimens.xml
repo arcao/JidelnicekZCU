@@ -1,6 +1,3 @@
 <resources>
     <dimen name="activity_horizontal_margin">128dp</dimen>
-
-    <dimen name="popup_width">600dp</dimen>
-    <dimen name="popup_height">600dp</dimen>
 </resources>

@@ -1,13 +1,14 @@
 package com.arcao.menza.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Place;
 
@@ -32,6 +33,7 @@ public class PlacePreviewFragment extends Fragment {
 
 		if (place != null) {
 			TextView descriptionView = (TextView) view.findViewById(R.id.description);
+			//noinspection deprecation
 			descriptionView.setText(Html.fromHtml(place.description));
 			descriptionView.setLinksClickable(true);
 			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());

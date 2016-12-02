@@ -16,7 +16,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Card">
+            style="@style/Widget.AppTheme.CardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/price"
-                    style="@style/Card.Header.First"/>
+                    style="@style/Widget.AppTheme.CardView.Header.First"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price_student"
-                            style="@style/Card.Label.Price" />
+                            style="@style/Widget.AppTheme.CardView.Label.Price" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -56,12 +56,12 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/priceStudent"
                                 tools:text="0"
-                                style="@style/Card.Value.Price" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/price_suffix"
-                                style="@style/Card.Value.Price.Suffix" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price.Suffix" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -75,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price_staff"
-                            style="@style/Card.Label.Price" />
+                            style="@style/Widget.AppTheme.CardView.Label.Price" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -86,12 +86,12 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/priceStaff"
                                 tools:text="0"
-                                style="@style/Card.Value.Price" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/price_suffix"
-                                style="@style/Card.Value.Price.Suffix" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price.Suffix" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -105,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price_external"
-                            style="@style/Card.Label.Price" />
+                            style="@style/Widget.AppTheme.CardView.Label.Price" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -116,12 +116,12 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/priceExternal"
                                 tools:text="0"
-                                style="@style/Card.Value.Price" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/price_suffix"
-                                style="@style/Card.Value.Price.Suffix" />
+                                style="@style/Widget.AppTheme.CardView.Value.Price.Suffix" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -131,7 +131,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Card">
+            style="@style/Widget.AppTheme.CardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,20 +143,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/header_rating"
-                    style="@style/Card.Header.First" />
+                    style="@style/Widget.AppTheme.CardView.Header.First" />
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ratingBar"
                     android:layout_gravity="center"
-                    style="@style/Card.RatingBar"/>
+                    style="@style/Widget.AppTheme.RatingBar"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Card">
+            style="@style/Widget.AppTheme.CardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/header_allergens"
-                    style="@style/Card.Header.First" />
+                    style="@style/Widget.AppTheme.CardView.Header.First" />
                 <LinearLayout
                     android:id="@+id/alergens_container"
                     android:layout_width="match_parent"

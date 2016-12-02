@@ -13,41 +13,59 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorControlActivated">@color/accent_dark</item>
+
         <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary</item>
         <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1.Secondary</item>
+
+        <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-    </style>
-
-    <style name="AppTheme.NavigationDrawer" />
-
-    <style name="NoWindowBaseTheme" parent="AppTheme">
-        <item name="android:windowBackground">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="AppBaseTheme.DialogWhenLarge" parent="Theme.AppCompat.Light.DialogWhenLarge">
+        <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-    </style>
-    <style name="NoWindowTheme" parent="NoWindowBaseTheme" />
 
-    <style name="PopupBaseTheme" parent="AppTheme">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryLight">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorControlActivated">@color/accent_dark</item>
+
+        <item name="android:colorBackground">@android:color/white</item>
+
+        <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary</item>
+        <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1.Secondary</item>
+        <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
+    </style>
+    <style name="AppBaseTheme.Settings" parent="@style/PreferenceFixTheme.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryLight">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
+        <item name="preferenceCategory_marginBottom">0dp</item>
+    </style>
+
+
+    <style name="AppTheme" parent="AppBaseTheme" />
+    <style name="AppTheme.NavigationDrawer" />
+    <style name="AppTheme.Invisible">
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
+        <!-- Note that we use the base animation style here (that is no
+             animations) because we really have no idea how this kind of
+             activity will be used. -->
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
-
-    <style name="PopupTheme" parent="PopupBaseTheme">
-    </style>
-
-    <style name="HeaderLayout" />
+    <style name="AppTheme.Settings" parent="AppBaseTheme.Settings" />
+    <style name="AppTheme.DialogWhenLarge" parent="AppBaseTheme.DialogWhenLarge" />
 
     <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:minHeight">?attr/actionBarSize</item>
@@ -56,13 +74,13 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="Widget">
-    </style>
+    <style name="Widget" />
+    <style name="Widget.AppTheme" />
 
-    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar"/>
-    <style name="Widget.Toolbar.NoElevation"/>
+    <style name="Widget.AppTheme.Toolbar" parent="Base.Widget.Toolbar"/>
+    <style name="Widget.AppTheme.Toolbar.NoElevation"/>
 
-    <style name="Widget.PagerTitleStrip">
+    <style name="Widget.AppTheme.PagerTitleStrip">
         <item name="android:background">?attr/colorPrimaryLight</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
     </style>
@@ -75,7 +93,7 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="Card" parent="CardView.Light">
+    <style name="Widget.AppTheme.CardView" parent="CardView.Light">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginRight">8dp</item>
@@ -83,44 +101,44 @@
         <item name="cardUseCompatPadding">true</item>
     </style>
 
-    <style name="Card.Header" parent="@android:style/Widget.TextView">
+    <style name="Widget.AppTheme.CardView.Header" parent="@android:style/Widget.TextView">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:paddingBottom">4dp</item>
         <item name="android:paddingTop">20dp</item>
     </style>
-    <style name="Card.Header.First">
+    <style name="Widget.AppTheme.CardView.Header.First">
         <item name="android:paddingTop">0dp</item>
     </style>
 
-    <style name="Card.Text" parent="@android:style/Widget.TextView">
+    <style name="Widget.AppTheme.CardView.Text" parent="@android:style/Widget.TextView">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
     </style>
-    <style name="Card.Divider" parent="">
+    <style name="Widget.AppTheme.CardView.Divider" parent="">
         <item name="android:background">?android:attr/listDivider</item>
     </style>
-    <style name="Card.Label" parent="Card.Text">
+    <style name="Widget.AppTheme.CardView.Label" parent="Widget.AppTheme.CardView.Text">
     </style>
-    <style name="Card.Label.Price">
+    <style name="Widget.AppTheme.CardView.Label.Price">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium.Primary</item>
     </style>
 
-    <style name="Card.Value" parent="Card.Text">
+    <style name="Widget.AppTheme.CardView.Value" parent="Widget.AppTheme.CardView.Text">
         <item name="android:layout_gravity">right</item>
     </style>
 
-    <style name="Card.Value.Price">
+    <style name="Widget.AppTheme.CardView.Value.Price">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1.Secondary</item>
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="Card.Value.Price.Suffix"/>
+    <style name="Widget.AppTheme.CardView.Value.Price.Suffix"/>
 
-    <style name="Card.Value.Left">
+    <style name="Widget.AppTheme.CardView.Value.Left">
         <item name="android:layout_gravity">left</item>
     </style>
 
-    <style name="Card.RatingBar" parent="@android:style/Widget.RatingBar">
+    <style name="Widget.AppTheme.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ic_toggle_star_normal</item>
         <item name="android:indeterminateDrawable">@drawable/ic_toggle_star_normal</item>
         <item name="android:minHeight">35dip</item>
@@ -128,12 +146,16 @@
         <item name="android:isIndicator">true</item>
     </style>
 
-    <style name="Dialog" />
-    <style name="Dialog.RatingBar" parent="@android:style/Widget.RatingBar">
+    <style name="Widget.AppTheme.RatingBar.Dialog" parent="@android:style/Widget.RatingBar">
         <item name="android:layout_gravity">center</item>
 
         <item name="android:progressDrawable">@drawable/ic_toggle_star_big</item>
         <item name="android:indeterminateDrawable">@drawable/ic_toggle_star_big</item>
+    </style>
+
+    <style name="Widget.AppTheme.DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
     </style>
 </resources>
 

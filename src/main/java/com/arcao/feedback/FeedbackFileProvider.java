@@ -9,6 +9,7 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
 import android.webkit.MimeTypeMap;
 
 import com.arcao.menza.BuildConfig;
@@ -61,8 +62,8 @@ public class FeedbackFileProvider extends ContentProvider {
 	}
 
 	@Override
-	public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
-		Timber.v("openFile: Called with uri: '" + uri + "'.");
+	public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
+		Timber.v("openFile: Called with uri: '%s'.", uri);
 
 		// Check incoming Uri against the matcher
 		switch (uriMatcher.match(uri)) {
@@ -70,21 +71,21 @@ public class FeedbackFileProvider extends ContentProvider {
 				File reportFile = getReportFile(getContext());
 
 				if (!reportFile.exists()) {
-					Timber.e("File '" + reportFile +"' for uri '" + uri +"' not found");
+					Timber.e("File '%s' for uri '%s' not found", reportFile, uri);
 					throw new FileNotFoundException(reportFile.toString());
 				}
 
 				return ParcelFileDescriptor.open(getReportFile(getContext()), ParcelFileDescriptor.MODE_READ_ONLY);
 
 			default:
-				Timber.e("Unsupported uri: '" + uri + "'.");
+				Timber.e("Unsupported uri: '%s'.", uri);
 				throw new FileNotFoundException("Unsupported uri: "	+ uri.toString());
 		}
 	}
 
 	@Override
-	public String getType(Uri uri) {
-		Timber.v("getType: Called with uri: '" + uri + "'");
+	public String getType(@NonNull Uri uri) {
+		Timber.v("getType: Called with uri: '%s'", uri);
 
 		String fileName = uri.getLastPathSegment();
 
@@ -101,7 +102,7 @@ public class FeedbackFileProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String s, String[] as1,	String s1) {
+	public Cursor query(@NonNull Uri uri, String[] projection, String s, String[] as1, String s1) {
 		switch (uriMatcher.match(uri)) {
 			case REPORT_FILE_ID:
 				final File file = getReportFile(getContext());
@@ -148,17 +149,17 @@ public class FeedbackFileProvider extends ContentProvider {
 
 	// Not supported / used / methods
 	@Override
-	public int update(Uri uri, ContentValues contentvalues, String s,	String[] as) {
+	public int update(@NonNull Uri uri, ContentValues contentvalues, String s, String[] as) {
 		throw new UnsupportedOperationException("No external updates");
 	}
 
 	@Override
-	public int delete(Uri uri, String s, String[] as) {
+	public int delete(@NonNull Uri uri, String s, String[] as) {
 		throw new UnsupportedOperationException("No external deletes");
 	}
 
 	@Override
-	public Uri insert(Uri uri, ContentValues contentvalues) {
+	public Uri insert(@NonNull Uri uri, ContentValues contentvalues) {
 		throw new UnsupportedOperationException("No external inserts");
 	}
 }

@@ -17,7 +17,7 @@
         android:gravity="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
         android:background="@drawable/round_button"
-        android:singleLine="true"
+        android:maxLines="1"
         android:includeFontPadding="false"
         tools:text="1"/>
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginLeft="16dp"
-        android:singleLine="false"
+        android:layout_marginStart="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="Suché skořápkové plody (tj. mandle, lístkové ořechy, vlašské ořechy, kešu ořechy, para ořechy, pistácie, ořechy makadamie a queensland) a výrobky z nich"/>
 </LinearLayout>

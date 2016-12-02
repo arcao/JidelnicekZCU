@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.support.annotation.NonNull;
-import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.arcao.feedback.FeedbackHelper;
@@ -20,19 +19,18 @@ import com.arcao.menza.R;
 import com.arcao.menza.WebViewActivity;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.dialog.AbstractDialogFragment;
+import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private static final String TAG = "SettingsFragment";
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
+	public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
 
@@ -58,20 +56,23 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		});
 
 		findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
-		try {
-			findPreference("build_time").setSummary(
-							DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
-											new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
-							)
-			);
-		} catch (ParseException e) {
-			Log.e(TAG, e.getMessage(), e);
+		if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {
+			try {
+				//noinspection deprecation
+				findPreference("build_time").setSummary(
+						DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
+						)
+				);
+			} catch (ParseException e) {
+				Log.e(TAG, e.getMessage(), e);
+			}
 		}
 
 
 		// fix for Android 2.x
-		updateListPreferenceSummary(PrefConstant.PRICE_GROUP);
-		updateListPreferenceSummary(PrefConstant.DEFAULT_PLACE);
+		//updateListPreferenceSummary(PrefConstant.PRICE_GROUP);
+		//updateListPreferenceSummary(PrefConstant.DEFAULT_PLACE);
 	}
 
 	@Override
@@ -93,27 +94,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 		switch (key) {
 			case PrefConstant.PRICE_GROUP:
 				getActivity().setResult(MainActivity.RESULT_REFRESH);
-				updateListPreferenceSummary(key);
+				//updateListPreferenceSummary(key);
 				break;
 			case PrefConstant.DEFAULT_PLACE:
-				updateListPreferenceSummary(key);
+				//updateListPreferenceSummary(key);
 				showChangesApplyAfterRestartDialog();
 				break;
 		}
 	}
 
 	private void showChangesApplyAfterRestartDialog() {
-		ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
-	}
-
-	private void updateListPreferenceSummary(String key) {
-		ListPreference p = findPreference(key);
-		p.setSummary(p.getEntry());
-	}
-
-	@SuppressWarnings("unchecked")
-	private <P extends Preference> P findPreference(String key) {
-		return (P)super.findPreference(key);
+		ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
 	}
 
 	private static String getVersion(Context context) {

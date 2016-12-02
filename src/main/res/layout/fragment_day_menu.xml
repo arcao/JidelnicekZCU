@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/card_window_background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/card_window_background">
 
     <LinearLayout android:id="@+id/progressContainer"
                   android:orientation="vertical"
@@ -28,7 +29,8 @@
             android:scrollbars="vertical"
             android:scrollbarStyle="outsideOverlay"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"/>
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            tools:listitem="@layout/list_menu_item"/>
 
         <TextView android:id="@+id/textEmpty"
                   android:layout_width="match_parent"

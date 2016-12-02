@@ -9,14 +9,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerTitleStripV22;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
+
 import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
@@ -35,7 +35,6 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 	private ViewPager mViewPager;
 	private SharedPreferences mSharedPreferences;
 	private int placeId;
-	private View headerLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +67,6 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		// prepare drawer
 		mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 		if (mNavigationView != null) {
-			// FIX for https://code.google.com/p/android/issues/detail?id=190226
-			headerLayout = mNavigationView.inflateHeaderView(R.layout.nav_header);
 			mNavigationView.setNavigationItemSelectedListener(
 							new NavigationView.OnNavigationItemSelectedListener() {
 								@Override
@@ -95,12 +92,12 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		}
 
 		// prepare day adapter
-		mDayPagerAdapter = new DayPagerAdapter(this, getSupportFragmentManager(), placeId);
+		mDayPagerAdapter = new DayPagerAdapter(this, getFragmentManager(), placeId);
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mDayPagerAdapter);
 		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
 
-		PagerTitleStripV22 pagerTitleStrip = (PagerTitleStripV22) findViewById(R.id.pager_title_strip);
+		PagerTitleStrip pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
 		pagerTitleStrip.setNonPrimaryAlpha(0.3F); // in percent
 
 		MenuItem menuItem = getMenuItemInGroup(mNavigationView.getMenu(), R.id.place, placeId);
@@ -212,9 +209,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		placeId = getMenuIndexInGroup(mNavigationView.getMenu(), menuItem);
 		menuItem.setChecked(true);
 		setTitle(menuItem.getTitle());
-		if (headerLayout != null)
-			((TextView)headerLayout.findViewById(R.id.title)).setText(menuItem.getTitle());
-
+		((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.title)).setText(menuItem.getTitle());
 		mDayPagerAdapter.updatePlaceId(placeId);
 	}
 }

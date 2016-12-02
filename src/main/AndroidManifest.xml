@@ -14,8 +14,8 @@
         android:anyDensity="true" />
 
     <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="24" />
 
     <application
         android:allowBackup="true"
@@ -37,11 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" android:label="@string/action_settings"/>
+        <activity android:name=".SettingsActivity" android:label="@string/action_settings" android:theme="@style/AppTheme.Settings"/>
         <activity android:name=".WebViewActivity"/>
-        <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/PopupTheme"/>
-        <activity android:name=".PlacePreviewActivity" android:theme="@style/PopupTheme"/>
-        <activity android:name=".ShortcutActivity" android:theme="@style/NoWindowTheme">
+        <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/AppTheme.DialogWhenLarge"/>
+        <activity android:name=".PlacePreviewActivity" android:theme="@style/AppTheme.DialogWhenLarge"/>
+        <activity android:name=".ShortcutActivity" android:theme="@style/AppTheme.DialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
