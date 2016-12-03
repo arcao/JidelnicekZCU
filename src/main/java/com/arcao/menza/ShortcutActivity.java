@@ -25,7 +25,7 @@ public class ShortcutActivity extends AbstractBaseActivity implements ShortcutDi
         Intent installIntent = new Intent(ACTION_INSTALL_SHORTCUT);
         installIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getResources().getStringArray(R.array.places)[placeId]);
         installIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        installIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.ic_launcher));
+        installIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher));
 
         setResult(RESULT_OK, installIntent);
         finish();
