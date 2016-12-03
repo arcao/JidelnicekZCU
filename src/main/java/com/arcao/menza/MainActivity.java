@@ -25,53 +25,53 @@ import com.arcao.menza.fragment.dialog.PriceGroupChangeableDialogFragment;
 import com.arcao.menza.fragment.dialog.PriceGroupSelectionDialogFragment;
 
 public class MainActivity extends AbstractBaseActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
-	public static final String PARAM_PLACE_ID = "PLACE_ID";
+    public static final String PARAM_PLACE_ID = "PLACE_ID";
     private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
-	public static final int RESULT_REFRESH = 101;
+    public static final int RESULT_REFRESH = 101;
 
-	private NavigationView mNavigationView;
-	private DrawerLayout mDrawerLayout;
-	private DayPagerAdapter mDayPagerAdapter;
-	private ViewPager mViewPager;
-	private SharedPreferences mSharedPreferences;
-	private int placeId;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private DayPagerAdapter mDayPagerAdapter;
+    private ViewPager mViewPager;
+    private SharedPreferences mSharedPreferences;
+    private int placeId;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-		// prepare current place id
-		int defaultPlaceId = Integer.parseInt(mSharedPreferences.getString(PrefConstant.DEFAULT_PLACE, "0"));
-		placeId = getIntent().getIntExtra(PARAM_PLACE_ID, defaultPlaceId);
-		if (savedInstanceState != null) {
-			placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);
-		}
+        // prepare current place id
+        int defaultPlaceId = Integer.parseInt(mSharedPreferences.getString(PrefConstant.DEFAULT_PLACE, "0"));
+        placeId = getIntent().getIntExtra(PARAM_PLACE_ID, defaultPlaceId);
+        if (savedInstanceState != null) {
+            placeId = savedInstanceState.getInt(STATE_PLACE_ID, placeId);
+        }
 
-		setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-		getWindow().setBackgroundDrawable(null);
+        getWindow().setBackgroundDrawable(null);
 
 
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-		// prepare toolbar
-		final ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null && mDrawerLayout != null) {
-			actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-			actionBar.setDisplayHomeAsUpEnabled(true);
-		}
+        // prepare toolbar
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && mDrawerLayout != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-		if (mDrawerLayout != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-		}
+        if (mDrawerLayout != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        }
 
-		// prepare drawer
-		mNavigationView = (NavigationView) findViewById(R.id.nav_view);
-		if (mNavigationView != null) {
-			mNavigationView.setNavigationItemSelectedListener(
-					menuItem -> {
+        // prepare drawer
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (mNavigationView != null) {
+            mNavigationView.setNavigationItemSelectedListener(
+                    menuItem -> {
                         if (menuItem.getGroupId() == R.id.place) {
                             onPlaceSelected(menuItem);
                         } else {
@@ -89,127 +89,127 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
                             mDrawerLayout.closeDrawers();
                         return true;
                     });
-		}
+        }
 
-		// prepare day adapter
-		mDayPagerAdapter = new DayPagerAdapter(this, getFragmentManager(), placeId);
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mDayPagerAdapter);
-		mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
+        // prepare day adapter
+        mDayPagerAdapter = new DayPagerAdapter(this, getFragmentManager(), placeId);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mDayPagerAdapter);
+        mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY);
 
-		PagerTitleStrip pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		pagerTitleStrip.setNonPrimaryAlpha(0.3F); // in percent
+        PagerTitleStrip pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
+        pagerTitleStrip.setNonPrimaryAlpha(0.3F); // in percent
 
-		MenuItem menuItem = getMenuItemInGroup(mNavigationView.getMenu(), R.id.place, placeId);
-		if (menuItem != null) {
-			onPlaceSelected(menuItem);
-		}
-	}
+        MenuItem menuItem = getMenuItemInGroup(mNavigationView.getMenu(), R.id.place, placeId);
+        if (menuItem != null) {
+            onPlaceSelected(menuItem);
+        }
+    }
 
-	@Nullable
-	private MenuItem getMenuItemInGroup(@NonNull Menu menu, int groupId, int index) {
-		int indexInGroup = 0;
+    @Nullable
+    private MenuItem getMenuItemInGroup(@NonNull Menu menu, int groupId, int index) {
+        int indexInGroup = 0;
 
-		for (int i = 0; i < menu.size(); i++) {
-			MenuItem menuItem = menu.getItem(i);
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem menuItem = menu.getItem(i);
 
-			if (menuItem.getGroupId() == groupId) {
-				if (indexInGroup == index) {
-					return menuItem;
-				}
-				indexInGroup++;
-			}
-		}
+            if (menuItem.getGroupId() == groupId) {
+                if (indexInGroup == index) {
+                    return menuItem;
+                }
+                indexInGroup++;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	private int getMenuIndexInGroup(@NonNull Menu menu, @NonNull MenuItem menuItem) {
-		int index = 0;
-		for (int i = 0; i < menu.size(); i++) {
-			MenuItem currMenuItem = menu.getItem(i);
-			if (currMenuItem.getGroupId() == menuItem.getGroupId()) {
-				if (menuItem.equals(currMenuItem))
-					return index;
-				index++;
-			}
-		}
+    private int getMenuIndexInGroup(@NonNull Menu menu, @NonNull MenuItem menuItem) {
+        int index = 0;
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem currMenuItem = menu.getItem(i);
+            if (currMenuItem.getGroupId() == menuItem.getGroupId()) {
+                if (menuItem.equals(currMenuItem))
+                    return index;
+                index++;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 
-	@Override
-	protected void onResumeFragments() {
-		super.onResumeFragments();
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
 
-		if (mSharedPreferences.getString(PrefConstant.PRICE_GROUP, null) == null
-				&& getSupportFragmentManager().findFragmentByTag(PriceGroupSelectionDialogFragment.TAG) == null) {
-			PriceGroupSelectionDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupSelectionDialogFragment.TAG);
-		}
-	}
+        if (mSharedPreferences.getString(PrefConstant.PRICE_GROUP, null) == null
+                && getSupportFragmentManager().findFragmentByTag(PriceGroupSelectionDialogFragment.TAG) == null) {
+            PriceGroupSelectionDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupSelectionDialogFragment.TAG);
+        }
+    }
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-		outState.putInt(STATE_PLACE_ID, placeId);
-	}
+        outState.putInt(STATE_PLACE_ID, placeId);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				if (mDrawerLayout != null)
-					mDrawerLayout.openDrawer(GravityCompat.START);
-				return true;
-			case R.id.action_today:
-				mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY, true);
-				return true;
-			case R.id.action_info:
-				startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId));
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (mDrawerLayout != null)
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_today:
+                mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY, true);
+                return true;
+            case R.id.action_info:
+                startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-	private void onSettingsSelected() {
-		startActivityForResult(new Intent(this, SettingsActivity.class), 0);
-	}
+    private void onSettingsSelected() {
+        startActivityForResult(new Intent(this, SettingsActivity.class), 0);
+    }
 
-	private void onFeedbackSelected() {
-		FeedbackHelper.sendFeedback(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
-	}
+    private void onFeedbackSelected() {
+        FeedbackHelper.sendFeedback(this, R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
+    }
 
-	@Override
-	public void onPriceGroupSelected(String priceGroup) {
-		mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).apply();
-		mDayPagerAdapter.notifyDataSetChanged();
+    @Override
+    public void onPriceGroupSelected(String priceGroup) {
+        mSharedPreferences.edit().putString(PrefConstant.PRICE_GROUP, priceGroup).apply();
+        mDayPagerAdapter.notifyDataSetChanged();
 
-		PriceGroupChangeableDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupChangeableDialogFragment.TAG);
-	}
+        PriceGroupChangeableDialogFragment.newInstance().show(getSupportFragmentManager(), PriceGroupChangeableDialogFragment.TAG);
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-		if (resultCode == RESULT_REFRESH) {
-				// reload fragments
-				mDayPagerAdapter.notifyDataSetChanged();
-		}
-	}
+        if (resultCode == RESULT_REFRESH) {
+            // reload fragments
+            mDayPagerAdapter.notifyDataSetChanged();
+        }
+    }
 
-	private void onPlaceSelected(MenuItem menuItem) {
-		placeId = getMenuIndexInGroup(mNavigationView.getMenu(), menuItem);
-		menuItem.setChecked(true);
-		setTitle(menuItem.getTitle());
-		((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.title)).setText(menuItem.getTitle());
-		mDayPagerAdapter.updatePlaceId(placeId);
-	}
+    private void onPlaceSelected(MenuItem menuItem) {
+        placeId = getMenuIndexInGroup(mNavigationView.getMenu(), menuItem);
+        menuItem.setChecked(true);
+        setTitle(menuItem.getTitle());
+        ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.title)).setText(menuItem.getTitle());
+        mDayPagerAdapter.updatePlaceId(placeId);
+    }
 }

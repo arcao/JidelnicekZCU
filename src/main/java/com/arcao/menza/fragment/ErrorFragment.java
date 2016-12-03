@@ -27,7 +27,7 @@ public class ErrorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.error_message, container, false);
 
-        ((TextView)view.findViewById(R.id.message)).setText(getArguments().getInt(ARG_ERROR_MESSAGE));
+        ((TextView) view.findViewById(R.id.message)).setText(getArguments().getInt(ARG_ERROR_MESSAGE));
 
         return view;
     }

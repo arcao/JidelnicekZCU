@@ -2,23 +2,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <layer-list>
-            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off_pressed" />
-            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off_pressed" />
-            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on_pressed" />
+            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off_pressed"/>
+            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off_pressed"/>
+            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on_pressed"/>
         </layer-list>
     </item>
     <item android:state_focused="true">
         <layer-list>
-            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off_pressed" />
-            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off_pressed" />
-            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on_pressed" />
+            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off_pressed"/>
+            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off_pressed"/>
+            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on_pressed"/>
         </layer-list>
     </item>
     <item>
         <layer-list>
-            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off" />
-            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off" />
-            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on" />
+            <item android:id="@android:id/background" android:drawable="@drawable/ic_toggle_star_big_off"/>
+            <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/ic_toggle_star_big_off"/>
+            <item android:id="@android:id/progress" android:drawable="@drawable/ic_toggle_star_big_on"/>
         </layer-list>
     </item>
 </selector>

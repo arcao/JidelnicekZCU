@@ -27,21 +27,21 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
-	private static final String TAG = "SettingsFragment";
+    private static final String TAG = "SettingsFragment";
 
-	@Override
-	public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
-		// Load the preferences from an XML resource
-		addPreferencesFromResource(R.xml.preferences);
+    @Override
+    public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.preferences);
 
-		Preference feedBackPref = findPreference("feedback");
-		feedBackPref.setOnPreferenceClickListener(preference -> {
+        Preference feedBackPref = findPreference("feedback");
+        feedBackPref.setOnPreferenceClickListener(preference -> {
             FeedbackHelper.sendFeedback(getActivity(), R.string.feedback_email, R.string.feedback_subject, R.string.feedback_message);
             return true;
         });
 
-		Preference licensesPref = findPreference("licenses");
-		licensesPref.setOnPreferenceClickListener(preference -> {
+        Preference licensesPref = findPreference("licenses");
+        licensesPref.setOnPreferenceClickListener(preference -> {
             Intent i = new Intent(getActivity(), WebViewActivity.class);
             i.putExtra(WebViewActivity.PARAM_TITLE, R.string.pref_licenses);
             i.putExtra(WebViewActivity.PARAM_RAW_RESOURCE, R.raw.licenses);
@@ -49,81 +49,81 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             return true;
         });
 
-		findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
-		if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {
-			try {
-				//noinspection deprecation
-				findPreference("build_time").setSummary(
-						DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
-								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
-						)
-				);
-			} catch (ParseException e) {
-				Log.e(TAG, e.getMessage(), e);
-			}
-		}
+        findPreference("version").setSummary(getVersion(getActivity()) + " (" + BuildConfig.GIT_SHA + ")");
+        if (!TextUtils.isEmpty(BuildConfig.BUILD_TIME)) {
+            try {
+                //noinspection deprecation
+                findPreference("build_time").setSummary(
+                        DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, getResources().getConfiguration().locale).format(
+                                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse(BuildConfig.BUILD_TIME)
+                        )
+                );
+            } catch (ParseException e) {
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
 
 
-		// fix for Android 2.x
-		//updateListPreferenceSummary(PrefConstant.PRICE_GROUP);
-		//updateListPreferenceSummary(PrefConstant.DEFAULT_PLACE);
-	}
+        // fix for Android 2.x
+        //updateListPreferenceSummary(PrefConstant.PRICE_GROUP);
+        //updateListPreferenceSummary(PrefConstant.DEFAULT_PLACE);
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		getPreferenceScreen().getSharedPreferences()
-						.registerOnSharedPreferenceChangeListener(this);
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
+    }
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		getPreferenceScreen().getSharedPreferences()
-						.unregisterOnSharedPreferenceChangeListener(this);
-	}
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
 
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		switch (key) {
-			case PrefConstant.PRICE_GROUP:
-				getActivity().setResult(MainActivity.RESULT_REFRESH);
-				//updateListPreferenceSummary(key);
-				break;
-			case PrefConstant.DEFAULT_PLACE:
-				//updateListPreferenceSummary(key);
-				showChangesApplyAfterRestartDialog();
-				break;
-		}
-	}
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key) {
+            case PrefConstant.PRICE_GROUP:
+                getActivity().setResult(MainActivity.RESULT_REFRESH);
+                //updateListPreferenceSummary(key);
+                break;
+            case PrefConstant.DEFAULT_PLACE:
+                //updateListPreferenceSummary(key);
+                showChangesApplyAfterRestartDialog();
+                break;
+        }
+    }
 
-	private void showChangesApplyAfterRestartDialog() {
-		ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
-	}
+    private void showChangesApplyAfterRestartDialog() {
+        ChangesApplyAfterRestartDialogFragment.newInstance().show(getActivity().getFragmentManager(), ChangesApplyAfterRestartDialogFragment.TAG);
+    }
 
-	private static String getVersion(Context context) {
-		try {
-			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-		} catch (PackageManager.NameNotFoundException e) {
-			return "0.0";
-		}
-	}
+    private static String getVersion(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            return "0.0";
+        }
+    }
 
-	public static class ChangesApplyAfterRestartDialogFragment extends AbstractDialogFragment {
-		public static final String TAG = "ChangesApplyAfterRestartDialogFragment";
+    public static class ChangesApplyAfterRestartDialogFragment extends AbstractDialogFragment {
+        public static final String TAG = "ChangesApplyAfterRestartDialogFragment";
 
-		public static ChangesApplyAfterRestartDialogFragment newInstance() {
-			return new ChangesApplyAfterRestartDialogFragment();
-		}
+        public static ChangesApplyAfterRestartDialogFragment newInstance() {
+            return new ChangesApplyAfterRestartDialogFragment();
+        }
 
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			return new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.pref_default_place_title)
-				.setMessage(R.string.dialog_changes_apply_after_restart)
-				.setPositiveButton(R.string.button_ok, null)
-				.create();
-		}
-	}
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.pref_default_place_title)
+                    .setMessage(R.string.dialog_changes_apply_after_restart)
+                    .setPositiveButton(R.string.button_ok, null)
+                    .create();
+        }
+    }
 }

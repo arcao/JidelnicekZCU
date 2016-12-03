@@ -26,118 +26,117 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DayMenuFragment extends Fragment implements UpdatableFragment, DayMenuRecyclerAdapter.OnItemClickListener {
-	public static final String ARG_DAY_ID = "DAY_ID";
-	public static final String ARG_PLACE_ID = "PLACE_ID";
+    public static final String ARG_DAY_ID = "DAY_ID";
+    public static final String ARG_PLACE_ID = "PLACE_ID";
 
-	private Date date = null;
+    private Date date = null;
 
-	private DayMenuRecyclerAdapter adapter;
+    private DayMenuRecyclerAdapter adapter;
 
-	private View progressContainer;
-	private View listContainer;
-	private TextView textEmpty;
+    private View progressContainer;
+    private View listContainer;
+    private TextView textEmpty;
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		update();
-	}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        update();
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_day_menu, container, false);
-		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_day_menu, container, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
-		adapter = new DayMenuRecyclerAdapter(getActivity());
-		adapter.setOnItemClickListener(this);
+        adapter = new DayMenuRecyclerAdapter(getActivity());
+        adapter.setOnItemClickListener(this);
 
-		recyclerView.setAdapter(adapter);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.addItemDecoration(new DayMenuDividerItemDecoration(getActivity(), DayMenuDividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DayMenuDividerItemDecoration(getActivity(), DayMenuDividerItemDecoration.VERTICAL_LIST));
 
-		progressContainer = view.findViewById(R.id.progressContainer);
-		listContainer = view.findViewById(R.id.listContainer);
-		textEmpty = (TextView) view.findViewById(R.id.textEmpty);
+        progressContainer = view.findViewById(R.id.progressContainer);
+        listContainer = view.findViewById(R.id.listContainer);
+        textEmpty = (TextView) view.findViewById(R.id.textEmpty);
 
-		setEmptyText("");
-		setListShown(false);
+        setEmptyText("");
+        setListShown(false);
 
-		return view;
-	}
+        return view;
+    }
 
-	@Override
-	public void update() {
-		setListShown(false);
+    @Override
+    public void update() {
+        setListShown(false);
 
-		if (getActivity() == null)
-			return;
+        if (getActivity() == null)
+            return;
 
-			adapter.clearItems();
+        adapter.clearItems();
 
-		int placeId = getArguments().getInt(ARG_PLACE_ID, 0);
-		int dayId = getArguments().getInt(ARG_DAY_ID, 0);
+        int placeId = getArguments().getInt(ARG_PLACE_ID, 0);
+        int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
-		Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);
+        Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);
 
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, dayId - AppConstant.DAY_ID_TODAY);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, dayId - AppConstant.DAY_ID_TODAY);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-		date = cal.getTime();
+        date = cal.getTime();
 
-		VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
-	}
+        VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
+    }
 
-	private void setListShown(boolean visible) {
-		if (visible) {
-			progressContainer.setVisibility(View.GONE);
-			listContainer.setVisibility(View.VISIBLE);
-		} else {
-			progressContainer.setVisibility(View.VISIBLE);
-			listContainer.setVisibility(View.GONE);
-		}
-		textEmpty.setVisibility(adapter.getItemCount() > 0 ? View.GONE : View.VISIBLE);
-	}
+    private void setListShown(boolean visible) {
+        if (visible) {
+            progressContainer.setVisibility(View.GONE);
+            listContainer.setVisibility(View.VISIBLE);
+        } else {
+            progressContainer.setVisibility(View.VISIBLE);
+            listContainer.setVisibility(View.GONE);
+        }
+        textEmpty.setVisibility(adapter.getItemCount() > 0 ? View.GONE : View.VISIBLE);
+    }
 
-	private void setEmptyText(CharSequence text) {
-		textEmpty.setText(text);
-	}
+    private void setEmptyText(CharSequence text) {
+        textEmpty.setText(text);
+    }
 
-	@Override
-	public void onItemClick(Meal item) {
-		Intent i = new Intent(getActivity(), MealPreviewActivity.class);
-		i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, getArguments().getInt(ARG_PLACE_ID, 0));
-		i.putExtra(MealPreviewActivity.PARAM_DATE, date.getTime());
-		i.putExtra(MealPreviewActivity.PARAM_MEAL, item);
-		getActivity().startActivity(i);
-	}
+    @Override
+    public void onItemClick(Meal item) {
+        Intent i = new Intent(getActivity(), MealPreviewActivity.class);
+        i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, getArguments().getInt(ARG_PLACE_ID, 0));
+        i.putExtra(MealPreviewActivity.PARAM_DATE, date.getTime());
+        i.putExtra(MealPreviewActivity.PARAM_MEAL, item);
+        getActivity().startActivity(i);
+    }
 
-	private Response.Listener<Section[]> createDayMenuReqSuccessListener() {
-		return response -> {
+    private Response.Listener<Section[]> createDayMenuReqSuccessListener() {
+        return response -> {
             if (getActivity() == null)
                 return;
 
-				adapter.fillItems(response);
+            adapter.fillItems(response);
             setEmptyText(getResources().getText(R.string.list_empty));
             setListShown(true);
         };
-	}
+    }
 
-	private Response.ErrorListener createDayMenuReqErrorListener() {
-		return error -> {
-			if (getActivity() == null)
-				return;
+    private Response.ErrorListener createDayMenuReqErrorListener() {
+        return error -> {
+            if (getActivity() == null)
+                return;
 
-			Log.e("VOLLEY", error.getMessage(), error);
+            Log.e("VOLLEY", error.getMessage(), error);
 
-				if (adapter.getItemCount() == 0) {
-					setEmptyText(getResources().getText(R.string.connection_error));
-					setListShown(true);
-				}
-			}
-		};
-	}
+            if (adapter.getItemCount() == 0) {
+                setEmptyText(getResources().getText(R.string.connection_error));
+                setListShown(true);
+            }
+        };
+    }
 }

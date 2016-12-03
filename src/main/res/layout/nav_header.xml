@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:layout_marginBottom="8dp"
-              android:background="@color/primary"
-              android:paddingTop="@dimen/nav_header_padding_top"
-              android:paddingBottom="8dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/primary"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingTop="@dimen/nav_header_padding_top">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:drawableStart="@drawable/ic_launcher"
         android:drawableLeft="@drawable/ic_launcher"
         android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_launcher"
         android:gravity="center_vertical"
-        android:text="@string/app_name"
         android:maxLines="1"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"/>
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="64dp"
         android:paddingLeft="64dp"
+        android:paddingStart="64dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
         tools:text="Menza Bory"/>
 </LinearLayout>

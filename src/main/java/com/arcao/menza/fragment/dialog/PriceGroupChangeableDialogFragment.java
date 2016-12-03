@@ -9,19 +9,19 @@ import android.support.v7.app.AlertDialog;
 import com.arcao.menza.R;
 
 public class PriceGroupChangeableDialogFragment extends DialogFragment {
-	public static final String TAG = "PriceGroupDialog";
+    public static final String TAG = "PriceGroupDialog";
 
-	public static PriceGroupChangeableDialogFragment newInstance() {
-		return new PriceGroupChangeableDialogFragment();
-	}
+    public static PriceGroupChangeableDialogFragment newInstance() {
+        return new PriceGroupChangeableDialogFragment();
+    }
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.pref_price_group_title)
-				.setMessage(R.string.price_group_changeable)
-				.setPositiveButton(R.string.button_continue, null)
-				.create();
-	}
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.pref_price_group_title)
+                .setMessage(R.string.price_group_changeable)
+                .setPositiveButton(R.string.button_continue, null)
+                .create();
+    }
 }

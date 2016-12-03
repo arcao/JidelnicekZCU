@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorPrimaryLight" format="reference|color" />
-    <attr name="textAppearanceListItemSecondary" format="reference" />
+    <attr name="colorPrimaryLight" format="reference|color"/>
+    <attr name="textAppearanceListItemSecondary" format="reference"/>
 
     <declare-styleable name="SelectableTextView">
-        <attr name="tint" format="reference|color" />
+        <attr name="tint" format="reference|color"/>
     </declare-styleable>
 </resources>

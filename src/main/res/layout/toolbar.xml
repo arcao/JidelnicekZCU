@@ -2,6 +2,6 @@
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
+    style="@style/Widget.AppTheme.Toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    style="@style/Widget.AppTheme.Toolbar"/>
+    android:layout_height="?attr/actionBarSize"/>

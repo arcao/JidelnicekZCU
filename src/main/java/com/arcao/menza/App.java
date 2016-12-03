@@ -7,12 +7,12 @@ import com.arcao.menza.volley.VolleyHelper;
 import timber.log.Timber;
 
 public class App extends Application {
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-		VolleyHelper.init(getApplicationContext());
+        VolleyHelper.init(getApplicationContext());
 
-		Timber.plant(new Timber.DebugTree());
-	}
+        Timber.plant(new Timber.DebugTree());
+    }
 }

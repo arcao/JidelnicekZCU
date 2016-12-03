@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_extended_title" android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_extended_title"/>
 
     <RelativeLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

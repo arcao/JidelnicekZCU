@@ -21,145 +21,145 @@ import timber.log.Timber;
 
 /**
  * <p>
- *   Provider for attaching feedback file to 3rd application:
+ * Provider for attaching feedback file to 3rd application:
  * </p>
  * <p>
- *   Usage in AndroidManifest.xml file:
+ * Usage in AndroidManifest.xml file:
  * </p>
- *
+ * <p>
  * <pre class="prettyprint">
  * &lt;provider
- *   android:name="com.arcao.feedback.FeedbackFileProvider"
- *   android:authorities="${applicationId}.provider.feedback"
- *   android:exported="true"
- *   android:enabled="true"
- *   android:grantUriPermissions="true"/&gt;
+ * android:name="com.arcao.feedback.FeedbackFileProvider"
+ * android:authorities="${applicationId}.provider.feedback"
+ * android:exported="true"
+ * android:enabled="true"
+ * android:grantUriPermissions="true"/&gt;
  * </pre>
  */
 public class FeedbackFileProvider extends ContentProvider {
-	private static final String[] COLUMNS = { OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE };
-	private static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider.feedback";
-	private static final String REPORT_FILE_NAME = "logs.zip";
-	private static final int REPORT_FILE_ID = 1;
+    private static final String[] COLUMNS = {OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE};
+    private static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider.feedback";
+    private static final String REPORT_FILE_NAME = "logs.zip";
+    private static final int REPORT_FILE_ID = 1;
 
-	// UriMatcher used to match against incoming requests
-	private UriMatcher uriMatcher;
+    // UriMatcher used to match against incoming requests
+    private UriMatcher uriMatcher;
 
-	public static File getReportFile(Context context) {
-		return new File(context.getCacheDir(), REPORT_FILE_NAME);
-	}
+    public static File getReportFile(Context context) {
+        return new File(context.getCacheDir(), REPORT_FILE_NAME);
+    }
 
-	public static Uri getReportFileUri() {
-		return new Uri.Builder().scheme("content").authority(AUTHORITY).path(REPORT_FILE_NAME).build();
-	}
+    public static Uri getReportFileUri() {
+        return new Uri.Builder().scheme("content").authority(AUTHORITY).path(REPORT_FILE_NAME).build();
+    }
 
-	@Override
-	public boolean onCreate() {
-		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		uriMatcher.addURI(AUTHORITY, REPORT_FILE_NAME, REPORT_FILE_ID);
+    @Override
+    public boolean onCreate() {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(AUTHORITY, REPORT_FILE_NAME, REPORT_FILE_ID);
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
-		Timber.v("openFile: Called with uri: '%s'.", uri);
+    @Override
+    public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
+        Timber.v("openFile: Called with uri: '%s'.", uri);
 
-		// Check incoming Uri against the matcher
-		switch (uriMatcher.match(uri)) {
-			case REPORT_FILE_ID:
-				File reportFile = getReportFile(getContext());
+        // Check incoming Uri against the matcher
+        switch (uriMatcher.match(uri)) {
+            case REPORT_FILE_ID:
+                File reportFile = getReportFile(getContext());
 
-				if (!reportFile.exists()) {
-					Timber.e("File '%s' for uri '%s' not found", reportFile, uri);
-					throw new FileNotFoundException(reportFile.toString());
-				}
+                if (!reportFile.exists()) {
+                    Timber.e("File '%s' for uri '%s' not found", reportFile, uri);
+                    throw new FileNotFoundException(reportFile.toString());
+                }
 
-				return ParcelFileDescriptor.open(getReportFile(getContext()), ParcelFileDescriptor.MODE_READ_ONLY);
+                return ParcelFileDescriptor.open(getReportFile(getContext()), ParcelFileDescriptor.MODE_READ_ONLY);
 
-			default:
-				Timber.e("Unsupported uri: '%s'.", uri);
-				throw new FileNotFoundException("Unsupported uri: "	+ uri.toString());
-		}
-	}
+            default:
+                Timber.e("Unsupported uri: '%s'.", uri);
+                throw new FileNotFoundException("Unsupported uri: " + uri.toString());
+        }
+    }
 
-	@Override
-	public String getType(@NonNull Uri uri) {
-		Timber.v("getType: Called with uri: '%s'", uri);
+    @Override
+    public String getType(@NonNull Uri uri) {
+        Timber.v("getType: Called with uri: '%s'", uri);
 
-		String fileName = uri.getLastPathSegment();
+        String fileName = uri.getLastPathSegment();
 
-		final int lastDot = fileName.lastIndexOf('.');
-		if (lastDot >= 0) {
-			final String extension = fileName.substring(lastDot + 1);
-			final String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-			if (mime != null) {
-				return mime;
-			}
-		}
+        final int lastDot = fileName.lastIndexOf('.');
+        if (lastDot >= 0) {
+            final String extension = fileName.substring(lastDot + 1);
+            final String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+            if (mime != null) {
+                return mime;
+            }
+        }
 
-		return "application/octet-stream";
-	}
+        return "application/octet-stream";
+    }
 
-	@Override
-	public Cursor query(@NonNull Uri uri, String[] projection, String s, String[] as1, String s1) {
-		switch (uriMatcher.match(uri)) {
-			case REPORT_FILE_ID:
-				final File file = getReportFile(getContext());
+    @Override
+    public Cursor query(@NonNull Uri uri, String[] projection, String s, String[] as1, String s1) {
+        switch (uriMatcher.match(uri)) {
+            case REPORT_FILE_ID:
+                final File file = getReportFile(getContext());
 
-				if (projection == null) {
-					projection = COLUMNS;
-				}
+                if (projection == null) {
+                    projection = COLUMNS;
+                }
 
-				String[] cols = new String[projection.length];
-				Object[] values = new Object[projection.length];
-				int i = 0;
-				for (String col : projection) {
-					if (OpenableColumns.DISPLAY_NAME.equals(col)) {
-						cols[i] = OpenableColumns.DISPLAY_NAME;
-						values[i++] = file.getName();
-					} else if (OpenableColumns.SIZE.equals(col)) {
-						cols[i] = OpenableColumns.SIZE;
-						values[i++] = file.length();
-					}
-				}
+                String[] cols = new String[projection.length];
+                Object[] values = new Object[projection.length];
+                int i = 0;
+                for (String col : projection) {
+                    if (OpenableColumns.DISPLAY_NAME.equals(col)) {
+                        cols[i] = OpenableColumns.DISPLAY_NAME;
+                        values[i++] = file.getName();
+                    } else if (OpenableColumns.SIZE.equals(col)) {
+                        cols[i] = OpenableColumns.SIZE;
+                        values[i++] = file.length();
+                    }
+                }
 
-				cols = copyOf(cols, i);
-				values = copyOf(values, i);
+                cols = copyOf(cols, i);
+                values = copyOf(values, i);
 
-				final MatrixCursor cursor = new MatrixCursor(cols, 1);
-				cursor.addRow(values);
-				return cursor;
-			default:
-				return null;
-		}
-	}
+                final MatrixCursor cursor = new MatrixCursor(cols, 1);
+                cursor.addRow(values);
+                return cursor;
+            default:
+                return null;
+        }
+    }
 
-	private static String[] copyOf(String[] original, int newLength) {
-		final String[] result = new String[newLength];
-		System.arraycopy(original, 0, result, 0, newLength);
-		return result;
-	}
+    private static String[] copyOf(String[] original, int newLength) {
+        final String[] result = new String[newLength];
+        System.arraycopy(original, 0, result, 0, newLength);
+        return result;
+    }
 
-	private static Object[] copyOf(Object[] original, int newLength) {
-		final Object[] result = new Object[newLength];
-		System.arraycopy(original, 0, result, 0, newLength);
-		return result;
-	}
+    private static Object[] copyOf(Object[] original, int newLength) {
+        final Object[] result = new Object[newLength];
+        System.arraycopy(original, 0, result, 0, newLength);
+        return result;
+    }
 
-	// Not supported / used / methods
-	@Override
-	public int update(@NonNull Uri uri, ContentValues contentvalues, String s, String[] as) {
-		throw new UnsupportedOperationException("No external updates");
-	}
+    // Not supported / used / methods
+    @Override
+    public int update(@NonNull Uri uri, ContentValues contentvalues, String s, String[] as) {
+        throw new UnsupportedOperationException("No external updates");
+    }
 
-	@Override
-	public int delete(@NonNull Uri uri, String s, String[] as) {
-		throw new UnsupportedOperationException("No external deletes");
-	}
+    @Override
+    public int delete(@NonNull Uri uri, String s, String[] as) {
+        throw new UnsupportedOperationException("No external deletes");
+    }
 
-	@Override
-	public Uri insert(@NonNull Uri uri, ContentValues contentvalues) {
-		throw new UnsupportedOperationException("No external inserts");
-	}
+    @Override
+    public Uri insert(@NonNull Uri uri, ContentValues contentvalues) {
+        throw new UnsupportedOperationException("No external inserts");
+    }
 }

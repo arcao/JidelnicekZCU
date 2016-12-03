@@ -1,9 +1,5 @@
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -14,8 +10,11 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorControlActivated">@color/accent_dark</item>
 
-        <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary</item>
-        <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1.Secondary</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary
+        </item>
+        <item name="textAppearanceListItemSecondary">
+            @style/TextAppearance.AppCompat.Body1.Secondary
+        </item>
 
         <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
     </style>
@@ -32,10 +31,14 @@
 
         <item name="android:colorBackground">@android:color/white</item>
 
-        <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary</item>
-        <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1.Secondary</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.AppCompat.Medium.Primary
+        </item>
+        <item name="textAppearanceListItemSecondary">
+            @style/TextAppearance.AppCompat.Body1.Secondary
+        </item>
         <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
     </style>
+
     <style name="AppBaseTheme.Settings" parent="@style/PreferenceFixTheme.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -50,8 +53,10 @@
     </style>
 
 
-    <style name="AppTheme" parent="AppBaseTheme" />
-    <style name="AppTheme.NavigationDrawer" />
+    <style name="AppTheme" parent="AppBaseTheme"/>
+
+    <style name="AppTheme.NavigationDrawer"/>
+
     <style name="AppTheme.Invisible">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -64,8 +69,10 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    <style name="AppTheme.Settings" parent="AppBaseTheme.Settings" />
-    <style name="AppTheme.DialogWhenLarge" parent="AppBaseTheme.DialogWhenLarge" />
+
+    <style name="AppTheme.Settings" parent="AppBaseTheme.Settings"/>
+
+    <style name="AppTheme.DialogWhenLarge" parent="AppBaseTheme.DialogWhenLarge"/>
 
     <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:minHeight">?attr/actionBarSize</item>
@@ -74,10 +81,12 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="Widget" />
-    <style name="Widget.AppTheme" />
+    <style name="Widget"/>
+
+    <style name="Widget.AppTheme"/>
 
     <style name="Widget.AppTheme.Toolbar" parent="Base.Widget.Toolbar"/>
+
     <style name="Widget.AppTheme.Toolbar.NoElevation"/>
 
     <style name="Widget.AppTheme.PagerTitleStrip">
@@ -108,6 +117,7 @@
         <item name="android:paddingBottom">4dp</item>
         <item name="android:paddingTop">20dp</item>
     </style>
+
     <style name="Widget.AppTheme.CardView.Header.First">
         <item name="android:paddingTop">0dp</item>
     </style>
@@ -115,11 +125,14 @@
     <style name="Widget.AppTheme.CardView.Text" parent="@android:style/Widget.TextView">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
     </style>
+
     <style name="Widget.AppTheme.CardView.Divider" parent="">
         <item name="android:background">?android:attr/listDivider</item>
     </style>
+
     <style name="Widget.AppTheme.CardView.Label" parent="Widget.AppTheme.CardView.Text">
     </style>
+
     <style name="Widget.AppTheme.CardView.Label.Price">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium.Primary</item>
     </style>
@@ -132,6 +145,7 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1.Secondary</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="Widget.AppTheme.CardView.Value.Price.Suffix"/>
 
     <style name="Widget.AppTheme.CardView.Value.Left">

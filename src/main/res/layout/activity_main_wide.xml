@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view"
+        app:headerLayout="@layout/nav_header"
         app:itemTextColor="@color/drawer_selector_foreground"
-        app:headerLayout="@layout/nav_header"/>
+        app:menu="@menu/drawer_view"/>
 
 
     <LinearLayout
@@ -20,12 +21,13 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/toolbar"
+            style="@style/Widget.AppTheme.Toolbar.NoElevation"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            style="@style/Widget.AppTheme.Toolbar.NoElevation"/>
+            android:layout_height="?attr/actionBarSize"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -34,11 +36,11 @@
 
             <android.support.v4.view.PagerTitleStrip
                 android:id="@+id/pager_title_strip"
+                style="@style/Widget.AppTheme.PagerTitleStrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                style="@style/Widget.AppTheme.PagerTitleStrip"
-                android:padding="4dp" />
+                android:padding="4dp"/>
 
         </android.support.v4.view.ViewPager>
     </LinearLayout>
