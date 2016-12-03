@@ -1,11 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_today"
-        android:title="@string/action_today"
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_today"
         android:icon="@drawable/ic_action_action_today"
-        yourapp:showAsAction="ifRoom" />
-    <item android:id="@+id/action_info"
-        android:title="@string/action_info"
+        android:title="@string/action_today"
+        yourapp:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_info"
         android:icon="@drawable/ic_action_action_info_outline"
-        yourapp:showAsAction="ifRoom" />
+        android:title="@string/action_info"
+        yourapp:showAsAction="ifRoom"/>
 </menu>

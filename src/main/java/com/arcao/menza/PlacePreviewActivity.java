@@ -1,6 +1,5 @@
 package com.arcao.menza;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
@@ -12,105 +11,109 @@ import com.android.volley.Response;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Place;
 import com.arcao.menza.fragment.ErrorFragment;
+import com.arcao.menza.fragment.LoadingFragment;
 import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
 
 public class PlacePreviewActivity extends AbstractBaseActivity {
-	private static final String PARAM_PLACE_ID = "PLACE_ID";
-	private static final String STATE_TITLE = "TITLE";
-	private static final String STATE_SUBTITLE = "SUBTITLE";
+    private static final String PARAM_PLACE_ID = "PLACE_ID";
+    private static final String STATE_TITLE = "TITLE";
+    private static final String STATE_SUBTITLE = "SUBTITLE";
 
-	private TextView titleTextView;
-	private TextView subTitleTextView;
+    private TextView titleTextView;
+    private TextView subTitleTextView;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_place_preview);
+        setContentView(R.layout.activity_place_preview);
 
-		titleTextView = (TextView) findViewById(R.id.title);
-		subTitleTextView = (TextView) findViewById(R.id.subTitle);
+        getWindow().setBackgroundDrawable(null);
 
-		int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
-		setTitle(getResources().getStringArray(R.array.places)[placeId]);
+        titleTextView = (TextView) findViewById(R.id.title);
+        subTitleTextView = (TextView) findViewById(R.id.subTitle);
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setHomeButtonEnabled(true);
-			actionBar.setDisplayShowTitleEnabled(false);
-		}
+        int placeId = getIntent().getIntExtra(PARAM_PLACE_ID, 0);
+        setTitle(getResources().getStringArray(R.array.places)[placeId]);
 
-		if (savedInstanceState == null) {
-			VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
-		} else {
-			// reset the title and subtitle
-			setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
-			setSubTitle(savedInstanceState.getCharSequence(STATE_SUBTITLE));
-		}
-	}
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment, LoadingFragment.newInstance()).commitAllowingStateLoss();
+            VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
+        } else {
+            // reset the title and subtitle
+            setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
+            setSubTitle(savedInstanceState.getCharSequence(STATE_SUBTITLE));
+        }
+    }
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-		}
-	}
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// Respond to the action bar's Up/Home button
-			case android.R.id.home:
-				finish();
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-		outState.putCharSequence(STATE_TITLE, titleTextView.getText());
-		outState.putCharSequence(STATE_SUBTITLE, subTitleTextView.getText());
-	}
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-	@Override
-	public void setTitle(CharSequence title) {
-		super.setTitle(title);
+        outState.putCharSequence(STATE_TITLE, titleTextView.getText());
+        outState.putCharSequence(STATE_SUBTITLE, subTitleTextView.getText());
+    }
 
-		titleTextView.setText(title);
-	}
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
 
-	private void setSubTitle(CharSequence subTitle) {
-		subTitleTextView.setText(subTitle);
-		subTitleTextView.setVisibility(View.VISIBLE);
-	}
+        titleTextView.setText(title);
+    }
 
-	private Response.Listener<Place> createPlaceReqSuccessListener() {
-		return response -> {
+    private void setSubTitle(CharSequence subTitle) {
+        subTitleTextView.setText(subTitle);
+        subTitleTextView.setVisibility(View.VISIBLE);
+    }
+
+    private Response.Listener<Place> createPlaceReqSuccessListener() {
+        return response -> {
             setTitle(response.name);
             setSubTitle(response.address);
 
-            Fragment fragment = PlacePreviewFragment.getInstance(response);
-            getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
+            getFragmentManager().beginTransaction().replace(R.id.fragment,
+                    PlacePreviewFragment.getInstance(response)).commitAllowingStateLoss();
         };
-	}
+    }
 
-	private Response.ErrorListener createPlaceReqErrorListener() {
-		return error -> {
+    private Response.ErrorListener createPlaceReqErrorListener() {
+        return error -> {
             Log.e("VOLLEY", error.getMessage(), error);
 
 
             if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
-                getFragmentManager().beginTransaction().add(R.id.fragment,
-                                ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
+                getFragmentManager().beginTransaction().replace(R.id.fragment,
+                        ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
             }
         };
-	}
+    }
 }

@@ -4,27 +4,36 @@
     <PreferenceCategory
         android:title="@string/pref_cat_general_title">
         <ListPreference
-            android:title="@string/pref_price_group_title"
-            android:key="price_group"
+            android:defaultValue="@string/pref_price_group_default"
             android:entries="@array/pref_price_group_entries"
             android:entryValues="@array/pref_price_group_values"
-            android:defaultValue="@string/pref_price_group_default"
+            android:key="price_group"
+            android:negativeButtonText="@string/button_cancel"
             android:summary="%s"
-            android:negativeButtonText="@string/button_cancel"/>
+            android:title="@string/pref_price_group_title"/>
         <ListPreference
-            android:title="@string/pref_default_place_title"
-            android:key="default_place"
+            android:defaultValue="@string/pref_default_place_default"
             android:entries="@array/places"
             android:entryValues="@array/pref_default_place_values"
-            android:defaultValue="@string/pref_default_place_default"
+            android:key="default_place"
+            android:negativeButtonText="@string/button_cancel"
             android:summary="%s"
-            android:negativeButtonText="@string/button_cancel"/>
+            android:title="@string/pref_default_place_title"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_cat_developer_title">
-        <Preference android:title="@string/pref_licenses" android:summary="@string/pref_licenses_summary" android:key="licenses" />
-        <Preference android:title="@string/pref_app_version" android:key="version" />
-        <Preference android:title="@string/pref_app_build_time" android:key="build_time" />
-        <Preference android:title="@string/action_feedback" android:key="feedback" />
+        <Preference
+            android:key="licenses"
+            android:summary="@string/pref_licenses_summary"
+            android:title="@string/pref_licenses"/>
+        <Preference
+            android:key="version"
+            android:title="@string/pref_app_version"/>
+        <Preference
+            android:key="build_time"
+            android:title="@string/pref_app_build_time"/>
+        <Preference
+            android:key="feedback"
+            android:title="@string/action_feedback"/>
     </PreferenceCategory>
 </PreferenceScreen>

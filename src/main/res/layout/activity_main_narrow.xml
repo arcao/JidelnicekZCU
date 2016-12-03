@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/drawer_layout"
-                                        android:layout_height="match_parent"
-                                        android:layout_width="match_parent"
-                                        android:fitsSystemWindows="true">
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/toolbar"
+            style="@style/Widget.AppTheme.Toolbar.NoElevation"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            style="@style/Widget.AppTheme.Toolbar.NoElevation"/>
+            android:layout_height="?attr/actionBarSize"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -24,23 +26,23 @@
 
             <android.support.v4.view.PagerTitleStrip
                 android:id="@+id/pager_title_strip"
+                style="@style/Widget.AppTheme.PagerTitleStrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                style="@style/Widget.AppTheme.PagerTitleStrip"
-                android:padding="4dp" />
+                android:padding="4dp"/>
 
         </android.support.v4.view.ViewPager>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_view"
-        app:itemTextColor="@color/drawer_selector_foreground"/>
+        app:itemTextColor="@color/drawer_selector_foreground"
+        app:menu="@menu/drawer_view"/>
 
 </android.support.v4.widget.DrawerLayout>

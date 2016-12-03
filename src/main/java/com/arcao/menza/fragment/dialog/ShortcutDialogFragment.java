@@ -10,48 +10,49 @@ import android.support.v7.app.AlertDialog;
 import com.arcao.menza.R;
 
 public class ShortcutDialogFragment extends AbstractDialogFragment implements DialogInterface.OnClickListener {
-	public static final String TAG = "ShortcutDialogFragment";
+    public static final String TAG = "ShortcutDialogFragment";
 
-	public interface ShortcutDialogListener {
-		void onCreateShortcut(int placeId);
-		void onCancel();
-	}
+    public interface ShortcutDialogListener {
+        void onCreateShortcut(int placeId);
 
-	private ShortcutDialogListener listener;
+        void onCancel();
+    }
 
-	public static ShortcutDialogFragment newInstance() {
-		return new ShortcutDialogFragment();
-	}
+    private ShortcutDialogListener listener;
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+    public static ShortcutDialogFragment newInstance() {
+        return new ShortcutDialogFragment();
+    }
 
-		try {
-			listener = (ShortcutDialogListener) getActivity();
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement ShortcutDialogListener");
-		}
-	}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new AlertDialog.Builder(getActivity())
-			.setTitle(R.string.create_shortcut)
-			.setItems(R.array.places, this)
-			.create();
-	}
+        try {
+            listener = (ShortcutDialogListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement ShortcutDialogListener");
+        }
+    }
 
-	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		listener.onCreateShortcut(which);
-	}
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.create_shortcut)
+                .setItems(R.array.places, this)
+                .create();
+    }
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        listener.onCreateShortcut(which);
+    }
 
-		listener.onCancel();
-	}
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+
+        listener.onCancel();
+    }
 }

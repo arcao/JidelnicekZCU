@@ -1,5 +1,9 @@
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable,!class/unboxing/enum
+-optimizationpasses 5
+-verbose
+
 #prevent severe obfuscation
--keep,allowshrinking,allowoptimization class * { <methods>; } 
+-keep,allowshrinking,allowoptimization class * { <methods>; }
 
 -keepclasseswithmembernames class * {
     native <methods>;

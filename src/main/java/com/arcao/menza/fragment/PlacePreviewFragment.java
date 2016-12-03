@@ -13,33 +13,33 @@ import com.arcao.menza.R;
 import com.arcao.menza.api.data.Place;
 
 public class PlacePreviewFragment extends Fragment {
-	private static final String PARAM_PLACE = "PLACE";
+    private static final String PARAM_PLACE = "PLACE";
 
-	public static PlacePreviewFragment getInstance(Place place) {
-		PlacePreviewFragment fragment = new PlacePreviewFragment();
+    public static PlacePreviewFragment getInstance(Place place) {
+        PlacePreviewFragment fragment = new PlacePreviewFragment();
 
-		Bundle args = new Bundle();
-		args.putParcelable(PARAM_PLACE, place);
-		fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putParcelable(PARAM_PLACE, place);
+        fragment.setArguments(args);
 
-		return fragment;
-	}
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_place_preview, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_place_preview, container, false);
 
-		Place place = getArguments().getParcelable(PARAM_PLACE);
+        Place place = getArguments().getParcelable(PARAM_PLACE);
 
-		if (place != null) {
-			TextView descriptionView = (TextView) view.findViewById(R.id.description);
-			//noinspection deprecation
-			descriptionView.setText(Html.fromHtml(place.description));
-			descriptionView.setLinksClickable(true);
-			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
-		}
+        if (place != null) {
+            TextView descriptionView = (TextView) view.findViewById(R.id.description);
+            //noinspection deprecation
+            descriptionView.setText(Html.fromHtml(place.description));
+            descriptionView.setLinksClickable(true);
+            descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
 
-		return view;
-	}
+        return view;
+    }
 
 }

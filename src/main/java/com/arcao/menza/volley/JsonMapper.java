@@ -6,23 +6,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 
 public enum JsonMapper {
-	INSTANCE;
+    INSTANCE;
 
-	private final ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
-	JsonMapper() {
-		mapper = new ObjectMapper();
-		VisibilityChecker<?> visibilityChecker = mapper.getSerializationConfig().getDefaultVisibilityChecker();
-		mapper.setVisibility(visibilityChecker
-						.withFieldVisibility(Visibility.ANY)
-						.withCreatorVisibility(Visibility.NONE)
-						.withGetterVisibility(Visibility.NONE)
-						.withSetterVisibility(Visibility.NONE)
-						.withIsGetterVisibility(Visibility.NONE));
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-	}
+    JsonMapper() {
+        mapper = new ObjectMapper();
+        VisibilityChecker<?> visibilityChecker = mapper.getSerializationConfig().getDefaultVisibilityChecker();
+        mapper.setVisibility(visibilityChecker
+                .withFieldVisibility(Visibility.ANY)
+                .withCreatorVisibility(Visibility.NONE)
+                .withGetterVisibility(Visibility.NONE)
+                .withSetterVisibility(Visibility.NONE)
+                .withIsGetterVisibility(Visibility.NONE));
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
 
-	public ObjectMapper mapper() {
-		return mapper;
-	}
+    public ObjectMapper mapper() {
+        return mapper;
+    }
 }

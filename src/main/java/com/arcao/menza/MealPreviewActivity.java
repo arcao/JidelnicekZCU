@@ -25,132 +25,135 @@ import com.arcao.menza.volley.VolleyHelper;
 import java.util.Date;
 
 public class MealPreviewActivity extends AbstractBaseActivity implements RatingDialogFragment.OnRatingChangeListener {
-	public static final String PARAM_PLACE_ID = "PLACE_ID";
-	public static final String PARAM_DATE = "DATE";
-	public static final String PARAM_MEAL = "MEAL";
+    public static final String PARAM_PLACE_ID = "PLACE_ID";
+    public static final String PARAM_DATE = "DATE";
+    public static final String PARAM_MEAL = "MEAL";
 
-	private TextView titleTextView;
+    private TextView titleTextView;
 
-	private int placeId = 1;
-	private Date date;
-	private Meal meal;
-	private String priceGroup;
-	private RatingChecker ratingChecker;
+    private int placeId = 1;
+    private Date date;
+    private Meal meal;
+    private String priceGroup;
+    private RatingChecker ratingChecker;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_meal_preview);
-		titleTextView = (TextView) findViewById(R.id.title);
+        setContentView(R.layout.activity_meal_preview);
 
-		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		priceGroup = mSharedPreferences.getString(PrefConstant.PRICE_GROUP, PrefConstant.PRICE_GROUP__STUDENT);
+        getWindow().setBackgroundDrawable(null);
 
-		placeId = getIntent().getIntExtra(PARAM_PLACE_ID, placeId);
-		date = new Date(getIntent().getLongExtra(PARAM_DATE, 0L));
-		meal = getIntent().getParcelableExtra(PARAM_MEAL);
+        titleTextView = (TextView) findViewById(R.id.title);
 
-		ratingChecker = new RatingChecker(getApplicationContext());
+        SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        priceGroup = mSharedPreferences.getString(PrefConstant.PRICE_GROUP, PrefConstant.PRICE_GROUP__STUDENT);
 
-		setTitle(meal.name);
+        placeId = getIntent().getIntExtra(PARAM_PLACE_ID, placeId);
+        date = new Date(getIntent().getLongExtra(PARAM_DATE, 0L));
+        meal = getIntent().getParcelableExtra(PARAM_MEAL);
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setHomeButtonEnabled(true);
-			actionBar.setDisplayShowTitleEnabled(false);
-		}
+        ratingChecker = new RatingChecker(getApplicationContext());
 
-		if (savedInstanceState == null) {
-			MealPreviewFragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
-			getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
-		}
-	}
+        setTitle(meal.name);
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-		}
-	}
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment,
+                    MealPreviewFragment.getInstance(placeId, date, meal)).commit();
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// Respond to the action bar's Up/Home button
-			case android.R.id.home:
-				finish();
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
-	@Override
-	public void setTitle(CharSequence title) {
-		super.setTitle(title);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
-		titleTextView.setText(title);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.meal_preview, menu);
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
 
-		// Set up ShareActionProvider's share intent
-		MenuItem shareItem = menu.findItem(R.id.action_share);
-		ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-		mShareActionProvider.setShareIntent(getShareIntent());
+        titleTextView.setText(title);
+    }
 
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.meal_preview, menu);
 
-	private Intent getShareIntent() {
-		String place = getResources().getStringArray(R.array.places)[placeId];
+        // Set up ShareActionProvider's share intent
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        mShareActionProvider.setShareIntent(getShareIntent());
 
-		String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
+        return super.onCreateOptionsMenu(menu);
+    }
 
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_TEXT, shareText);
-		intent.setType("text/plain");
+    private Intent getShareIntent() {
+        String place = getResources().getStringArray(R.array.places)[placeId];
 
-		return intent;
-	}
+        String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
 
-	private float getMealPrice(Meal meal) {
-		switch (priceGroup) {
-			case PrefConstant.PRICE_GROUP__STAFF:
-				return meal.priceStaff;
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, shareText);
+        intent.setType("text/plain");
 
-			case PrefConstant.PRICE_GROUP__EXTERNAL:
-				return meal.priceExternal;
+        return intent;
+    }
 
-			case PrefConstant.PRICE_GROUP__STUDENT:
-			default:
-				return meal.priceStudent;
+    private float getMealPrice(Meal meal) {
+        switch (priceGroup) {
+            case PrefConstant.PRICE_GROUP__STAFF:
+                return meal.priceStaff;
 
-		}
-	}
+            case PrefConstant.PRICE_GROUP__EXTERNAL:
+                return meal.priceExternal;
 
-	@Override
-	public void onRatingChanged(float rating) {
-		Bundle params = new Bundle();
-		params.putString("hash", meal.hash);
-		params.putFloat("vote", rating);
+            case PrefConstant.PRICE_GROUP__STUDENT:
+            default:
+                return meal.priceStudent;
 
-		ratingChecker.addRating(date, meal.hash);
+        }
+    }
 
-		// show message
-		Toast.makeText(getApplicationContext(), R.string.vote_progress, Toast.LENGTH_LONG).show();
+    @Override
+    public void onRatingChanged(float rating) {
+        Bundle params = new Bundle();
+        params.putString("hash", meal.hash);
+        params.putFloat("vote", rating);
 
-		VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date), createRatingReqErrorListener(meal));
-	}
+        ratingChecker.addRating(date, meal.hash);
 
-	private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date) {
-		return response -> {
+        // show message
+        Toast.makeText(getApplicationContext(), R.string.vote_progress, Toast.LENGTH_LONG).show();
+
+        VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date), createRatingReqErrorListener(meal));
+    }
+
+    private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date) {
+        return response -> {
             // invalidate soft cache
             VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
 
@@ -159,11 +162,11 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
             // show message
             Toast.makeText(getApplicationContext(), R.string.vote_finished, Toast.LENGTH_LONG).show();
         };
-	}
+    }
 
 
-	private Response.ErrorListener createRatingReqErrorListener(final Meal meal) {
-		return error -> {
+    private Response.ErrorListener createRatingReqErrorListener(final Meal meal) {
+        return error -> {
             Log.e("VOLLEY", error.getMessage(), error);
 
             ratingChecker.removeRating(date, meal.hash);
@@ -171,6 +174,6 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
             // show error message
             Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();
         };
-	}
+    }
 }
 

@@ -1,50 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.arcao.menza"
-    android:versionName="2.3"
-    android:installLocation="auto">
+          package="com.arcao.menza"
+          android:installLocation="auto"
+          android:versionName="2.3">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
 
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:anyDensity="true" />
+        android:normalScreens="true"
+        android:smallScreens="true"/>
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="24"/>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".App">
+        android:theme="@style/AppTheme">
 
         <provider
             android:name="com.arcao.feedback.FeedbackFileProvider"
             android:authorities="${applicationId}.provider.feedback"
-            android:exported="true"
             android:enabled="true"
+            android:exported="true"
             android:grantUriPermissions="true"/>
 
-        <activity android:name=".MainActivity" android:label="@string/app_name" android:theme="@style/AppTheme.NavigationDrawer">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NavigationDrawer">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" android:label="@string/action_settings" android:theme="@style/AppTheme.Settings"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/action_settings"
+            android:theme="@style/AppTheme.Settings"/>
         <activity android:name=".WebViewActivity"/>
-        <activity android:name=".MealPreviewActivity" android:label="@string/preview_meal" android:theme="@style/AppTheme.DialogWhenLarge"/>
-        <activity android:name=".PlacePreviewActivity" android:theme="@style/AppTheme.DialogWhenLarge"/>
-        <activity android:name=".ShortcutActivity" android:theme="@style/AppTheme.DialogWhenLarge">
+        <activity
+            android:name=".MealPreviewActivity"
+            android:label="@string/preview_meal"
+            android:theme="@style/AppTheme.DialogWhenLarge"/>
+        <activity
+            android:name=".PlacePreviewActivity"
+            android:theme="@style/AppTheme.DialogWhenLarge"/>
+        <activity
+            android:name=".ShortcutActivity"
+            android:theme="@style/AppTheme.DialogWhenLarge">
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

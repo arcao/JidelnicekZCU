@@ -15,69 +15,69 @@ import com.arcao.menza.R;
 import com.arcao.menza.constant.AppConstant;
 
 public class RatingDialogFragment extends AbstractDialogFragment implements RatingBar.OnRatingBarChangeListener {
-	public static final String TAG = "RatingDialogFragment";
+    public static final String TAG = "RatingDialogFragment";
 
-	public interface OnRatingChangeListener {
-		void onRatingChanged(float rating);
-	}
+    public interface OnRatingChangeListener {
+        void onRatingChanged(float rating);
+    }
 
-	private OnRatingChangeListener listener;
-	private float newRating = -1F;
+    private OnRatingChangeListener listener;
+    private float newRating = -1F;
 
-	public static RatingDialogFragment newInstance() {
-		return new RatingDialogFragment();
-	}
+    public static RatingDialogFragment newInstance() {
+        return new RatingDialogFragment();
+    }
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-		try {
-			listener = (OnRatingChangeListener) getActivity();
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnRatingChangeListener");
-		}
-	}
+        try {
+            listener = (OnRatingChangeListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnRatingChangeListener");
+        }
+    }
 
-	@Override
-	public void onDetach() {
-		listener = null;
-		super.onDetach();
-	}
+    @Override
+    public void onDetach() {
+        listener = null;
+        super.onDetach();
+    }
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		@SuppressLint("InflateParams")
-		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_rating, null);
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        @SuppressLint("InflateParams")
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_rating, null);
 
-		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 
-		ratingBar.setMax(AppConstant.RATING__MAX);
-		ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
-		ratingBar.setOnRatingBarChangeListener(this);
+        ratingBar.setMax(AppConstant.RATING__MAX);
+        ratingBar.setNumStars(AppConstant.RATING__NUM_STARS);
+        ratingBar.setOnRatingBarChangeListener(this);
 
-		final AlertDialog dialog = new AlertDialog.Builder(getActivity())
-			.setTitle(R.string.header_rating)
-			.setView(view)
-			.setNegativeButton(R.string.button_cancel, null)
-			.setPositiveButton(R.string.button_send, (dialog1, which) -> {
-                if (listener != null && newRating > 0)
-                    listener.onRatingChanged(newRating);
-            })
-			.create();
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.header_rating)
+                .setView(view)
+                .setNegativeButton(R.string.button_cancel, null)
+                .setPositiveButton(R.string.button_send, (dialog1, which) -> {
+                    if (listener != null && newRating > 0)
+                        listener.onRatingChanged(newRating);
+                })
+                .create();
 
-		dialog.setOnShowListener(di -> dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false));
+        dialog.setOnShowListener(di -> dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false));
 
-		return dialog;
-	}
+        return dialog;
+    }
 
-	@Override
-	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-		if (!fromUser)
-			return;
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        if (!fromUser)
+            return;
 
-		newRating = rating;
-		((AlertDialog)getDialog()).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
-	}
+        newRating = rating;
+        ((AlertDialog) getDialog()).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
+    }
 }

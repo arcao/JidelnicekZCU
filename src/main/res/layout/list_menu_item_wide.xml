@@ -4,53 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:minHeight="?attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
     android:background="?attr/listChoiceBackgroundIndicator"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="horizontal">
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_weight="1">
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:clickable="false"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceListItem"
             tools:text="Dinner name"
             />
+
         <RatingBar
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:progressDrawable="@drawable/ic_toggle_star_small"
+            android:clickable="false"
             android:indeterminateDrawable="@drawable/ic_toggle_star_small"
-            android:minHeight="16dp"
-            android:maxHeight="16dp"
             android:isIndicator="true"
-            android:clickable="false" />
+            android:maxHeight="16dp"
+            android:minHeight="16dp"
+            android:progressDrawable="@drawable/ic_toggle_star_small"/>
     </LinearLayout>
+
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:textAppearance="?attr/textAppearanceListItemSecondary"
         android:textSize="@dimen/abc_text_size_title_material"
-        android:clickable="false"
         tools:text="10"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:text="@string/price_suffix"
         android:textAppearance="?attr/textAppearanceListItemSecondary"
-        android:textSize="@dimen/abc_text_size_title_material"
-        android:clickable="false"/>
+        android:textSize="@dimen/abc_text_size_title_material"/>
 </LinearLayout>
