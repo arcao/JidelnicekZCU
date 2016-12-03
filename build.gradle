@@ -47,7 +47,7 @@ android {
     buildConfigField 'String', 'GIT_SHA', 'null'
     buildConfigField 'String', 'BUILD_TIME', 'null'
 
-    resConfigs 'en', 'cs', 'sk'
+    resConfigs 'cs'
   }
 
   compileOptions {
