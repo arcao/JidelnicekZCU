@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jídelníček ZČU</string>
+    <string name="app_name">WBU Canteens</string>
     <string name="action_settings">Settings</string>
 
     <string name="place_menza_bory">Menza Bory</string>
