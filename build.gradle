@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
-        classpath 'com.android.tools.build:gradle:2.1.3'
+    classpath 'com.android.tools.build:gradle:2.2.2'
     }
 }
 
@@ -34,8 +34,8 @@ def isTravis = 'true'.equals(System.getenv('TRAVIS'))
 def preDexEnabled = 'true'.equals(System.getProperty('pre-dex', 'true'))
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     dexOptions {
         // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
@@ -48,6 +48,7 @@ android {
         buildConfigField 'String', 'BUILD_TIME', 'null'
 
         resConfigs 'en', 'cs', 'sk'
+
         jackOptions {
             enabled true
         }
@@ -73,7 +74,7 @@ android {
         release {
             versionNameSuffix ''
 
-            buildConfigField 'String', 'GIT_SHA', '"' + gitSha() +'"'
+      buildConfigField 'String', 'GIT_SHA', '"' + gitSha() + '"'
             buildConfigField 'String', 'BUILD_TIME', '"' + buildTime() + '"'
 
             signingConfig signingConfigs.release
@@ -95,20 +96,19 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:24.2.0'
-    compile 'com.android.support:support-v13:24.2.0'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:recyclerview-v7:24.2.0'
-    compile 'com.android.support:cardview-v7:24.2.0'
-    compile 'com.takisoft.fix:preference-v7:24.2.0.0'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:support-v13:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:cardview-v7:25.0.1'
+    compile 'com.takisoft.fix:preference-v7:25.0.1.0'
     compile 'com.android:volley:1.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
+    compile 'com.jakewharton.timber:timber:4.3.1'
     compile 'commons-io:commons-io:2.5'
 }
 
-if (project.hasProperty('storeFile') &&
-        project.hasProperty('storePassword') &&
+if (project.hasProperty('storeFile') && project.hasProperty('storePassword') &&
         project.hasProperty('keyPassword')) {
     android.signingConfigs.release.storeFile = file(storeFile)
     android.signingConfigs.release.storePassword = storePassword

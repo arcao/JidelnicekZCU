@@ -26,7 +26,7 @@ import com.arcao.menza.fragment.dialog.PriceGroupSelectionDialogFragment;
 
 public class MainActivity extends AbstractBaseActivity implements PriceGroupSelectionDialogFragment.OnPriceGroupSelectedListener {
 	public static final String PARAM_PLACE_ID = "PLACE_ID";
-  private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
+    private static final String STATE_PLACE_ID = "STATE_PLACE_ID";
 	public static final int RESULT_REFRESH = 101;
 
 	private NavigationView mNavigationView;
@@ -50,6 +50,9 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
 		}
 
 		setContentView(R.layout.activity_main);
+
+		getWindow().setBackgroundDrawable(null);
+
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 

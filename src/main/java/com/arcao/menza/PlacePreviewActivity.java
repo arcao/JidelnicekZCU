@@ -1,17 +1,16 @@
 package com.arcao.menza;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.volley.Response;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Place;
 import com.arcao.menza.fragment.ErrorFragment;
+import com.arcao.menza.fragment.LoadingFragment;
 import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
 
@@ -29,6 +28,8 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 
 		setContentView(R.layout.activity_place_preview);
 
+		getWindow().setBackgroundDrawable(null);
+
 		titleTextView = (TextView) findViewById(R.id.title);
 		subTitleTextView = (TextView) findViewById(R.id.subTitle);
 
@@ -43,6 +44,7 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 		}
 
 		if (savedInstanceState == null) {
+			getFragmentManager().beginTransaction().replace(R.id.fragment, LoadingFragment.newInstance()).commitAllowingStateLoss();
 			VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
 		} else {
 			// reset the title and subtitle
@@ -97,20 +99,20 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
             setTitle(response.name);
             setSubTitle(response.address);
 
-            Fragment fragment = PlacePreviewFragment.getInstance(response);
-            getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commitAllowingStateLoss();
+				getFragmentManager().beginTransaction().replace(R.id.fragment,
+						PlacePreviewFragment.getInstance(response)).commitAllowingStateLoss();
         };
 	}
 
 	private Response.ErrorListener createPlaceReqErrorListener() {
 		return error -> {
-            Log.e("VOLLEY", error.getMessage(), error);
+			Log.e("VOLLEY", error.getMessage(), error);
 
 
-            if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
-                getFragmentManager().beginTransaction().add(R.id.fragment,
-                                ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
-            }
-        };
+			if (getFragmentManager().findFragmentById(R.id.fragment) == null) {
+				getFragmentManager().beginTransaction().replace(R.id.fragment,
+					ErrorFragment.newInstance(R.string.connection_error_data)).commitAllowingStateLoss();
+			}
+		};
 	}
 }

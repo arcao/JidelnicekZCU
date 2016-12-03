@@ -42,6 +42,9 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_meal_preview);
+
+		getWindow().setBackgroundDrawable(null);
+
 		titleTextView = (TextView) findViewById(R.id.title);
 
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -63,8 +66,8 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
 		}
 
 		if (savedInstanceState == null) {
-			MealPreviewFragment fragment = MealPreviewFragment.getInstance(placeId, date, meal);
-			getFragmentManager().beginTransaction().add(R.id.fragment, fragment).commit();
+			getFragmentManager().beginTransaction().replace(R.id.fragment,
+					MealPreviewFragment.getInstance(placeId, date, meal)).commit();
 		}
 	}
 
