@@ -1,41 +1,33 @@
 package com.arcao.menza.api.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.auto.value.AutoValue;
 
-public class Image implements Parcelable {
-    String imageUrl;
-    User user;
-    String description;
+@AutoValue
+@JsonDeserialize(builder = Image.Builder.class)
+public abstract class Image implements Parcelable {
+  @JsonProperty public abstract String imageUrl();
+  @JsonProperty public abstract User user();
+  @JsonProperty public abstract String description();
 
-    @Override
-    public int describeContents() {
-        return 0;
+  public static Builder builder() {
+    return new AutoValue_Image.Builder();
+  }
+
+  @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
+  public abstract static class Builder {
+    @JsonCreator private static Builder create() {
+      return Image.builder();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.imageUrl);
-        dest.writeParcelable(this.user, 0);
-        dest.writeString(this.description);
-    }
-
-    public Image() {
-    }
-
-    private Image(Parcel in) {
-        this.imageUrl = in.readString();
-        this.user = in.readParcelable(((Object) user).getClass().getClassLoader());
-        this.description = in.readString();
-    }
-
-    public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
-        public Image createFromParcel(Parcel source) {
-            return new Image(source);
-        }
-
-        public Image[] newArray(int size) {
-            return new Image[size];
-        }
-    };
+    public abstract Builder imageUrl(String imageUrl);
+    public abstract Builder user(User user);
+    public abstract Builder description(String description);
+    public abstract Image build();
+  }
 }

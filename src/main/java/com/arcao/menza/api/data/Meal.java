@@ -1,71 +1,60 @@
 package com.arcao.menza.api.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.auto.value.AutoValue;
+import java.util.Collections;
+import java.util.List;
 
-public class Meal implements Parcelable {
-    public int id;
-    public String name;
-    public float priceStudent;
-    public float priceStaff;
-    public float priceExternal;
-    public String hash;
-    public float quality;
-    public int commentCount;
-    public int imageCount;
-    public Image[] images;
-    public Comment[] comments;
-    public int[] allergens;
-    public boolean premium;
+@AutoValue
+@JsonDeserialize(builder = Meal.Builder.class)
+public abstract class Meal implements Parcelable {
+  @JsonProperty public abstract int id();
+  @JsonProperty public abstract String name();
+  @JsonProperty public abstract float priceStudent();
+  @JsonProperty public abstract float priceStaff();
+  @JsonProperty public abstract float priceExternal();
+  @JsonProperty public abstract String hash();
+  @JsonProperty public abstract float quality();
+  @JsonProperty public abstract int commentCount();
+  @JsonProperty public abstract int imageCount();
+  @JsonProperty public abstract List<Image> images();
+  @JsonProperty public abstract List<Comment> comments();
+  @JsonProperty public abstract List<Integer> allergens();
+  @JsonProperty public abstract boolean premium();
 
-    @Override
-    public int describeContents() {
-        return 0;
+  public static Builder builder() {
+    return new AutoValue_Meal.Builder().quality(-1)
+        .commentCount(0)
+        .imageCount(0)
+        .images(Collections.emptyList())
+        .comments(Collections.emptyList())
+        .allergens(Collections.emptyList());
+  }
+
+  @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
+  public abstract static class Builder {
+    @JsonCreator private static Builder create() {
+      return Meal.builder();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeFloat(this.priceStudent);
-        dest.writeFloat(this.priceStaff);
-        dest.writeFloat(this.priceExternal);
-        dest.writeString(this.hash);
-        dest.writeFloat(this.quality);
-        dest.writeInt(this.commentCount);
-        dest.writeInt(this.imageCount);
-        dest.writeTypedArray(this.images, flags);
-        dest.writeTypedArray(this.comments, flags);
-        dest.writeIntArray(allergens);
-        dest.writeInt(premium ? 1 : 0);
-    }
-
-    public Meal() {
-    }
-
-    private Meal(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.priceStudent = in.readFloat();
-        this.priceStaff = in.readFloat();
-        this.priceExternal = in.readFloat();
-        this.hash = in.readString();
-        this.quality = in.readFloat();
-        this.commentCount = in.readInt();
-        this.imageCount = in.readInt();
-        this.images = in.createTypedArray(Image.CREATOR);
-        this.comments = in.createTypedArray(Comment.CREATOR);
-        this.allergens = in.createIntArray();
-        this.premium = in.readInt() != 0;
-    }
-
-    public static final Parcelable.Creator<Meal> CREATOR = new Parcelable.Creator<Meal>() {
-        public Meal createFromParcel(Parcel source) {
-            return new Meal(source);
-        }
-
-        public Meal[] newArray(int size) {
-            return new Meal[size];
-        }
-    };
+    public abstract Builder id(int id);
+    public abstract Builder name(String name);
+    public abstract Builder priceStudent(float priceStudent);
+    public abstract Builder priceStaff(float priceStaff);
+    public abstract Builder priceExternal(float priceExternal);
+    public abstract Builder hash(String hash);
+    public abstract Builder quality(float quality);
+    public abstract Builder commentCount(int commentCount);
+    public abstract Builder imageCount(int imageCount);
+    public abstract Builder images(List<Image> images);
+    public abstract Builder comments(List<Comment> comments);
+    public abstract Builder allergens(List<Integer> allergens);
+    public abstract Builder premium(boolean premium);
+    public abstract Meal build();
+  }
 }

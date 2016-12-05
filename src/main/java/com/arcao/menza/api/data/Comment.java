@@ -1,44 +1,34 @@
 package com.arcao.menza.api.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.auto.value.AutoValue;
 import java.util.Date;
 
-public class Comment implements Parcelable {
-    User user;
-    Date date;
-    String text;
+@AutoValue
+@JsonDeserialize(builder = Comment.Builder.class)
+public abstract class Comment implements Parcelable {
+  @JsonProperty public abstract User user();
+  @JsonProperty public abstract Date date();
+  @JsonProperty public abstract String text();
 
-    @Override
-    public int describeContents() {
-        return 0;
+  public static Builder builder() {
+    return new AutoValue_Comment.Builder();
+  }
+
+  @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
+  public abstract static class Builder {
+    @JsonCreator private static Builder create() {
+      return Comment.builder();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.user, flags);
-        dest.writeLong(date != null ? date.getTime() : -1);
-        dest.writeString(this.text);
-    }
-
-    public Comment() {
-    }
-
-    private Comment(Parcel in) {
-        this.user = in.readParcelable(User.class.getClassLoader());
-        long tmpDate = in.readLong();
-        this.date = tmpDate == -1 ? null : new Date(tmpDate);
-        this.text = in.readString();
-    }
-
-    public static final Parcelable.Creator<Comment> CREATOR = new Parcelable.Creator<Comment>() {
-        public Comment createFromParcel(Parcel source) {
-            return new Comment(source);
-        }
-
-        public Comment[] newArray(int size) {
-            return new Comment[size];
-        }
-    };
+    public abstract Builder user(User user);
+    public abstract Builder date(Date date);
+    public abstract Builder text(String text);
+    public abstract Comment build();
+  }
 }

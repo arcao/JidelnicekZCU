@@ -1,7 +1,6 @@
 package com.arcao.menza.volley;
 
 import android.util.Base64;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
@@ -13,27 +12,28 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.arcao.menza.constant.AppConstant;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import timber.log.Timber;
 
 public class JacksonRequest<T> extends Request<T> {
-    private final Class<T> mClazz;
-    private final Listener<T> mListener;
+    private final TypeReference typeReference;
+    private final Listener<T> listener;
 
 
-    public JacksonRequest(int method, String url, Class<T> clazz, Listener<T> listener, ErrorListener errorListener) {
+    public JacksonRequest(int method, String url, TypeReference<T> clazz, Listener<T> listener, ErrorListener errorListener) {
         super(method, url, errorListener);
-        this.mClazz = clazz;
-        this.mListener = listener;
+        this.typeReference = clazz;
+        this.listener = listener;
     }
 
     @Override
     protected void deliverResponse(T response) {
-        mListener.onResponse(response);
+        listener.onResponse(response);
     }
 
     @Override
@@ -56,7 +56,9 @@ public class JacksonRequest<T> extends Request<T> {
                 cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
             }
 
-            return Response.success(JsonMapper.INSTANCE.mapper().readValue(response.data, mClazz), cacheEntry);
+            Timber.v(new String(response.data));
+
+            return Response.success(JsonMapper.INSTANCE.mapper().readValue(response.data, typeReference), cacheEntry);
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JsonMappingException e) {

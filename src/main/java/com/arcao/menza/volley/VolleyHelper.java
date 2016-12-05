@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,16 +20,16 @@ public class VolleyHelper {
         requestQueue = Volley.newRequestQueue(mContext);
     }
 
-    public static <T> void addGetRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        requestQueue.add(createGetRequest(url, clazz, listener, errorListener));
+    public static <T> void addGetRequest(String url, TypeReference<T> typeReference, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        requestQueue.add(createGetRequest(url, typeReference, listener, errorListener));
     }
 
-    private static <T> JacksonRequest<T> createGetRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        return new JacksonRequest<>(Method.GET, url, clazz, listener, errorListener);
+    private static <T> JacksonRequest<T> createGetRequest(String url, TypeReference<T> typeReference, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        return new JacksonRequest<>(Method.GET, url, typeReference, listener, errorListener);
     }
 
-    public static <T> void addPostRequest(String url, final Bundle params, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        JacksonRequest<T> request = new JacksonRequest<T>(Method.POST, url, clazz, listener, errorListener) {
+    public static <T> void addPostRequest(String url, final Bundle params, TypeReference<T> typeReference, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        JacksonRequest<T> request = new JacksonRequest<T>(Method.POST, url, typeReference, listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> paramsMap = new HashMap<>();

@@ -1,46 +1,38 @@
 package com.arcao.menza.api.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.auto.value.AutoValue;
+import java.util.Collections;
+import java.util.List;
 
-public class Place implements Parcelable {
-    public String name;
-    public String address;
-    public String description;
-    public String[] images;
+@AutoValue
+@JsonDeserialize(builder = Place.Builder.class)
+public abstract class Place implements Parcelable {
+  @JsonProperty public abstract String name();
+  @JsonProperty public abstract String address();
+  @JsonProperty public abstract String description();
+  @JsonProperty public abstract List<String> images();
 
-    public Place() {
+  public static Builder builder() {
+    return new AutoValue_Place.Builder()
+        .images(Collections.emptyList());
+  }
+
+  @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
+  public abstract static class Builder {
+    @JsonCreator private static Builder create() {
+      return Place.builder();
     }
 
-    protected Place(Parcel in) {
-        name = in.readString();
-        address = in.readString();
-        description = in.readString();
-        images = in.createStringArray();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(address);
-        dest.writeString(description);
-        dest.writeArray(images);
-    }
-
-    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
-        @Override
-        public Place createFromParcel(Parcel in) {
-            return new Place(in);
-        }
-
-        @Override
-        public Place[] newArray(int size) {
-            return new Place[size];
-        }
-    };
+    public abstract Builder name(String name);
+    public abstract Builder address(String address);
+    public abstract Builder description(String description);
+    public abstract Builder images(List<String> images);
+    public abstract Place build();
+  }
 }

@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Meal;
@@ -21,7 +20,7 @@ import com.arcao.menza.fragment.MealPreviewFragment;
 import com.arcao.menza.fragment.dialog.RatingDialogFragment;
 import com.arcao.menza.util.RatingChecker;
 import com.arcao.menza.volley.VolleyHelper;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Date;
 
 public class MealPreviewActivity extends AbstractBaseActivity implements RatingDialogFragment.OnRatingChangeListener {
@@ -56,7 +55,7 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
 
         ratingChecker = new RatingChecker(getApplicationContext());
 
-        setTitle(meal.name);
+        setTitle(meal.name());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -114,7 +113,7 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
     private Intent getShareIntent() {
         String place = getResources().getStringArray(R.array.places)[placeId];
 
-        String shareText = getString(R.string.share_text, place, meal.name, (int) getMealPrice(meal));
+        String shareText = getString(R.string.share_text, place, meal.name(), (int) getMealPrice(meal));
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, shareText);
@@ -126,14 +125,14 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
     private float getMealPrice(Meal meal) {
         switch (priceGroup) {
             case PrefConstant.PRICE_GROUP__STAFF:
-                return meal.priceStaff;
+                return meal.priceStaff();
 
             case PrefConstant.PRICE_GROUP__EXTERNAL:
-                return meal.priceExternal;
+                return meal.priceExternal();
 
             case PrefConstant.PRICE_GROUP__STUDENT:
             default:
-                return meal.priceStudent;
+                return meal.priceStudent();
 
         }
     }
@@ -141,18 +140,18 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
     @Override
     public void onRatingChanged(float rating) {
         Bundle params = new Bundle();
-        params.putString("hash", meal.hash);
+        params.putString("hash", meal.hash());
         params.putFloat("vote", rating);
 
-        ratingChecker.addRating(date, meal.hash);
+        ratingChecker.addRating(date, meal.hash());
 
         // show message
         Toast.makeText(getApplicationContext(), R.string.vote_progress, Toast.LENGTH_LONG).show();
 
-        VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, Object.class, createRatingReqSuccessListener(placeId, date), createRatingReqErrorListener(meal));
+        VolleyHelper.addPostRequest(MenzaUrlGenerator.generateRatingUrl(), params, new TypeReference<Void>() {}, createRatingReqSuccessListener(placeId, date), createRatingReqErrorListener(meal));
     }
 
-    private Response.Listener<Object> createRatingReqSuccessListener(final int placeId, final Date date) {
+    private Response.Listener<Void> createRatingReqSuccessListener(final int placeId, final Date date) {
         return response -> {
             // invalidate soft cache
             VolleyHelper.invalidateCache(MenzaUrlGenerator.generateDayUrl(placeId, date), false);
@@ -169,7 +168,7 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
         return error -> {
             Log.e("VOLLEY", error.getMessage(), error);
 
-            ratingChecker.removeRating(date, meal.hash);
+            ratingChecker.removeRating(date, meal.hash());
 
             // show error message
             Toast.makeText(getApplicationContext(), R.string.vote_failed, Toast.LENGTH_LONG).show();

@@ -34,7 +34,7 @@ public class PlacePreviewFragment extends Fragment {
         if (place != null) {
             TextView descriptionView = (TextView) view.findViewById(R.id.description);
             //noinspection deprecation
-            descriptionView.setText(Html.fromHtml(place.description));
+            descriptionView.setText(Html.fromHtml(place.description()));
             descriptionView.setLinksClickable(true);
             descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
         }

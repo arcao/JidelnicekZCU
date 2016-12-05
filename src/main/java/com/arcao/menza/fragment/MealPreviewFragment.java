@@ -57,9 +57,9 @@ public class MealPreviewFragment extends Fragment {
         date = new Date(getArguments().getLong(PARAM_DATE));
         meal = getArguments().getParcelable(PARAM_MEAL);
 
-        ((TextView) view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent));
-        ((TextView) view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff));
-        ((TextView) view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal));
+        ((TextView) view.findViewById(R.id.priceStudent)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStudent()));
+        ((TextView) view.findViewById(R.id.priceStaff)).setText(AppConstant.PRICE_FORMAT.format(meal.priceStaff()));
+        ((TextView) view.findViewById(R.id.priceExternal)).setText(AppConstant.PRICE_FORMAT.format(meal.priceExternal()));
 
         RatingBar ratingBar = ((RatingBar) view.findViewById(R.id.ratingBar));
         prepareRatingBar(ratingBar, meal);
@@ -79,14 +79,14 @@ public class MealPreviewFragment extends Fragment {
     }
 
     private void prepareAllergens(LayoutInflater inflater, ViewGroup container, Meal meal) {
-        if (meal.allergens == null || meal.allergens.length == 0)
+        if (meal.allergens() == null || meal.allergens().size() == 0)
             return;
 
         container.removeAllViews();
 
         String[] allergenTexts = getResources().getStringArray(R.array.allergens);
 
-        for (int allergenId : meal.allergens) {
+        for (int allergenId : meal.allergens()) {
             if (allergenId < 1 || allergenId > allergenTexts.length)
                 continue;
 
@@ -105,8 +105,8 @@ public class MealPreviewFragment extends Fragment {
         ratingBar.setFocusable(true);
         ratingBar.setFocusableInTouchMode(true);
 
-        if (meal.quality >= 0) {
-            ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + meal.quality / AppConstant.RATING__QUANTIFIER));
+        if (meal.quality() >= 0) {
+            ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + meal.quality() / AppConstant.RATING__QUANTIFIER));
         }
 
         ratingBar.setOnClickListener(v -> performVote());
@@ -120,7 +120,7 @@ public class MealPreviewFragment extends Fragment {
     }
 
     private void performVote() {
-        if (ratingChecker.isRated(date, meal.hash)) {
+        if (ratingChecker.isRated(date, meal.hash())) {
             ErrorDialogFragment.newInstance(R.string.vote_error_title, R.string.vote_already_before).show(getActivity().getFragmentManager(), ErrorDialogFragment.TAG);
             return;
         }

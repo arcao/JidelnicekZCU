@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.android.volley.Response;
 import com.arcao.menza.MealPreviewActivity;
 import com.arcao.menza.R;
@@ -21,9 +20,10 @@ import com.arcao.menza.api.data.Section;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.volley.VolleyHelper;
 import com.arcao.menza.widget.decorator.DayMenuDividerItemDecoration;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DayMenuFragment extends Fragment implements UpdatableFragment, DayMenuRecyclerAdapter.OnItemClickListener {
     public static final String ARG_DAY_ID = "DAY_ID";
@@ -88,7 +88,7 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 
         date = cal.getTime();
 
-        VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), Section[].class, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
+        VolleyHelper.addGetRequest(MenzaUrlGenerator.generateDayUrl(placeId, date), new TypeReference<List<Section>>() {}, createDayMenuReqSuccessListener(), createDayMenuReqErrorListener());
     }
 
     private void setListShown(boolean visible) {
@@ -115,7 +115,7 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
         getActivity().startActivity(i);
     }
 
-    private Response.Listener<Section[]> createDayMenuReqSuccessListener() {
+    private Response.Listener<List<Section>> createDayMenuReqSuccessListener() {
         return response -> {
             if (getActivity() == null)
                 return;

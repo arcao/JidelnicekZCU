@@ -1,60 +1,46 @@
 package com.arcao.menza.api.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.auto.value.AutoValue;
 
-public class User implements Parcelable {
-    public int id;
-    public UserType type;
-    public String login;
-    public String firstName;
-    public String lastName;
-    public String publicProfileUrl;
-    public String imageUrl;
+@AutoValue
+@JsonDeserialize(builder = User.Builder.class)
+public abstract class User implements Parcelable {
+  @JsonProperty public abstract int id();
+  @JsonProperty public abstract UserType type();
+  @JsonProperty public abstract String login();
+  @JsonProperty public abstract String firstName();
+  @JsonProperty public abstract String lastName();
+  @JsonProperty public abstract String publicProfileUrl();
+  @JsonProperty public abstract String imageUrl();
 
-    public enum UserType {
-        GOOGLE,
-        FACEBOOK
+  public static Builder builder() {
+    return new AutoValue_User.Builder();
+  }
+
+  public enum UserType {
+    GOOGLE,
+    FACEBOOK
+  }
+
+  @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
+  public abstract static class Builder {
+    @JsonCreator private static Builder create() {
+      return User.builder();
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeInt(this.type == null ? -1 : this.type.ordinal());
-        dest.writeString(this.login);
-        dest.writeString(this.firstName);
-        dest.writeString(this.lastName);
-        dest.writeString(this.publicProfileUrl);
-        dest.writeString(this.imageUrl);
-    }
-
-    public User() {
-    }
-
-    private User(Parcel in) {
-        this.id = in.readInt();
-        int tmpType = in.readInt();
-        this.type = tmpType == -1 ? null : UserType.values()[tmpType];
-        this.login = in.readString();
-        this.firstName = in.readString();
-        this.lastName = in.readString();
-        this.publicProfileUrl = in.readString();
-        this.imageUrl = in.readString();
-    }
-
-    public static Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
+    public abstract Builder id(int id);
+    public abstract Builder type(UserType type);
+    public abstract Builder login(String login);
+    public abstract Builder firstName(String firstName);
+    public abstract Builder lastName(String lastName);
+    public abstract Builder publicProfileUrl(String publicProfileUrl);
+    public abstract Builder imageUrl(String imageUrl);
+    public abstract User build();
+  }
 }

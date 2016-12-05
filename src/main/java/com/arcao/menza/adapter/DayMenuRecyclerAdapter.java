@@ -9,14 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.arcao.menza.R;
 import com.arcao.menza.api.data.Meal;
 import com.arcao.menza.constant.AppConstant;
 import com.arcao.menza.constant.PrefConstant;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -41,12 +38,12 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         notifyDataSetChanged();
     }
 
-    public void fillItems(com.arcao.menza.api.data.Section[] sections) {
+    public void fillItems(List<com.arcao.menza.api.data.Section> sections) {
         clearItems();
 
         for (com.arcao.menza.api.data.Section section : sections) {
-            items.add(new Section(section.name));
-            Collections.addAll(items, section.meals);
+            items.add(new Section(section.name()));
+            items.addAll(section.meals());
         }
 
         notifyDataSetChanged();
@@ -59,14 +56,14 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private String getMealPrice(Meal meal) {
         switch (priceGroup) {
             case PrefConstant.PRICE_GROUP__STAFF:
-                return AppConstant.PRICE_FORMAT.format(meal.priceStaff);
+                return AppConstant.PRICE_FORMAT.format(meal.priceStaff());
 
             case PrefConstant.PRICE_GROUP__EXTERNAL:
-                return AppConstant.PRICE_FORMAT.format(meal.priceExternal);
+                return AppConstant.PRICE_FORMAT.format(meal.priceExternal());
 
             case PrefConstant.PRICE_GROUP__STUDENT:
             default:
-                return AppConstant.PRICE_FORMAT.format(meal.priceStudent);
+                return AppConstant.PRICE_FORMAT.format(meal.priceStudent());
         }
     }
 
@@ -152,13 +149,13 @@ public class DayMenuRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         void bind(Meal item) {
-            titleTextView.setText(item.name);
+            titleTextView.setText(item.name());
             priceTextView.setText(getMealPrice(item));
-            titleTextView.setTextColor(item.premium ? titleTextViewPremiumColor : titleTextViewOriginalColor);
+            titleTextView.setTextColor(item.premium() ? titleTextViewPremiumColor : titleTextViewOriginalColor);
 
-            if (item.quality > 0) {
+            if (item.quality() > 0) {
                 ratingBar.setVisibility(View.VISIBLE);
-                ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + item.quality / AppConstant.RATING__QUANTIFIER));
+                ratingBar.setProgress((int) (AppConstant.RATING__STEP_SIZE + item.quality() / AppConstant.RATING__QUANTIFIER));
             } else {
                 ratingBar.setVisibility(View.GONE);
             }

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.volley.Response;
 import com.arcao.menza.api.MenzaUrlGenerator;
 import com.arcao.menza.api.data.Place;
@@ -14,6 +13,7 @@ import com.arcao.menza.fragment.ErrorFragment;
 import com.arcao.menza.fragment.LoadingFragment;
 import com.arcao.menza.fragment.PlacePreviewFragment;
 import com.arcao.menza.volley.VolleyHelper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class PlacePreviewActivity extends AbstractBaseActivity {
     private static final String PARAM_PLACE_ID = "PLACE_ID";
@@ -46,7 +46,7 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().replace(R.id.fragment, LoadingFragment.newInstance()).commitAllowingStateLoss();
-            VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), Place.class, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
+            VolleyHelper.addGetRequest(MenzaUrlGenerator.generatePlaceUrl(placeId), new TypeReference<Place>() {}, createPlaceReqSuccessListener(), createPlaceReqErrorListener());
         } else {
             // reset the title and subtitle
             setTitle(savedInstanceState.getCharSequence(STATE_TITLE));
@@ -97,8 +97,8 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 
     private Response.Listener<Place> createPlaceReqSuccessListener() {
         return response -> {
-            setTitle(response.name);
-            setSubTitle(response.address);
+            setTitle(response.name());
+            setSubTitle(response.address());
 
             getFragmentManager().beginTransaction().replace(R.id.fragment,
                     PlacePreviewFragment.getInstance(response)).commitAllowingStateLoss();
