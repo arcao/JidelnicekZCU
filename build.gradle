@@ -91,6 +91,10 @@ android {
     exclude 'META-INF/NOTICE'
     exclude '.readme'
   }
+  
+  aaptOptions {
+    cruncherEnabled = false
+  }
 
   lintOptions { abortOnError false }
 }
