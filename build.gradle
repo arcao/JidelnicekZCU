@@ -79,7 +79,7 @@ android {
 
       signingConfig signingConfigs.release
       minifyEnabled true
-      shrinkResources true
+      shrinkResources false
       proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
       proguardFile 'proguard.pro'
     }
@@ -91,7 +91,7 @@ android {
     exclude 'META-INF/NOTICE'
     exclude '.readme'
   }
-  
+
   aaptOptions {
     cruncherEnabled = false
   }
