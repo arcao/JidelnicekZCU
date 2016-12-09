@@ -3,11 +3,11 @@
     <string name="app_name">WBU Canteens</string>
     <string name="action_settings">Settings</string>
 
-    <string name="place_menza_bory">Menza Bory</string>
-    <string name="place_menza_kollarova">Menza Kollárova</string>
-    <string name="place_bufet_lochotin">Bufet Lochotín</string>
-    <string name="place_bufet_fst">Bufet FST</string>
-    <string name="place_bufet_pf">Bufet PF</string>
+    <string name="place_menza_bory">Canteen Bory</string>
+    <string name="place_menza_kollarova">Canteen Kollárova</string>
+    <string name="place_bufet_lochotin">Cafeteria Lochotín</string>
+    <string name="place_bufet_fst">Cafeteria FST</string>
+    <string name="place_bufet_pf">Cafeteria PF</string>
 
     <string name="place_menza_bory_short">Bory</string>
     <string name="place_menza_kollarova_short">Kollárova</string>
@@ -16,16 +16,16 @@
     <string name="place_bufet_pf_short">PF</string>
 
     <string-array name="places">
-        <item>Menza Bory</item>
-        <item>Menza Kollárova</item>
-        <item>Bufet Lochotín</item>
-        <item>Bufet FST</item>
-        <item>Bufet PF</item>
+        <item>@string/place_menza_bory</item>
+        <item>@string/place_menza_kollarova</item>
+        <item>@string/place_bufet_lochotin</item>
+        <item>@string/place_bufet_fst</item>
+        <item>@string/place_bufet_pf</item>
     </string-array>
     <string-array name="relative_day_title">
-        <item>Včera</item>
-        <item>Dnes</item>
-        <item>Zítra</item>
+        <item>Yesterday</item>
+        <item>Today</item>
+        <item>Tomorrow</item>
     </string-array>
 
     <string name="list_empty">This day is not cooked.</string>

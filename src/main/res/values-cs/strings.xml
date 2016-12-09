@@ -16,11 +16,11 @@
     <string name="place_bufet_pf_short">PF</string>
 
     <string-array name="places">
-        <item>Menza Bory</item>
-        <item>Menza Kollárova</item>
-        <item>Bufet Lochotín</item>
-        <item>Bufet FST</item>
-        <item>Bufet PF</item>
+        <item>@string/place_menza_bory</item>
+        <item>@string/place_menza_kollarova</item>
+        <item>@string/place_bufet_lochotin</item>
+        <item>@string/place_bufet_fst</item>
+        <item>@string/place_bufet_pf</item>
     </string-array>
     <string-array name="relative_day_title">
         <item>Včera</item>
