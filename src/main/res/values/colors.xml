@@ -11,4 +11,5 @@
     <color name="card_window_background">#e5e5e5</color>
     <color name="card_background">#ffffff</color>
     <color name="premium_meal">@color/primary_dark</color>
+    <color name="shortcut_background">#F5F5F5</color>
 </resources>

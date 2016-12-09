@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:targetApi="n_mr1">
+
+  <!-- Menza Bory -->
+  <shortcut
+      android:enabled="true"
+      android:shortcutId="shortcut_1"
+      android:shortcutLongLabel="@string/place_menza_bory"
+      android:shortcutShortLabel="@string/place_menza_bory_short"
+      android:icon="@drawable/ic_shortcut_bory">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="${applicationId}"
+        android:targetClass="com.arcao.menza.MainActivity">
+      <extra
+          android:name="PLACE_ID"
+          android:value="0" />
+    </intent>
+  </shortcut>
+
+  <!-- Menza Kollarova -->
+  <shortcut
+      android:enabled="true"
+      android:shortcutId="shortcut_2"
+      android:shortcutLongLabel="@string/place_menza_kollarova"
+      android:shortcutShortLabel="@string/place_menza_kollarova_short"
+      android:icon="@drawable/ic_shortcut_kollarova">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="${applicationId}"
+        android:targetClass="com.arcao.menza.MainActivity">
+      <extra
+          android:name="PLACE_ID"
+          android:value="1" />
+    </intent>
+  </shortcut>
+
+  <!-- Bufet Lochotin -->
+  <shortcut
+      android:enabled="true"
+      android:shortcutId="shortcut_3"
+      android:shortcutLongLabel="@string/place_bufet_lochotin"
+      android:shortcutShortLabel="@string/place_bufet_lochotin_short"
+      android:icon="@drawable/ic_shortcut_lochotin">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="${applicationId}"
+        android:targetClass="com.arcao.menza.MainActivity">
+      <extra
+          android:name="PLACE_ID"
+          android:value="2" />
+    </intent>
+  </shortcut>
+
+  <!-- Bufet FST -->
+  <shortcut
+      android:enabled="true"
+      android:shortcutId="shortcut_4"
+      android:shortcutLongLabel="@string/place_bufet_fst"
+      android:shortcutShortLabel="@string/place_bufet_fst_short"
+      android:icon="@drawable/ic_shortcut_fst">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="${applicationId}"
+        android:targetClass="com.arcao.menza.MainActivity">
+      <extra
+          android:name="PLACE_ID"
+          android:value="3" />
+    </intent>
+  </shortcut>
+
+  <!-- Bufet PF -->
+  <shortcut
+      android:enabled="true"
+      android:shortcutId="shortcut_5"
+      android:shortcutLongLabel="@string/place_bufet_pf"
+      android:shortcutShortLabel="@string/place_bufet_pf_short"
+      android:icon="@drawable/ic_shortcut_pf">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="${applicationId}"
+        android:targetClass="com.arcao.menza.MainActivity">
+      <extra
+          android:name="PLACE_ID"
+          android:value="4" />
+    </intent>
+  </shortcut>
+</shortcuts>

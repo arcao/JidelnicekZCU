@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.arcao.menza"
-          android:installLocation="auto"
-          android:versionName="2.3">
+    package="com.arcao.menza"
+    android:installLocation="auto"
+    android:versionName="2.3"
+    >
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
@@ -15,7 +16,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="24"/>
+        android:targetSdkVersion="25"/>
 
     <application
         android:name=".App"
@@ -37,8 +38,13 @@
             android:theme="@style/AppTheme.NavigationDrawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".SettingsActivity"
