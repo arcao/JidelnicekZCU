@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string translatable="false" name="pref_price_group_default">0</string>
+    <string translatable="false" name="pref_default_place_default">0</string>
+    <string translatable="false" name="feedback_email">feedback@arcao.com</string>
+</resources>
