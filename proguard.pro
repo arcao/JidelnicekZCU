@@ -37,5 +37,5 @@
 -keepattributes *Annotation*
 
 -dontwarn com.fasterxml.jackson.databind.**
-
+-dontwarn java.lang.invoke.*
 
