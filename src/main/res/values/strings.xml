@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WBU Canteens</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Jídelníček ZČU</string>
+    <string name="action_settings">Nastavení</string>
 
-    <string name="place_menza_bory">Canteen Bory</string>
-    <string name="place_menza_kollarova">Canteen Kollárova</string>
-    <string name="place_bufet_lochotin">Cafeteria Lochotín</string>
-    <string name="place_bufet_fst">Cafeteria FST</string>
-    <string name="place_bufet_pf">Cafeteria PF</string>
+    <string name="place_menza_bory">Menza Bory</string>
+    <string name="place_menza_kollarova">Menza Kollárova</string>
+    <string name="place_bufet_lochotin">Bufet Lochotín</string>
+    <string name="place_bufet_fst">Bufet FST</string>
+    <string name="place_bufet_pf">Bufet PF</string>
 
     <string name="place_menza_bory_short">Bory</string>
     <string name="place_menza_kollarova_short">Kollárova</string>
@@ -23,75 +23,75 @@
         <item>@string/place_bufet_pf</item>
     </string-array>
     <string-array name="relative_day_title">
-        <item>Yesterday</item>
-        <item>Today</item>
-        <item>Tomorrow</item>
+        <item>Včera</item>
+        <item>Dnes</item>
+        <item>Zítra</item>
     </string-array>
 
-    <string name="list_empty">This day is not cooked.</string>
-    <string name="connection_error">Unable to download the menu!</string>
-    <string name="action_today">Show today</string>
+    <string name="list_empty">Tento den se nevaří.</string>
+    <string name="connection_error">Nepovedlo se stáhnout jídelní lístek!</string>
+    <string name="action_today">Zobrazit dnešek</string>
     <string name="price_suffix">,- Kč</string>
-    <string name="pref_cat_general_title">General</string>
-    <string name="pref_price_group_title">Price group</string>
+    <string name="pref_cat_general_title">Obecné</string>
+    <string name="pref_price_group_title">Cenová skupina</string>
 
     <string-array name="pref_price_group_entries">
         <item>Student</item>
-        <item>Staff</item>
-        <item>External</item>
+        <item>Zaměstnanec</item>
+        <item>Externí</item>
     </string-array>
 
-    <string name="pref_default_place_title">Default canteen</string>
+    <string name="pref_default_place_title">Výchozí výdejna</string>
     <string name="button_ok">OK</string>
-    <string name="button_continue">Continue</string>
-    <string name="price_group_changeable">Price group can be always changed later in the application settings.</string>
-    <string name="price">Price</string>
-    <string name="price_external">External</string>
+    <string name="button_continue">Pokračovat</string>
+    <string name="price_group_changeable">Cenovou skupinu lze kdykoliv později změnit v nastavení aplikace.</string>
+    <string name="price">Cena</string>
+    <string name="price_external">Externí</string>
     <string name="price_student">Student</string>
-    <string name="price_staff">Staff</string>
-    <string name="preview_meal">Meal preview</string>
-    <string name="action_share">Share</string>
-    <string name="share_text">I suggest meal %2$s for %3$d,- Kč in %1$s.</string>
-    <string name="header_rating">Boarders ratting</string>
-    <string name="vote_progress">Sending rating…</string>
-    <string name="vote_finished">The rating was sent successfully.</string>
-    <string name="vote_failed">Unable to sent rating.</string>
-    <string name="vote_today_only">You can rate only today meals!</string>
-    <string name="vote_already_before">You have already rate this meal before!</string>
-    <string name="vote_error_title">Notice</string>
-    <string name="action_feedback">Feedback</string>
-    <string name="feedback_subject">%1$s (%2$s): Feedback</string>
-    <string name="feedback_message">Your text…</string>
-    <string name="pref_cat_developer_title">Developer</string>
-    <string name="action_info">Place info</string>
-    <string name="open_time">Open time</string>
-    <string name="connection_error_data">Unable to download data!</string>
-    <string name="pref_licenses">Open Source license</string>
-    <string name="pref_licenses_summary">License details for open source software</string>
-    <string name="pref_app_version">App version</string>
-    <string name="create_shortcut">Create shortcut for…</string>
-    <string name="pref_app_build_time">App build time</string>
-    <string name="dialog_changes_apply_after_restart">The change will take effect after relaunching the app.</string>
-    <string name="header_allergens">Allergenic ingredients</string>
-    <string name="no_allergens">Allergenic ingredients are not present</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="button_send">Send</string>
+    <string name="price_staff">Zaměstnanec</string>
+    <string name="preview_meal">Náhled jídla</string>
+    <string name="action_share">Sdílet</string>
+    <string name="share_text">V %1$s doporučuji jídlo %2$s za %3$d,- Kč.</string>
+    <string name="header_rating">Hodnocení strávníků</string>
+    <string name="vote_progress">Odesílám váše hodnocení…</string>
+    <string name="vote_finished">Hodnocení bylo úspěšně odesláno.</string>
+    <string name="vote_failed">Nepovedlo se odeslat hodnocení.</string>
+    <string name="vote_today_only">Hlasovat lze jen pro aktuální den!</string>
+    <string name="vote_already_before">Již jste toto jídlo ohodnotil!</string>
+    <string name="vote_error_title">Upozornění</string>
+    <string name="action_feedback">Zpětná vazba</string>
+    <string name="feedback_subject">%1$s (%2$s): Zpětná vazba</string>
+    <string name="feedback_message">Váš text…</string>
+    <string name="pref_cat_developer_title">Vývojář</string>
+    <string name="action_info">Informace o místě</string>
+    <string name="open_time">Otevírací doba</string>
+    <string name="connection_error_data">Nepovedlo se stáhnout data!</string>
+    <string name="pref_licenses">Licence Open Source</string>
+    <string name="pref_licenses_summary">Licenční detaily pro Open source software</string>
+    <string name="pref_app_version">Verze aplikace</string>
+    <string name="create_shortcut">Vytvořit zástupce pro…</string>
+    <string name="pref_app_build_time">Čas sestavení aplikace</string>
+    <string name="dialog_changes_apply_after_restart">Změna se projeví až po opětovném spuštění aplikace.</string>
+    <string name="header_allergens">Alergenní složky</string>
+    <string name="no_allergens">Neobsahuje alergení složky</string>
+    <string name="button_cancel">Storno</string>
+    <string name="button_send">Odeslat</string>
 
     <string-array name="allergens">
         <item/>
-        <item>Cereals containing gluten (ie. wheat, rye, barley, oats, spelled, kamut or their hybridised strains) and products thereof</item> <!-- 1 -->
-        <item>Crustaceans and products thereof</item> <!-- 2 -->
-        <item>Eggs and products thereof</item> <!-- 3 -->
-        <item>Fish and products thereof</item> <!-- 4 -->
-        <item>Groundnuts (peanuts) and products thereof</item> <!-- 5 -->
-        <item>Soybeans (soya) and products thereof</item> <!-- 6 -->
-        <item>Milk and products from it (including lactose)</item> <!-- 7 -->
-        <item>Dry nuts (ie. almonds, hazelnuts, walnuts, cashews, Brazil nuts, pistachios, macadamia nuts and Queensland) and products thereof</item> <!-- 8 -->
-        <item>Celery and products thereof</item> <!-- 9 -->
-        <item>Mustard and products thereof</item> <!-- 10 -->
-        <item>Sesame seeds (sesame) and products thereof</item> <!-- 11 -->
-        <item>Sulphur dioxide and sulphites in concentrates of more than 10 mg/kg or 10 mg/l, expressed as SO₂</item> <!-- 12 -->
-        <item>Lupin and products thereof</item> <!-- 13 -->
-        <item>Mollusks and products thereof</item> <!-- 14 -->
+        <item>Obiloviny obsahující lepek (tj. pšenice, žito, ječmen, oves, pšenice špalda, kamut nebo jejich hybridní odrůdy) a výrobky z nich</item> <!-- 1 -->
+        <item>Korýši a výrobky z nich</item> <!-- 2 -->
+        <item>Vejce a výrobky z nich</item> <!-- 3 -->
+        <item>Ryby a výrobky z nich</item> <!-- 4 -->
+        <item>Jádra podzemnice olejné (arašídy) a výrobky z nich</item> <!-- 5 -->
+        <item>Sojové boby (sója) a výrobky z nich</item> <!-- 6 -->
+        <item>Mléko a výrobky z něj (včetně laktózy)</item> <!-- 7 -->
+        <item>Suché skořápkové plody (tj. mandle, lístkové ořechy, vlašské ořechy, kešu ořechy, para ořechy, pistácie, ořechy makadamie a queensland) a výrobky z nich</item> <!-- 8 -->
+        <item>Celer a výrobky z něj</item> <!-- 9 -->
+        <item>Hořčice a výrobky z ní</item> <!-- 10 -->
+        <item>Sezamová semena (sezam) a výrobky z nich</item> <!-- 11 -->
+        <item>Oxid siřičitý a siřičitany v koncentrátech vyšších než 10 mg/kg nebo 10 mg/l, vyjádřeno jako SO₂</item> <!-- 12 -->
+        <item>Vlčí bob (lupina) a výrobky z něj</item> <!-- 13 -->
+        <item>Měkkýši a výrobky z nich</item> <!-- 14 -->
     </string-array>
 </resources>
