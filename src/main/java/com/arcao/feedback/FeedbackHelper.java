@@ -102,9 +102,11 @@ public class FeedbackHelper {
         collectors.add(new ConstantsCollector(Build.class, "BUILD"));
         collectors.add(new ConstantsCollector(Build.VERSION.class, "VERSION"));
         collectors.add(new MemoryCollector());
-        collectors.add(new LogCatCollector(context));
         collectors.add(new SharedPreferencesCollector(context));
         collectors.add(new DisplayManagerCollector(context));
+
+        // LogCat collector has to be the latest one to receive exceptions from collectors
+        collectors.add(new LogCatCollector(context));
 
         return collectors;
     }
