@@ -53,7 +53,7 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new DayMenuDividerItemDecoration(getActivity(), DayMenuDividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new DayMenuDividerItemDecoration(getActivity(), DayMenuDividerItemDecoration.VERTICAL));
 
         progressContainer = view.findViewById(R.id.progressContainer);
         listContainer = view.findViewById(R.id.listContainer);

@@ -2,7 +2,6 @@ package com.arcao.menza.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.preference.PreferenceManager;
 
 import com.arcao.menza.constant.PrefConstant;
@@ -71,11 +70,7 @@ public class RatingChecker {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(PrefConstant.VOTES, keys);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            editor.apply();
-        } else {
-            editor.commit();
-        }
+        editor.apply();
     }
 
     public synchronized void removeRating(Date date, String hash) {
@@ -94,11 +89,7 @@ public class RatingChecker {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(PrefConstant.VOTES, keys);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            editor.apply();
-        } else {
-            editor.commit();
-        }
+        editor.apply();
     }
 
     private static String join(Collection<String> collection, String separator) {

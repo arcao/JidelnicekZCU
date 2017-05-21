@@ -16,7 +16,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/name"

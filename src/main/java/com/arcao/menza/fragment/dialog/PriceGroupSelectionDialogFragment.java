@@ -2,7 +2,6 @@ package com.arcao.menza.fragment.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -42,13 +41,10 @@ public class PriceGroupSelectionDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.pref_price_group_title)
-                .setItems(R.array.pref_price_group_entries, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        OnPriceGroupSelectedListener listener = priceGroupSelectedListenerRef.get();
-                        if (listener != null) {
-                            listener.onPriceGroupSelected(getResources().getStringArray(R.array.pref_price_group_values)[which]);
-                        }
+                .setItems(R.array.pref_price_group_entries, (dialog, which) -> {
+                    OnPriceGroupSelectedListener listener = priceGroupSelectedListenerRef.get();
+                    if (listener != null) {
+                        listener.onPriceGroupSelected(getResources().getStringArray(R.array.pref_price_group_values)[which]);
                     }
                 })
                 .create();

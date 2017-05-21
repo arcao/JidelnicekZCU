@@ -9,9 +9,12 @@ import android.view.View;
 import com.arcao.menza.adapter.DayMenuRecyclerAdapter;
 
 /**
- * Disabling DividerItemDecoration around {@link com.arcao.menza.adapter.DayMenuRecyclerAdapter#TYPE_SECTION} item types
+ * Disabling DividerItemDecoration around {@link DayMenuRecyclerAdapter#TYPE_SECTION} item types
  */
-public class DayMenuDividerItemDecoration extends DividerItemDecoration {
+public class DayMenuDividerItemDecoration extends AbstractDividerItemDecoration {
+    public static final int HORIZONTAL = AbstractDividerItemDecoration.HORIZONTAL;
+    public static final int VERTICAL = AbstractDividerItemDecoration.VERTICAL;
+
     public DayMenuDividerItemDecoration(Context context, int orientation) {
         super(context, orientation);
     }

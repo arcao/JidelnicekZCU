@@ -1,13 +1,11 @@
 package com.arcao.menza.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.Checkable;
-import android.widget.TextView;
 
-public class SelectableTextView extends TextView implements Checkable {
+public class SelectableTextView extends AppCompatTextView implements Checkable {
     private static final int[] CHECKED_STATE_SET = {
             android.R.attr.state_checked
     };
@@ -24,11 +22,6 @@ public class SelectableTextView extends TextView implements Checkable {
 
     public SelectableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SelectableTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override

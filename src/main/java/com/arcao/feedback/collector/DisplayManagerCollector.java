@@ -121,13 +121,11 @@ public class DisplayManagerCollector extends Collector {
     private static String collectRectSize(Display display) {
         StringBuilder result = new StringBuilder();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            Rect size = new Rect();
-            // since API v13
-            display.getRectSize(size);
-            result.append(display.getDisplayId()).append(".rectSize=[").append(size.top).append(',').append(size.left)
-                    .append(',').append(size.width()).append(',').append(size.height()).append(']').append('\n');
-        }
+        Rect size = new Rect();
+        // since API v13
+        display.getRectSize(size);
+        result.append(display.getDisplayId()).append(".rectSize=[").append(size.top).append(',').append(size.left)
+                .append(',').append(size.width()).append(',').append(size.height()).append(']').append('\n');
         return result.toString();
     }
 
