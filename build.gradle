@@ -1,161 +1,172 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
-    classpath 'com.android.tools.build:gradle:2.3.0'
-    classpath 'me.tatarka:gradle-retrolambda:3.4.0'
-    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-  }
+    repositories {
+        jcenter()
+        maven { url 'https://maven.google.com/' }
+    }
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
+    }
 }
 
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
-  jcenter()
-  maven {
-    url 'https://raw.githubusercontent.com/Goddchen/mvn-repo/master/'
-  }
+    jcenter()
+    maven { url 'https://maven.google.com/' }
+    maven { url 'https://raw.githubusercontent.com/Goddchen/mvn-repo/master/' }
 }
 
 def gitSha() {
-  return 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim();
+    return 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 }
 
 static def buildTime() {
-  return new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZ", TimeZone.getTimeZone('UTC'));
+    return new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZ", TimeZone.getTimeZone('UTC'))
 }
 
 def gitVersionCode() {
-  return 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim().toInteger();
+    return 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim().toInteger()
 }
 
 def isTravis = 'true' == System.getenv('TRAVIS')
 def preDexEnabled = 'true' == System.getProperty('pre-dex', 'true')
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
-  dexOptions {
-    // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
-    preDexLibraries preDexEnabled && !isTravis
-  }
-
-  defaultConfig {
-    versionCode gitVersionCode()
-    buildConfigField 'String', 'GIT_SHA', 'null'
-    buildConfigField 'String', 'BUILD_TIME', 'null'
-
-    resConfigs 'cs', 'sk'
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries preDexEnabled && !isTravis
     }
 
-  compileOptions {
-    encoding "UTF-8"
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    defaultConfig {
+        versionCode gitVersionCode()
+        buildConfigField 'String', 'GIT_SHA', 'null'
+        buildConfigField 'String', 'BUILD_TIME', 'null'
 
-  signingConfigs {
-    release {
-      keyAlias "jidelnicekzcu"
+        resConfigs 'cs'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
     }
-  }
 
-  buildTypes {
-    debug {
-      applicationIdSuffix '.dev'
-      versionNameSuffix '-dev'
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-    release {
-      versionNameSuffix ''
 
-      buildConfigField 'String', 'GIT_SHA', '"' + gitSha() + '"'
-      buildConfigField 'String', 'BUILD_TIME', '"' + buildTime() + '"'
-
-      signingConfig signingConfigs.release
-      minifyEnabled true
-      shrinkResources false
-      proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
-      proguardFile 'proguard.pro'
+    signingConfigs {
+        release {
+            keyAlias "jidelnicekzcu"
+        }
     }
-  }
 
-  packagingOptions {
-    // removed because of conflict in creating package
-    exclude 'META-INF/LICENSE'
-    exclude 'META-INF/NOTICE'
-    exclude '.readme'
-  }
+    buildTypes {
+        debug {
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
+        }
+        release {
+            versionNameSuffix ''
 
-  aaptOptions {
-    cruncherEnabled = false
-  }
+            buildConfigField 'String', 'GIT_SHA', '"' + gitSha() + '"'
+            buildConfigField 'String', 'BUILD_TIME', '"' + buildTime() + '"'
 
-  lintOptions { abortOnError false }
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFile 'proguard.pro'
+        }
+    }
+
+    packagingOptions {
+        // removed because of conflict in creating package
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude '.readme'
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
+
+    lintOptions { abortOnError false }
 }
 
 dependencies {
-  compile 'com.android.support:design:25.2.0'
-  compile 'com.android.support:support-v13:25.2.0'
-  compile 'com.android.support:appcompat-v7:25.2.0'
-  compile 'com.android.support:recyclerview-v7:25.2.0'
-  compile 'com.android.support:cardview-v7:25.2.0'
-  compile 'com.takisoft.fix:preference-v7:25.2.0.0'
-  compile 'com.android:volley:1.0'
-  compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr2'
-  compile 'com.jakewharton.timber:timber:4.5.1'
-  compile 'commons-io:commons-io:2.5'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'com.android.support:support-v13:25.3.1'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.android.support:cardview-v7:25.3.1'
+    implementation 'com.takisoft.fix:preference-v7:25.3.1.1'
+    implementation 'com.android:volley:1.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr2'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'commons-io:commons-io:2.5'
 
-  provided 'com.google.auto.value:auto-value:1.4'
-  apt 'com.google.auto.value:auto-value:1.4'
-  apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
-  compile 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5'
+    annotationProcessor 'com.google.auto.value:auto-value:1.4.1'
+    compileOnly 'com.google.auto.value:auto-value:1.4.1'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
+    implementation 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5'
 }
 
 if (project.hasProperty('storeFile') && project.hasProperty('storePassword') &&
-    project.hasProperty('keyPassword')) {
-  android.signingConfigs.release.storeFile = file(storeFile)
-  android.signingConfigs.release.storePassword = storePassword
-  android.signingConfigs.release.keyPassword = keyPassword
+        project.hasProperty('keyPassword')) {
+    android.signingConfigs.release.storeFile = file(storeFile)
+    android.signingConfigs.release.storePassword = storePassword
+    android.signingConfigs.release.keyPassword = keyPassword
 } else {
-  android.buildTypes.release.signingConfig = android.signingConfigs.debug
+    android.buildTypes.release.signingConfig = android.signingConfigs.debug
+}
+
+// dependencyUpdates: suggest only released artifacts
+dependencyUpdates.resolutionStrategy = {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any {
+                selection.candidate.version ==~ /(?i).*[.-]${it}.*/
+            }
+            if (rejected)
+                selection.reject('Release candidate')
+        }
+    }
 }
 
 // add support for placeholders in resource files
 def replacePlaceholdersInFile(basePath, fileName, placeholders) {
-  def file = new File(basePath, fileName);
+    def file = new File(basePath, fileName)
 
-  if (!file.exists()) {
-    logger.quiet("Unable to replace placeholders in " + file.toString() + ". File cannot be found.")
-    return;
-  }
+    if (!file.exists()) {
+        logger.quiet("Unable to replace placeholders in " + file.toString() + ". File cannot be found.")
+        return
+    }
 
-  logger.debug("Replacing placeholders in " + file.toString())
-  logger.debug("Placeholders: " + placeholders.toString())
+    logger.debug("Replacing placeholders in " + file.toString())
+    logger.debug("Placeholders: " + placeholders.toString())
 
-  def content = file.getText('UTF-8')
-
-  placeholders.each { entry ->
-    content = content.replaceAll("\\\$\\{${entry.key}\\}", entry.value)
-  }
-
-  file.write(content, 'UTF-8')
+    def content = file.getText('UTF-8')
+    placeholders.each { content = content.replaceAll("\\\$\\{${it.key}\\}", it.value) }
+    file.write(content, 'UTF-8')
 }
 
 afterEvaluate {
-  android.applicationVariants.all { variant ->
-    variant.outputs.each { output ->
-      output.processResources.doFirst {
-        // prepare placeholder map from manifestPlaceholders including applicationId placeholder
-        def placeholders = variant.mergedFlavor.manifestPlaceholders + [applicationId: variant.applicationId]
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.processResources.doFirst {
+                // prepare placeholder map from manifestPlaceholders including applicationId placeholder
+                def placeholders = variant.mergedFlavor.manifestPlaceholders + [applicationId: variant.applicationId]
 
-        replacePlaceholdersInFile(resDir, 'xml/shortcuts.xml', placeholders)
-      }
+                replacePlaceholdersInFile(resDir, 'xml/shortcuts.xml', placeholders)
+            }
+        }
     }
-  }
 }
