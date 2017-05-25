@@ -15,7 +15,7 @@ import com.arcao.menza.api.data.Place;
 public class PlacePreviewFragment extends Fragment {
     private static final String PARAM_PLACE = "PLACE";
 
-    public static PlacePreviewFragment getInstance(Place place) {
+    public static PlacePreviewFragment newInstance(Place place) {
         PlacePreviewFragment fragment = new PlacePreviewFragment();
 
         Bundle args = new Bundle();

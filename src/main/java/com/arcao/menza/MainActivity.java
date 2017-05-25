@@ -1,5 +1,6 @@
 package com.arcao.menza;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -16,7 +17,6 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.adapter.DayPagerAdapter;
 import com.arcao.menza.constant.AppConstant;
@@ -35,6 +35,11 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
     private ViewPager mViewPager;
     private SharedPreferences mSharedPreferences;
     private int placeId;
+
+    public static Intent createIntent(@NonNull Context context, int placeId) {
+        return new Intent(context, MainActivity.class)
+            .putExtra(MainActivity.PARAM_PLACE_ID, placeId);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +177,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
                 mViewPager.setCurrentItem(AppConstant.DAY_ID_TODAY, true);
                 return true;
             case R.id.action_info:
-                startActivity(new Intent(this, PlacePreviewActivity.class).putExtra(MealPreviewActivity.PARAM_PLACE_ID, placeId));
+                startActivity(PlacePreviewActivity.createIntent(this, placeId));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -180,7 +185,7 @@ public class MainActivity extends AbstractBaseActivity implements PriceGroupSele
     }
 
     private void onSettingsSelected() {
-        startActivityForResult(new Intent(this, SettingsActivity.class), 0);
+        startActivityForResult(SettingsActivity.createIntent(this), 0);
     }
 
     private void onFeedbackSelected() {

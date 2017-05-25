@@ -5,6 +5,7 @@ import android.app.Application;
 import com.arcao.menza.volley.VolleyHelper;
 
 import timber.log.Timber;
+import timber.log.Timber.DebugTree;
 
 public class App extends Application {
     @Override
@@ -13,6 +14,6 @@ public class App extends Application {
 
         VolleyHelper.init(getApplicationContext());
 
-        Timber.plant(new Timber.DebugTree());
+        Timber.plant(new DebugTree());
     }
 }

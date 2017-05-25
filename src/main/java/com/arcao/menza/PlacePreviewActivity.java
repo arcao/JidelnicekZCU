@@ -1,6 +1,9 @@
 package com.arcao.menza;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +25,11 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
 
     private TextView titleTextView;
     private TextView subTitleTextView;
+
+    public static Intent createIntent(@NonNull Context context, int placeId) {
+        return new Intent(context, PlacePreviewActivity.class)
+            .putExtra(PARAM_PLACE_ID, placeId);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +77,7 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -101,7 +109,7 @@ public class PlacePreviewActivity extends AbstractBaseActivity {
             setSubTitle(response.address());
 
             getFragmentManager().beginTransaction().replace(R.id.fragment,
-                    PlacePreviewFragment.getInstance(response)).commitAllowingStateLoss();
+                    PlacePreviewFragment.newInstance(response)).commitAllowingStateLoss();
         };
     }
 

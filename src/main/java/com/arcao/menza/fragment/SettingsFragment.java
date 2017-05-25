@@ -2,7 +2,6 @@ package com.arcao.menza.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.arcao.feedback.FeedbackHelper;
 import com.arcao.menza.BuildConfig;
 import com.arcao.menza.MainActivity;
@@ -20,7 +18,6 @@ import com.arcao.menza.WebViewActivity;
 import com.arcao.menza.constant.PrefConstant;
 import com.arcao.menza.fragment.dialog.AbstractDialogFragment;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,10 +39,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
         Preference licensesPref = findPreference("licenses");
         licensesPref.setOnPreferenceClickListener(preference -> {
-            Intent i = new Intent(getActivity(), WebViewActivity.class);
-            i.putExtra(WebViewActivity.PARAM_TITLE, R.string.pref_licenses);
-            i.putExtra(WebViewActivity.PARAM_RAW_RESOURCE, R.raw.licenses);
-            startActivity(i);
+            startActivity(WebViewActivity.createIntent(getActivity(), R.string.pref_licenses, R.raw.licenses));
+            getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             return true;
         });
 
@@ -107,6 +102,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         } catch (PackageManager.NameNotFoundException e) {
             return "0.0";
         }
+    }
+
+    public static SettingsFragment newInstance() {
+        return new SettingsFragment();
     }
 
     public static class ChangesApplyAfterRestartDialogFragment extends AbstractDialogFragment {

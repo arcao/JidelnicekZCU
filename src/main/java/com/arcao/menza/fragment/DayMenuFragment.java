@@ -1,7 +1,6 @@
 package com.arcao.menza.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DayMenuFragment extends Fragment implements UpdatableFragment, DayMenuRecyclerAdapter.OnItemClickListener {
-    public static final String ARG_DAY_ID = "DAY_ID";
+    private static final String ARG_DAY_ID = "DAY_ID";
     public static final String ARG_PLACE_ID = "PLACE_ID";
 
     private Date date = null;
@@ -36,6 +35,18 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
     private View progressContainer;
     private View listContainer;
     private TextView textEmpty;
+    private int placeId;
+
+    public static Fragment newInstance(int position, int placeId) {
+        Fragment fragment = new DayMenuFragment();
+
+        Bundle args = new Bundle();
+        args.putInt(DayMenuFragment.ARG_DAY_ID, position);
+        args.putInt(DayMenuFragment.ARG_PLACE_ID, placeId);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -74,7 +85,7 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 
         adapter.clearItems();
 
-        int placeId = getArguments().getInt(ARG_PLACE_ID, 0);
+        placeId = getArguments().getInt(ARG_PLACE_ID, 0);
         int dayId = getArguments().getInt(ARG_DAY_ID, 0);
 
         Log.d("UPDATE", "PlaceId:" + placeId + " DayId: " + dayId);
@@ -108,11 +119,12 @@ public class DayMenuFragment extends Fragment implements UpdatableFragment, DayM
 
     @Override
     public void onItemClick(Meal item) {
-        Intent i = new Intent(getActivity(), MealPreviewActivity.class);
-        i.putExtra(MealPreviewActivity.PARAM_PLACE_ID, getArguments().getInt(ARG_PLACE_ID, 0));
-        i.putExtra(MealPreviewActivity.PARAM_DATE, date.getTime());
-        i.putExtra(MealPreviewActivity.PARAM_MEAL, item);
-        getActivity().startActivity(i);
+        getActivity().startActivity(MealPreviewActivity.createIntent(
+            getActivity(),
+            placeId,
+            date.getTime(),
+            item
+        ));
     }
 
     private Response.Listener<List<Section>> createDayMenuReqSuccessListener() {

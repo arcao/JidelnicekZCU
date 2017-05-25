@@ -18,8 +18,7 @@ public class ShortcutActivity extends AbstractBaseActivity implements ShortcutDi
 
     @Override
     public void onCreateShortcut(int placeId) {
-        Intent shortcutIntent = new Intent(this, MainActivity.class);
-        shortcutIntent.putExtra(MainActivity.PARAM_PLACE_ID, placeId);
+        Intent shortcutIntent = MainActivity.createIntent(this, placeId);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         Intent installIntent = new Intent(ACTION_INSTALL_SHORTCUT);

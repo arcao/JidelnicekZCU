@@ -1,9 +1,11 @@
 package com.arcao.menza;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.ShareActionProvider;
@@ -24,9 +26,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Date;
 
 public class MealPreviewActivity extends AbstractBaseActivity implements RatingDialogFragment.OnRatingChangeListener {
-    public static final String PARAM_PLACE_ID = "PLACE_ID";
-    public static final String PARAM_DATE = "DATE";
-    public static final String PARAM_MEAL = "MEAL";
+    private static final String PARAM_PLACE_ID = "PLACE_ID";
+    private static final String PARAM_DATE = "DATE";
+    private static final String PARAM_MEAL = "MEAL";
 
     private TextView titleTextView;
 
@@ -35,6 +37,13 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
     private Meal meal;
     private String priceGroup;
     private RatingChecker ratingChecker;
+
+    public static Intent createIntent(@NonNull Context context, int placeId, long date, Meal meal) {
+        return new Intent(context, MealPreviewActivity.class)
+            .putExtra(PARAM_PLACE_ID, placeId)
+            .putExtra(PARAM_DATE, date)
+            .putExtra(PARAM_MEAL, meal);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +75,7 @@ public class MealPreviewActivity extends AbstractBaseActivity implements RatingD
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().replace(R.id.fragment,
-                    MealPreviewFragment.getInstance(placeId, date, meal)).commit();
+                    MealPreviewFragment.newInstance(placeId, date, meal)).commit();
         }
     }
 

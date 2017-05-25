@@ -31,7 +31,7 @@ public class MealPreviewFragment extends Fragment {
     private Date date;
     private Meal meal;
 
-    public static MealPreviewFragment getInstance(int placeId, Date date, Meal meal) {
+    public static MealPreviewFragment newInstance(int placeId, Date date, Meal meal) {
         MealPreviewFragment fragment = new MealPreviewFragment();
 
         Bundle args = new Bundle();
