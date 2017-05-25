@@ -10,7 +10,7 @@
 }
 
 -keepclasseswithmembers,allowshrinking,allowoptimization class * {
-	public <init>(android.content.Context);
+	  public <init>(android.content.Context);
     public <init>(android.content.Context,android.util.AttributeSet);
     public <init>(android.content.Context,android.util.AttributeSet,int);
 }
@@ -20,6 +20,8 @@
     public <init>(android.content.Context,android.util.AttributeSet);
     public <init>(android.content.Context,android.util.AttributeSet,int);
 }
+
+-keep class android.support.v7.widget.ShareActionProvider { *; }
 
 -keepnames class com.fasterxml.jackson.** { *; }
 -keep class com.arcao.menza.api.data.** { *; }
