@@ -17,6 +17,14 @@
         </item>
 
         <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Fade</item>
+    </style>
+
+    <style name="Animation.Fade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@android:anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@android:anim/fade_out</item>
     </style>
 
     <style name="AppBaseTheme.DialogWhenLarge" parent="Theme.AppCompat.Light.DialogWhenLarge">
@@ -37,6 +45,7 @@
             @style/TextAppearance.AppCompat.Body1.Secondary
         </item>
         <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Fade</item>
     </style>
 
     <style name="AppBaseTheme.Settings" parent="@style/PreferenceFixTheme.Light.DarkActionBar">
@@ -50,6 +59,7 @@
 
         <item name="drawerArrowStyle">@style/Widget.AppTheme.DrawerArrowStyle</item>
         <item name="preferenceCategory_marginBottom">0dp</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Fade</item>
     </style>
 
 
